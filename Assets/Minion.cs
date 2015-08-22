@@ -19,6 +19,8 @@ public class Minion : MonoBehaviour {
 	public float moveSpeed = 0.1f;
 	public Vector2 moveDelta;
 	public GameObject target;
+	public float damage = 1f;
+
 
 	// Use this for initialization
 	void Start () {
@@ -62,7 +64,6 @@ public class Minion : MonoBehaviour {
 		health -= damage;
 		if(health < 0){
 			Destroy(gameObject,.5f);
-
 		}
 
 	}
