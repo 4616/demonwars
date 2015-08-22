@@ -1,11 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Token.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Spawner.cs">
     <Files>
-      <File FileName="Assets/ClickForegroundController.cs" Line="17" Column="54" />
-      <File FileName="Assets/Token.cs" Line="27" Column="36" />
-      <File FileName="Assets/Spawner.cs" Line="15" Column="5" />
-      <File FileName="Assets/Rock.cs" Line="1" Column="1" />
+      <File FileName="Assets\Minion.cs" Line="56" Column="10" />
+      <File FileName="Assets\House.cs" Line="30" Column="1" />
+      <File FileName="Assets\Water.cs" Line="28" Column="4" />
+      <File FileName="Assets\Spawner.cs" Line="14" Column="36" />
+      <File FileName="Assets\Obstacle.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

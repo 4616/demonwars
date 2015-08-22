@@ -16,8 +16,9 @@ public class ClickForegroundController : MonoBehaviour {
 	{
 		if (currentDelay <= 0 && (tokenList.Count == 0 || !tokenList[0].Blocking())) {
 			var mousePos = Input.mousePosition;
-			mousePos.z = 10;
+			mousePos.z = -5;
 			var objectPos = Camera.main.ScreenToWorldPoint(mousePos);
+			//objectPos.z = -5;
 			GameObject go = Instantiate(token, objectPos, Quaternion.identity) as GameObject;
 
 			Token tk = go.GetComponent<Token>();
