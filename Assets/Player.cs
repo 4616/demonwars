@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Player : MonoBehaviour {
-
+	public int sorrow = 1;
 	// Use this for initialization
 	void Start () {
 	
@@ -12,4 +12,7 @@ public class Player : MonoBehaviour {
 	void Update () {
 	
 	}
+
+
+
 }

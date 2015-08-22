@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Obstacle : MonoBehaviour {
-	public int playernumber = 0;
+	public Player owner = null;
 
 	// Use this for initialization
 	void Start () {
