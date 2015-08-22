@@ -8,13 +8,14 @@ public class ClickForegroundController : MonoBehaviour {
 	private int currentDelay = 0;
 
 	public GameObject token;
+	public Player owner;
 //	private Camera camera = GetComponent.<Camera>();
 
-	private List<Token> tokenList = new List<Token>();
+	//private List<Token> tokenList = new List<Token>();
 
 	void OnMouseDown()
 	{
-		if (currentDelay <= 0 && (tokenList.Count == 0 || !tokenList[0].Blocking())) {
+		if (owner != null && currentDelay <= 0 && (owner.tokenList.Count == 0 || !owner.tokenList[0].Blocking())) {
 			var mousePos = Input.mousePosition;
 			mousePos.z = -5;
 			var objectPos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -23,7 +24,8 @@ public class ClickForegroundController : MonoBehaviour {
 
 			Token tk = go.GetComponent<Token>();
 			tk.startDragging();
-			tokenList.Insert(0,tk);
+			tk.init(owner);
+			owner.tokenList.Insert(0,tk);
 //			tk.state = Token.State.Dragging;
 			currentDelay = delayTimer;
 		}

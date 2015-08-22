@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-class Token : MonoBehaviour
+public class Token : MonoBehaviour
 {
 	private float distance;
 	private float xDeg = 90;
@@ -18,9 +18,15 @@ class Token : MonoBehaviour
 	public float rotateFriction = 2;
 
 	public int rateLimit = 10;
+
+	public Player owner;
 	
 	void Start() {
 
+	}
+
+	public void init(Player owner) {
+		this.owner = owner;
 	}
 
 	public bool Blocking() {

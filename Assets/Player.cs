@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
+
+	public List<Token> tokenList = new List<Token>();
 
 	public float sorrow = 100000;
 	// Use this for initialization
@@ -9,6 +12,10 @@ public class Player : MonoBehaviour {
 		tag = "Player";
 	
 	}
+
+	//public List<Token>  getTokenList() {
+	//	return tokenList;
+	//}
 	
 	// Update is called once per frame
 	void Update () {
