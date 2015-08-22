@@ -4,7 +4,8 @@ using System.Collections;
 public class Obstacle : MonoBehaviour {
 	public Player owner = null;
 	public bool ownable = false;
-	public
+	public bool damageable = false;
+	public float health = 100f;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +25,11 @@ public class Obstacle : MonoBehaviour {
 		}
 
 	public void TakeDamage(float damage) {
+		if (damageable) {
+			this.health -= damage;
+		}
+
+
 
 
 	}
