@@ -9,6 +9,8 @@ public class GameSetup : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		StartGame();
+
 	
 	}
 	
@@ -17,11 +19,13 @@ public class GameSetup : MonoBehaviour {
 	
 	}
 
-	void Initialize(){
+	void StartGame(){
 		for (int i = 0; i <= this.nplayers; i++){
-			GameObject playeri = Instantiate(PlayerPrefab, new Vector3(0,0,0), Quaternion 0)
-			GameObject spawneri = Instantiate(SpawnerPrefab, new Vector3(0,0,0), Quaternion 0)
-			spawneri.TakeOwnership(playeri)
+			GameObject playergameobji = Instantiate(PlayerPrefab, new Vector3(0f,0f,0f), Quaternion.identity) as GameObject;
+			GameObject spawnergameobji = Instantiate(SpawnerPrefab, new Vector3(.5f,.5f,0f), Quaternion.identity) as GameObject;
+			Player playeri =  playergameobji.GetComponent<Player>();
+			Spawner spawneri =  spawnergameobji.GetComponent<Spawner>();
+			spawneri.TakeOwnership(playeri);
 		}
 		
 	 }
