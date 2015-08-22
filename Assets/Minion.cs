@@ -17,6 +17,7 @@ public class Minion : MonoBehaviour {
 	public float wanderMagnitude = 0.1f;
 	public float movePerterbation = 0.05f;
 	public float moveSpeed = 0.1f;
+	public float tokenAtraction = 0.01f;
 	public Vector2 moveDelta;
 	public GameObject target;
 	public float damage = 1f;
@@ -62,7 +63,7 @@ public class Minion : MonoBehaviour {
 	}
 	
 	private void findNewTarget() {
-		
+
 	}
 	
 	public void TakeDamage(float damage) {
@@ -92,6 +93,22 @@ public class Minion : MonoBehaviour {
 	Vector2 deltaV() {
 		Vector2 velocity = new Vector2 (Random.Range (-brownianJumpMagnitude,brownianJumpMagnitude), 
 		                                Random.Range (-brownianJumpMagnitude,brownianJumpMagnitude));
+		float minDist = 0f;
+		Token closest = null;
+		if (owner != null) {
+
+			foreach (Token token in owner.tokenList) {
+				float dist = Vector3.Distance (gameObject.transform.position, token.gameObject.transform.position);
+				if (closest == null || minDist > dist) {
+					minDist = dist;
+					closest = token;
+				}
+			}
+			if (closest != null) {
+
+				gameObject.transform.position = Vector3.MoveTowards (gameObject.transform.position, closest.gameObject.transform.position, tokenAtraction);
+			}
+		}
 //		velocity.Normalize ();
 		velocity *= (state == State.Wander ? wanderMagnitude : movePerterbation);
 		return velocity;
