@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class House : Obstacle {
+	public string tag = "House";
 	public float sorrow = 1f;
 	public float sorrowgen = 0f;
 	public float sorrowgenratechange = .00001f;

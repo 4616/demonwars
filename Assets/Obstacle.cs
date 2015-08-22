@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Obstacle : MonoBehaviour {
+	public string tag = "GenericObstacle";
 	public Player owner = null;
 	public bool ownable = false;
 	public bool damageable = false;
