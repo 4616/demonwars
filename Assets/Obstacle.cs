@@ -19,6 +19,8 @@ public class Obstacle : MonoBehaviour {
 	}
 
 	public void TakeOwnership(Player newowner) {
+		//print (newowner);
+		print (ownable);
 		if (ownable) {
 			this.owner = newowner;
 		}

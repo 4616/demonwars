@@ -3,19 +3,20 @@ using System.Collections;
 
 public class Spawner : Obstacle {
 	public GameObject MinonPrefab;
-	//public Player owner;
 
 	// Use this for initialization
-	void Start () {
+	public void Init () {
 		ownable = true;
-		this.TakeOwnership (owner);
+		//this.TakeOwnership (owner);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		//print (owner);
 		if(owner != null && owner.sorrow >= 1f){
 			this.Spawn();
 			owner.sorrow -= 1f;
+			//print ("In spawning loop");
 		}
 	}
 
