@@ -10,7 +10,7 @@ public class Minion : MonoBehaviour {
 	};
 	
 	
-	public string tag = "Minion";
+	//public string tag = "Minion";
 	public float health = 10f;
 	public State state;
 	public Player owner;
@@ -29,6 +29,7 @@ public class Minion : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		state = State.Wander;
+		//tag = "Minion";
 	}
 	
 	// Update is called once per frame
@@ -95,21 +96,21 @@ public class Minion : MonoBehaviour {
 		                                Random.Range (-brownianJumpMagnitude,brownianJumpMagnitude));
 		float minDist = 0f;
 		Token closest = null;
-		if (owner != null) {
-
-			foreach (Token token in owner.tokenList) {
-				float dist = Vector3.Distance (gameObject.transform.position, token.gameObject.transform.position);
-				if (closest == null || minDist > dist) {
-					Debug.log("We close enough?");
-					minDist = dist;
-					closest = token;
-				}
-			}
-			if (closest != null) {
-
-				gameObject.transform.position = Vector3.MoveTowards (gameObject.transform.position, closest.gameObject.transform.position, tokenAtraction);
-			}
-		}
+//		if (owner != null) {
+//
+//			foreach (Token token in owner.tokenList) {
+//				float dist = Vector3.Distance (gameObject.transform.position, token.gameObject.transform.position);
+//				if (closest == null || minDist > dist) {
+//					Debug.log("We close enough?");
+//					minDist = dist;
+//					closest = token;
+//				}
+//			}
+//			if (closest != null) {
+//
+//				gameObject.transform.position = Vector3.MoveTowards (gameObject.transform.position, closest.gameObject.transform.position, tokenAtraction);
+//			}
+//		}
 //		velocity.Normalize ();
 		velocity *= (state == State.Wander ? wanderMagnitude : movePerterbation);
 		return velocity;

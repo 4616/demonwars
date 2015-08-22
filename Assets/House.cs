@@ -10,7 +10,7 @@ public class House : Obstacle {
 
 	// Use this for initialization
 	void Start () {
-		tag = "House";
+		//tag = "House";
 		ownable = true;
 
 	
@@ -29,11 +29,19 @@ public class House : Obstacle {
 	}
 
 	void OnCollisionEnter2D(Collision2D otherObj) {
-		Debug.Log ("Collision with a house!");
+		Debug.Log ("OnCollisionEnter2D with a house!");
 		//if (otherObj.gameObject.tag == "Minion") {
 		//	Minion minion = otherObj.gameObject.GetComponent<Minion>();
 		//	this.TakeOwnership(minion.owner);
 		//}
+	}
+	void OnTriggerEnter2D(Collider2D otherObj) {
+		Debug.Log (otherObj);
+		if (otherObj.gameObject.tag == "Minion") {
+			Minion minion = otherObj.gameObject.GetComponent<Minion>();
+			this.TakeOwnership(minion.owner);
+			Debug.Log("owner of house is " + owner);
+		}
 	}
 //	void OnCollisionEnter(Collision otherObj) {
 //		print ("Collision with a house!");
