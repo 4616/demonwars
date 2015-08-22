@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NewBehaviourScript : MonoBehaviour {
+public class Obstacle : MonoBehaviour {
+	public int playernumber = 0;
 
 	// Use this for initialization
 	void Start () {

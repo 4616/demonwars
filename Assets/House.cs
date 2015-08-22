@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class House : MonoBehaviour {
+public class House : Obstacle {
+	public int sorrow = 1;
 
 	// Use this for initialization
 	void Start () {
