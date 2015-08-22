@@ -18,4 +18,8 @@ public class Minion : MonoBehaviour {
 	public void TakeDamage(float damage) {
 
 	}
+
+	void OnTriggerEnter(Collider other) {
+
+	}
 }

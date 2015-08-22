@@ -17,7 +17,8 @@ public class Water : Obstacle {
 	}
 	void OnCollisionEnter(Collision otherObj) {
 		if (otherObj.gameObject.tag == "Minion") {
-			otherObj.TakeDamage(float this.damage);
+			Minion minon = otherObj.gameObject.GetComponent<Minion>();
+			minon.TakeDamage(this.damage);
 		}
 	}
 

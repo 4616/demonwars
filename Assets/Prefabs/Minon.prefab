@@ -9,8 +9,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 412612}
   - 212: {fileID: 21238962}
-  - 114: {fileID: 11417342}
   - 58: {fileID: 5838432}
+  - 114: {fileID: 11419146}
   m_Layer: 0
   m_Name: Minon
   m_TagString: Untagged
@@ -85,7 +85,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: .5
---- !u!114 &11417342
+--- !u!114 &11419146
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
