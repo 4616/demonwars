@@ -24,3 +24,4 @@ public class House : Obstacle {
 	
 	}
 }
+}
