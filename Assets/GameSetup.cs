@@ -20,14 +20,18 @@ public class GameSetup : MonoBehaviour {
 	}
 
 	void StartGame(){
+		float flipx = -1;
+		float flipy = -1;
+
 		for (int i = 0; i < this.nplayers; i++){
-			GameObject playergameobji = Instantiate(PlayerPrefab, new Vector3(0f,0f,0f), Quaternion.identity) as GameObject;
-			GameObject spawnergameobji = Instantiate(SpawnerPrefab, new Vector3(0f,0f,0f), Quaternion.identity) as GameObject;
+			GameObject playergameobji = Instantiate(PlayerPrefab, new Vector3(0f,-5f * flipy,0f), Quaternion.identity) as GameObject;
+			GameObject spawnergameobji = Instantiate(SpawnerPrefab, new Vector3(0f,-5f * flipy,0f), Quaternion.identity) as GameObject;
 			Player playeri =  playergameobji.GetComponent<Player>();
 			Spawner spawneri =  spawnergameobji.GetComponent<Spawner>();
 			spawneri.Init();
 			//print (playeri);
 			spawneri.TakeOwnership(playeri);
+			flipy = flipy * -1;
 		}
 		
 	 }
