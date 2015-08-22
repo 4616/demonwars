@@ -24,4 +24,8 @@ public class Minion : MonoBehaviour {
 		}
 
 	}
+
+	void OnTriggerEnter(Collider other) {
+
+	}
 }
