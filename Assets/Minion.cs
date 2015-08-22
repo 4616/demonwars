@@ -96,12 +96,13 @@ public class Minion : MonoBehaviour {
 		                                Random.Range (-brownianJumpMagnitude,brownianJumpMagnitude));
 		float minDist = 0f;
 		Token closest = null;
+
 //		if (owner != null) {
 //
-//			foreach (Token token in owner.tokenList) {
+//			foreach (Token token in owner.tokenManager.tokenList) {
 //				float dist = Vector3.Distance (gameObject.transform.position, token.gameObject.transform.position);
 //				if (closest == null || minDist > dist) {
-//					Debug.log("We close enough?");
+//					Debug.Log("We close enough?");
 //					minDist = dist;
 //					closest = token;
 //				}
@@ -111,6 +112,7 @@ public class Minion : MonoBehaviour {
 //				gameObject.transform.position = Vector3.MoveTowards (gameObject.transform.position, closest.gameObject.transform.position, tokenAtraction);
 //			}
 //		}
+
 //		velocity.Normalize ();
 		velocity *= (state == State.Wander ? wanderMagnitude : movePerterbation);
 		return velocity;
