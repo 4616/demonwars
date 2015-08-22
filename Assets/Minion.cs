@@ -14,4 +14,8 @@ public class Minion : MonoBehaviour {
 		Vector2 delta = state.setVelocity ();
 		gameObject.transform.position += new Vector3(delta.x, delta.y);
 	}
+
+	public void TakeDamage(float damage) {
+
+	}
 }
