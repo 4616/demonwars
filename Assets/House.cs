@@ -2,9 +2,9 @@
 using System.Collections;
 
 public class House : Obstacle {
-	public float sorrow = 1;
-	public float sorrowgen = 0;
-	public float sorrowgenratechange = .00001;
+	public float sorrow = 1f;
+	public float sorrowgen = 0f;
+	public float sorrowgenratechange = .00001f;
 	public bool ownable = true;
 
 
@@ -20,8 +20,8 @@ public class House : Obstacle {
 
 		if (owner != null){
 			owner.sorrow += sorrow;
-			sorrow = 0;
+			sorrow = 0f;
 	
+		}
 	}
-}
 }

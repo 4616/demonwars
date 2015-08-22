@@ -10,12 +10,12 @@ public class Spawner : Obstacle {
 	
 	// Update is called once per frame
 	void Update () {
-		if(owner.sorrow >= 1){
+		if(owner.sorrow >= 1f){
 			//spawn a unit here.
 
-			owner.sorrow -= 1;
+			owner.sorrow -= 1f;
 	
+		}
 	}
-}
 
 }
