@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Player : MonoBehaviour {
-	public int sorrow = 1;
+	public float sorrow = 1;
 	// Use this for initialization
 	void Start () {
 	

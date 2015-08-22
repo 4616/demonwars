@@ -2,9 +2,10 @@
 using System.Collections;
 
 public class House : Obstacle {
-	public int sorrow = 1;
-	public int sorrowgen = 0;
-	public int sorrowgenratechange = .01;
+	public float sorrow = 1;
+	public float sorrowgen = 0;
+	public float sorrowgenratechange = .01;
+	public bool ownable = true;
 
 
 	// Use this for initialization
