@@ -35,4 +35,4 @@ public class Obstacle : MonoBehaviour {
 		
 	}
 
-}
+  }
