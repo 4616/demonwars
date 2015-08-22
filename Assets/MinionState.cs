@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public interface MinionState {
+public abstract class MinionState {
 
-	Vector2 setVelocity();
+	public abstract Vector2 setVelocity();
+
+	public bool inCombat() {
+		return false;
+	}
 }

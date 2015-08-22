@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\ClickForegroundController.cs" />
+     <Compile Include="Assets\CombatState.cs" />
      <Compile Include="Assets\House.cs" />
      <Compile Include="Assets\Minion.cs" />
      <Compile Include="Assets\MinionState.cs" />
