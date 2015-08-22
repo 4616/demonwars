@@ -12,11 +12,11 @@ public class Spawner : Obstacle {
 	
 	// Update is called once per frame
 	void Update () {
-		//if(owner.sorrow >= 1f){
+		if(owner.sorrow >= 1f){
 			this.Spawn();
-			//owner.sorrow -= 1f;
+			owner.sorrow -= 1f;
 	
-		//}
+		}
 	}
 	void Spawn () {
 		Instantiate (MinonPrefab, this.transform.position, this.transform.rotation);
