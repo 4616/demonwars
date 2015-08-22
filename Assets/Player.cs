@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-	public float sorrow = 1;
+	public float sorrow = 100000;
 	// Use this for initialization
 	void Start () {
 		tag = "Player";
