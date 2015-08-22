@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class House : MonoBehaviour {
-
+	public int playernumber = 0;
 	// Use this for initialization
 	void Start () {
 	

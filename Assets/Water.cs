@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Water : MonoBehaviour {
+public class Water : Obstacle {
 
 	// Use this for initialization
 	void Start () {
