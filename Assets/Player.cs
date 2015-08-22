@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
-
+	public float sorrow;
+	// Use this for initialization
 	public GameObject token;
 
 	public int maxTokensLimit;
@@ -62,20 +63,14 @@ public class Player : MonoBehaviour {
 			}
 		}
 	}
-
-	public Player() {
-//		Debug.Log (token);
-//		tokenManager = new TokenManager (this, token);
+	void Start () {
+		tag = "Player";
+		
 	}
 
 	public TokenManager tokenManager;
 
-	public float sorrow;
-	// Use this for initialization
-	void Start () {
-		tag = "Player";
-	
-	}
+
 
 	//public List<Token>  getTokenList() {
 	//	return tokenList;
