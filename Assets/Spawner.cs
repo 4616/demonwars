@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Spawner : MonoBehaviour {
+public class Spawner : Obstacle {
 
 	// Use this for initialization
 	void Start () {
@@ -10,6 +10,10 @@ public class Spawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(owner.sorrow >= 1){
+			//spawn a unit here.
+
+			owner.sorrow -= 1;
 	
 	}
 }

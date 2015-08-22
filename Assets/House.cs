@@ -2,7 +2,11 @@
 using System.Collections;
 
 public class House : Obstacle {
-	public int sorrow = 1;
+	public float sorrow = 1;
+	public float sorrowgen = 0;
+	public float sorrowgenratechange = .01;
+	public bool ownable = true;
+
 
 	// Use this for initialization
 	void Start () {
@@ -11,6 +15,12 @@ public class House : Obstacle {
 	
 	// Update is called once per frame
 	void Update () {
+		sorrowgen += sorrowgenratechange;
+		sorrow += sorrowgen;
+
+		if (owner != null){
+			owner.sorrow += sorrow;
+			sorrow = 0;
 	
 	}
 }
