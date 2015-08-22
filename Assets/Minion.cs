@@ -4,6 +4,7 @@ using System.Collections;
 public class Minion : MonoBehaviour {
 	public string tag = "Minion";
 	public float health = 10f;
+	public float damage = 1f;
 	public MinionState state;
 
 	// Use this for initialization
