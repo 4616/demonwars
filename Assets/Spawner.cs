@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Spawner : Obstacle {
 	public GameObject MinonPrefab;
-	public Player owner;
+	//public Player owner;
 
 	// Use this for initialization
 	void Start () {
@@ -13,7 +13,7 @@ public class Spawner : Obstacle {
 	
 	// Update is called once per frame
 	void Update () {
-		if(owner.sorrow >= 1f){
+		if(owner != null && owner.sorrow >= 1f){
 			this.Spawn();
 			owner.sorrow -= 1f;
 		}

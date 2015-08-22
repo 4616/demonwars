@@ -1,8 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Water.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Minion.cs">
     <Files>
-      <File FileName="Assets\Minion.cs" Line="72" Column="23" />
+      <File FileName="Assets\Minion.cs" Line="56" Column="10" />
       <File FileName="Assets\House.cs" Line="30" Column="1" />
       <File FileName="Assets\Water.cs" Line="28" Column="4" />
     </Files>
