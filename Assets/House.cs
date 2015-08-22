@@ -12,6 +12,7 @@ public class House : Obstacle {
 	void Start () {
 		tag = "House";
 		ownable = true;
+
 	
 	}
 	

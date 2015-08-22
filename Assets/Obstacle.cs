@@ -23,7 +23,9 @@ public class Obstacle : MonoBehaviour {
 		print (ownable);
 		if (ownable) {
 			this.owner = newowner;
+			print ("Obstacle ownership taken!");
 		}
+
 
 		}
 
