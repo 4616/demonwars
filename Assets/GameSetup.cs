@@ -18,9 +18,11 @@ public class GameSetup : MonoBehaviour {
 	}
 
 	void Initialize(){
-		for (int i = 0; i <= this.nplayers; i++)
-		GameObject playeri = Instantiate(PlayerPrefab, new Vector3(0,0,0), 0)
-		GameObject spawneri = Instantiate(SpawnerPrefab, new Vector3(0,0,0), 0)
+		for (int i = 0; i <= this.nplayers; i++){
+			GameObject playeri = Instantiate(PlayerPrefab, new Vector3(0,0,0), Quaternion 0)
+			GameObject spawneri = Instantiate(SpawnerPrefab, new Vector3(0,0,0), Quaternion 0)
+			spawneri.TakeOwnership(playeri)
+		}
 		
 	 }
 }
