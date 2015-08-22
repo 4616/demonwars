@@ -69,7 +69,7 @@ public class Player : MonoBehaviour {
 
 	public TokenManager tokenManager;
 
-	public float sorrow = 100000;
+	public float sorrow;
 	// Use this for initialization
 	void Start () {
 		tag = "Player";

@@ -16,7 +16,8 @@ public class Spawner : Obstacle {
 		if(owner != null && owner.sorrow >= 1f){
 			this.Spawn();
 			owner.sorrow -= 1f;
-			//print ("In spawning loop");
+			//print (owner.sorrow);
+
 		}
 	}
 
