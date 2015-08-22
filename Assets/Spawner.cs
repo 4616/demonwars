@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Spawner : Obstacle {
-
+	public GameObject MinonPrefab;
 	// Use this for initialization
 	void Start () {
 	
@@ -11,11 +11,12 @@ public class Spawner : Obstacle {
 	// Update is called once per frame
 	void Update () {
 		if(owner.sorrow >= 1f){
-			//spawn a unit here.
-
+			this.Spawn();
 			owner.sorrow -= 1f;
 	
 		}
 	}
-
+	void Spawn () {
+		Instantiate (MinonPrefab, this.transform.position, this.transform.rotation);
+	}
 }
