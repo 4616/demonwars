@@ -1,29 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ClickForegroundController : MonoBehaviour {
 
 	public int delayTimer;
 	private int currentDelay = 0;
 
-	public Transform token;
-
+	public GameObject token;
 //	private Camera camera = GetComponent.<Camera>();
+
+	private List<Token> tokenList = new List<Token>();
 
 	void OnMouseDown()
 	{
-		Debug.Log ("Potato");
-		if (currentDelay <= 0) {
+		if (currentDelay <= 0 && (tokenList.Count == 0 || !tokenList[0].Blocking())) {
 			var mousePos = Input.mousePosition;
-			Debug.Log (mousePos.x);
-			Debug.Log (mousePos.y);
 			mousePos.z = 10;
-			var objectPos = Camera.current.ScreenToWorldPoint(mousePos);
-			Debug.Log(objectPos);
-//			Instantiate(token, objectPos, Quaternion.identity);
-			GameObject objectNew = GameObject.Instantiate(token, objectPos, Quaternion.identity) as GameObject;
-			Rigidbody clone = objectNew.GetComponent<Rigidbody>();
-			Debug.Log("instantiated");
+			var objectPos = Camera.main.ScreenToWorldPoint(mousePos);
+			GameObject go = Instantiate(token, objectPos, Quaternion.identity) as GameObject;
+
+			Token tk = go.GetComponent<Token>();
+			tk.startDragging();
+			tokenList.Insert(0,tk);
+//			tk.state = Token.State.Dragging;
+			currentDelay = delayTimer;
 		}
 	}
 
