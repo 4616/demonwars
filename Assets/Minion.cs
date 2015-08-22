@@ -20,6 +20,8 @@ public class Minion : MonoBehaviour {
 	public Vector2 moveDelta;
 	public GameObject target;
 	public float damage = 1f;
+	public float brownianJumpMagnitude = 5f;
+	public float probabilityToWander = 0.1f;
 	public float range = 1.5f;
 	
 	
@@ -32,8 +34,10 @@ public class Minion : MonoBehaviour {
 	void Update () {
 		switch (state) {
 		case State.Wander:
-			Vector2 delta = deltaV ();
-			gameObject.transform.position += new Vector3 (delta.x, delta.y);
+			if (Random.value < probabilityToWander) {
+			    Vector2 delta = deltaV ();
+			    gameObject.transform.position += new Vector3 (delta.x, delta.y);
+			}
 			break;
 		case State.Move:
 			if (moveDelta != null) {
@@ -86,8 +90,9 @@ public class Minion : MonoBehaviour {
 	}
 	
 	Vector2 deltaV() {
-		Vector2 velocity = new Vector2 (Random.Range (-1f,1f), Random.Range (-1f,1f));
-		velocity.Normalize ();
+		Vector2 velocity = new Vector2 (Random.Range (-brownianJumpMagnitude,brownianJumpMagnitude), 
+		                                Random.Range (-brownianJumpMagnitude,brownianJumpMagnitude));
+//		velocity.Normalize ();
 		velocity *= (state == State.Wander ? wanderMagnitude : movePerterbation);
 		return velocity;
 	}
