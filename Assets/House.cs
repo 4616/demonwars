@@ -5,7 +5,7 @@ public class House : Obstacle {
 	public int sorrow = 1;
 	public int sorrowgen = 0;
 	public int sorrowgenratechange = .01;
-	public Player owner = null;
+
 
 	// Use this for initialization
 	void Start () {
@@ -18,8 +18,8 @@ public class House : Obstacle {
 		sorrow += sorrowgen;
 
 		if (owner != null){
-			owner.sorrow += sorrow
-			sorrow = 0
+			owner.sorrow += sorrow;
+			sorrow = 0;
 	
 	}
 }
