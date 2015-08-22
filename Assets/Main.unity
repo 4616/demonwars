@@ -315,24 +315,6 @@ Prefab:
     - {fileID: 11417342, guid: c055f3fe6a281914cb0bc51bb5cc1a4e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c055f3fe6a281914cb0bc51bb5cc1a4e, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1310813943 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 126286, guid: c055f3fe6a281914cb0bc51bb5cc1a4e, type: 2}
-  m_PrefabInternal: {fileID: 1310813942}
---- !u!114 &1310813944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1310813943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 680325155673b5f408cc6ea298dfe365, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tag: Minion
-  health: 10
-  damage: 1
 --- !u!1001 &1635274589
 Prefab:
   m_ObjectHideFlags: 0
