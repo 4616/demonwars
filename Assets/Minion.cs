@@ -20,6 +20,7 @@ public class Minion : MonoBehaviour {
 	public Vector2 moveDelta;
 	public GameObject target;
 	public float damage = 1f;
+	public float range = 1.5f;
 	
 	
 	// Use this for initialization
@@ -41,13 +42,13 @@ public class Minion : MonoBehaviour {
 			break;
 		case State.Combat:
 			if (target != null) {
-				// if target in range 
-				gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target.transform.position, moveSpeed);
-				// else
-				//findNewTarget ();
+				float dist = Vector3.Distance(transform.position, target.transform.position);
+				if (dist < range) {
+					target.GetComponent<Minion>().TakeDamage(damage);
+				}else {
+					gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target.transform.position, moveSpeed);
+				}
 			} else {
-				// findNewTarget ();
-				// wander state if nothing in range
 				state = State.Wander;
 			}
 			break;
