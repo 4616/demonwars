@@ -68,7 +68,12 @@ public class Minion : MonoBehaviour {
 		}
 		
 	}
-	
+
+//	void OnCollisionEnter2D(Collider2D otherObj) {
+//		print("Collision on minion!");
+//	}
+
+
 	void OnTriggerEnter(Collider other) {
 		if (state != null && state != State.Combat && other.gameObject.tag == "Minion") {
 			Minion minon = other.gameObject.GetComponent<Minion>();

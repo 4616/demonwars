@@ -23,7 +23,11 @@ public class Obstacle : MonoBehaviour {
 		print (ownable);
 		if (ownable) {
 			this.owner = newowner;
-			print ("Obstacle ownership taken!");
+			print (this.tag);
+			if(this.tag == "House"){
+			print ("You are a home owner");
+			}
+
 		}
 
 

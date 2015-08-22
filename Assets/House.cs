@@ -27,4 +27,19 @@ public class House : Obstacle {
 	
 		}
 	}
+
+	void OnCollisionEnter2D(Collider2D otherObj) {
+		print ("Collision with a house!");
+		if (otherObj.gameObject.tag == "Minion") {
+			Minion minion = otherObj.gameObject.GetComponent<Minion>();
+			this.TakeOwnership(minion.owner);
+		}
+	}
+//	void OnCollisionEnter(Collision otherObj) {
+//		print ("Collision with a house!");
+//		if (otherObj.gameObject.tag == "Minion") {
+//			Minion minion = otherObj.gameObject.GetComponent<Minion>();
+//			this.TakeOwnership(minion.owner);
+//		}
+//	}
 }
