@@ -15,11 +15,12 @@ public class MainMenu : MonoBehaviour {
 	public float guiPlacementY1 = .5f;
 	public float guiPlacementY2 = .7f;
 	public string CurrentMenu = "Main";
+	public GUIStyle Random1;
 
 	void OnGUI(){
 
 		if (CurrentMenu == "Main")
-			Main_Menu ();
+			Main_Menu();
 
 
 		if (CurrentMenu == "Options")
@@ -48,6 +49,7 @@ public class MainMenu : MonoBehaviour {
 			}
 			
 			if(GUI.Button (new Rect (Screen.width * guiPlacementX2, Screen.height * guiPlacementY2, Screen.width * .5f, Screen.height * .1f), "Options")){
+				NavGate("Options");
 				print ("Clicked Options");
 			}
 			
@@ -63,6 +65,22 @@ public class MainMenu : MonoBehaviour {
 		}
 
 	public void Options_Menu(){
+		// Displays background texture
+		GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroudTexture);
+
+
+	
+	if(GUI.Button (new Rect (Screen.width * guiPlacementX2, Screen.height * guiPlacementY2, Screen.width * .5f, Screen.height * .1f), "Singleplayer")){
+		NavGate("Main");
+			//set to single player
+		print ("Clicked single player, returning to main menu");
+	}
+	
+		if(GUI.Button (new Rect (Screen.width * guiPlacementX2, Screen.height * guiPlacementY2, Screen.width * .5f, Screen.height * .1f), "Singleplayer")){
+			NavGate("Main");
+			//set to single player
+			print ("Clicked single player, returning to main menu");
+		}
 	
 	
 	}
