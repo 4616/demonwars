@@ -17,7 +17,7 @@ public class Minion : MonoBehaviour {
 	public float wanderMagnitude = 0.1f;
 	public float movePerterbation = 0.05f;
 	public float moveSpeed = 0.1f;
-	public float tokenAtraction = 0.01f;
+	public float tokenAtraction = 2f;
 	public Vector2 moveDelta;
 	public GameObject target;
 	public float damage = 1f;
@@ -98,6 +98,7 @@ public class Minion : MonoBehaviour {
 			foreach (Token token in owner.tokenManager.tokenList) {
 				float dist = Vector3.Distance (gameObject.transform.position, token.gameObject.transform.position);
 				if (closest == null || minDist > dist) {
+					Debug.log("We close enough?");
 					minDist = dist;
 					closest = token;
 				}
