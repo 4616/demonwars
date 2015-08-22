@@ -53,11 +53,14 @@ public class Player : MonoBehaviour {
 
 		public void trimOldTokens(int maxTokens) {
 			if (tokenList.Count > maxTokens) {
-				foreach (Token tk in tokenList.GetRange (maxTokens-1, (tokenList.Count-maxTokens))) {
+				Debug.Log (maxTokens);
+				Debug.Log (tokenList.Count);
+				foreach (Token tk in tokenList.GetRange (maxTokens, (tokenList.Count-(maxTokens)))) {
 					//TODO: Play destruction animation
 					tk.Destroy();
 				}
 				tokenList = tokenList.GetRange (0, maxTokens);
+				Debug.Log (tokenList);
 			}
 		}
 	}
