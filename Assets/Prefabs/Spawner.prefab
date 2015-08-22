@@ -40,10 +40,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3439522ddd0754abe32e1c6aea8f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tag: GenericObstacle
   owner: {fileID: 0}
   ownable: 0
   damageable: 0
   health: 100
+  MinonPrefab: {fileID: 126286, guid: c055f3fe6a281914cb0bc51bb5cc1a4e, type: 2}
 --- !u!212 &21212102
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -76,7 +78,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: MinonPrefab
+      value: 
+      objectReference: {fileID: 126286, guid: c055f3fe6a281914cb0bc51bb5cc1a4e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 132890}

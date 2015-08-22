@@ -2,15 +2,16 @@
 using System.Collections;
 
 public class House : Obstacle {
-	public string tag = "House";
 	public float sorrow = 1f;
 	public float sorrowgen = 0f;
 	public float sorrowgenratechange = .00001f;
-	public bool ownable = true;
+
 
 
 	// Use this for initialization
 	void Start () {
+		tag = "House";
+		ownable = true;
 	
 	}
 	

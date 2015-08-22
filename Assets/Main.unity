@@ -330,6 +330,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680325155673b5f408cc6ea298dfe365, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tag: Minion
+  health: 10
+  damage: 1
 --- !u!1001 &1635274589
 Prefab:
   m_ObjectHideFlags: 0
