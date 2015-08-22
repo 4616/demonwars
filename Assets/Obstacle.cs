@@ -25,13 +25,14 @@ public class Obstacle : MonoBehaviour {
 
 		}
 
+
 	public void TakeDamage(float damage) {
-		if (damageable) {
-			this.health -= damage;
+	if (damageable) {
+		health -= damage;
+		if(health < 0){
+			Destroy(gameObject,.5f);
 		}
-
-
-
-
+		
 	}
+
 }
