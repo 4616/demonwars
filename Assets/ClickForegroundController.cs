@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour {
-	public string tag = "Player";
-	public float sorrow = 1;
+public class ClickForegroundController : MonoBehaviour {
+
 	// Use this for initialization
 	void Start () {
 	
@@ -13,7 +12,4 @@ public class Player : MonoBehaviour {
 	void Update () {
 	
 	}
-
-
-
 }
