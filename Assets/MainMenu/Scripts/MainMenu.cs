@@ -48,6 +48,7 @@ public class MainMenu : MonoBehaviour {
 			//button location x, button location y, buttion size x, button size y
 			if(GUI.Button (new Rect (Screen.width * guiPlacementX1, Screen.height * guiPlacementY1, Screen.width * .5f, Screen.height * .1f), "Play Game")){
 				print ("Clicked Play Game");
+				Application.LoadLevel(1);
 			}
 			
 			if(GUI.Button (new Rect (Screen.width * guiPlacementX2, Screen.height * guiPlacementY2, Screen.width * .5f, Screen.height * .1f), "Options")){
