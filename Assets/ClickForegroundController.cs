@@ -3,13 +3,22 @@ using System.Collections;
 
 public class ClickForegroundController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
+	public int delayTimer;
+	private int currentDelay;
+
+	public Transform token;
+
+	void OnMouseDown()
+	{
+		if (currentDelay <= 0) {
+			var mousePos = Input.mousePosition;
+			var objectPos = Camera.current.ScreenToWorldPoint(mousePos);
+			Instantiate(token, objectPos, Quaternion.identity);
+		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void Update()
+	{
+		currentDelay--;
 	}
 }
