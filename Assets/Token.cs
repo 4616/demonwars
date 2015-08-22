@@ -20,6 +20,8 @@ public class Token : MonoBehaviour
 	public int rateLimit = 10;
 
 	public Player owner;
+
+	public GameObject explosion;
 	
 	void Start() {
 

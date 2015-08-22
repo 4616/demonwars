@@ -56,6 +56,7 @@ public class Player : MonoBehaviour {
 				foreach (Token tk in tokenList.GetRange (maxTokens, (tokenList.Count-(maxTokens)))) {
 					//TODO: Play destruction animation
 					tk.Destroy();
+					Instantiate (tk.explosion, tk.transform.position, tk.transform.rotation);
 				}
 				tokenList = tokenList.GetRange (0, maxTokens);
 			}
