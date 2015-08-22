@@ -3,7 +3,8 @@ using System.Collections;
 
 public class GameSetup : MonoBehaviour {
 	public int nplayers = 2;
-	public GameObject playerprefab;
+	public GameObject PlayerPrefab;
+	public GameObject SpawnerPrefab;
 
 
 	// Use this for initialization
@@ -17,5 +18,9 @@ public class GameSetup : MonoBehaviour {
 	}
 
 	void Initialize(){
+		for (int i = 0; i <= this.nplayers; i++)
+		GameObject playeri = Instantiate(PlayerPrefab, new Vector3(0,0,0), 0)
+		GameObject spawneri = Instantiate(SpawnerPrefab, new Vector3(0,0,0), 0)
+		
 	 }
 }
