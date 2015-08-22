@@ -8,7 +8,7 @@ public class ClickForegroundController : MonoBehaviour {
 
 	public Transform token;
 
-	private Camera camera = GetComponent.<Camera>();
+//	private Camera camera = GetComponent.<Camera>();
 
 	void OnMouseDown()
 	{
@@ -17,8 +17,13 @@ public class ClickForegroundController : MonoBehaviour {
 			var mousePos = Input.mousePosition;
 			Debug.Log (mousePos.x);
 			Debug.Log (mousePos.y);
-//			var objectPos = Camera.current.ScreenToWorldPoint(mousePos);
+			mousePos.z = 10;
+			var objectPos = Camera.current.ScreenToWorldPoint(mousePos);
+			Debug.Log(objectPos);
 //			Instantiate(token, objectPos, Quaternion.identity);
+			GameObject objectNew = GameObject.Instantiate(token, objectPos, Quaternion.identity) as GameObject;
+			Rigidbody clone = objectNew.GetComponent<Rigidbody>();
+			Debug.Log("instantiated");
 		}
 	}
 

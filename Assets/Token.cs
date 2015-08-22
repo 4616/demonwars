@@ -10,8 +10,8 @@ class Token : MonoBehaviour
 	//Don't allow the player to re-drag if they already dragged the tower.  They can still rotate though.
 	private bool alreadyDragged = false;
 
-	public float rotateSpeed;
-	public float rotateFriction;
+	public float rotateSpeed = 10;
+	public float rotateFriction = 2;
 	
 	void Start() {
 
