@@ -11,9 +11,11 @@ public class MainMenu : MonoBehaviour {
 	public Texture backgroudTexture;
 
 	public float guiPlacementX1 = .25f;
+	public float guiPlacementY1 = .45f;
 	public float guiPlacementX2 = .25f;
-	public float guiPlacementY1 = .5f;
-	public float guiPlacementY2 = .7f;
+	public float guiPlacementY2 = .6f;
+	public float guiPlacementX3 = .25f;
+	public float guiPlacementY3 = .75f;
 	public string CurrentMenu = "Main";
 	public GUIStyle Random1;
 
@@ -70,18 +72,23 @@ public class MainMenu : MonoBehaviour {
 
 
 	
-	if(GUI.Button (new Rect (Screen.width * guiPlacementX2, Screen.height * guiPlacementY2, Screen.width * .5f, Screen.height * .1f), "Singleplayer")){
-		NavGate("Main");
-			//set to single player
-		print ("Clicked single player, returning to main menu");
-	}
-	
-		if(GUI.Button (new Rect (Screen.width * guiPlacementX2, Screen.height * guiPlacementY2, Screen.width * .5f, Screen.height * .1f), "Singleplayer")){
+		if(GUI.Button (new Rect (Screen.width * guiPlacementX1, Screen.height * guiPlacementY1, Screen.width * .5f, Screen.height * .1f), "Singleplayer")){
 			NavGate("Main");
 			//set to single player
 			print ("Clicked single player, returning to main menu");
 		}
-	
+
+		if(GUI.Button (new Rect (Screen.width * guiPlacementX2, Screen.height * guiPlacementY2, Screen.width * .5f, Screen.height * .1f), "Multiplayer")){
+			NavGate("Main");
+			//set to multiplayer
+			print ("Clicked multiplayer, returning to main menu");
+		}
+
+		if(GUI.Button (new Rect (Screen.width * guiPlacementX3, Screen.height * guiPlacementY3, Screen.width * .5f, Screen.height * .1f), "Back")){
+			NavGate("Main");
+			//set to multiplayer
+			print ("Clicked back, returning to main menu");
+		}
 	
 	}
 	}
