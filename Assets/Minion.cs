@@ -97,10 +97,10 @@ public class Minion : MonoBehaviour {
 		Token closest = null;
 		if (owner != null) {
 
-			foreach (Token token in owner.tokenList) {
+			foreach (Token token in owner.tokenManager.tokenList) {
 				float dist = Vector3.Distance (gameObject.transform.position, token.gameObject.transform.position);
 				if (closest == null || minDist > dist) {
-					Debug.log("We close enough?");
+					Debug.Log("We close enough?");
 					minDist = dist;
 					closest = token;
 				}
