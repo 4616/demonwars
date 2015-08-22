@@ -21,7 +21,6 @@ public class Minion : MonoBehaviour {
 		health -= damage;
 		if(health < 0){
 			Destroy(gameObject,.5f);
-
 		}
 
 	}
