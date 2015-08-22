@@ -48,11 +48,13 @@
   <ItemGroup>
      <Compile Include="Assets\House.cs" />
      <Compile Include="Assets\Minion.cs" />
+     <Compile Include="Assets\MinionState.cs" />
      <Compile Include="Assets\Obstacle.cs" />
      <Compile Include="Assets\Player.cs" />
      <Compile Include="Assets\Rock.cs" />
      <Compile Include="Assets\Spawner.cs" />
      <Compile Include="Assets\Token.cs" />
+     <Compile Include="Assets\WanderState.cs" />
      <Compile Include="Assets\Water.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
