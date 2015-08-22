@@ -32,20 +32,48 @@ public class Token : MonoBehaviour
 	public bool Blocking() {
 		return !(state == State.Finished);
 	}
-	
-	void OnMouseDown()
-	{
-		if (state == State.Fresh)
-			startDragging ();
-		if (state == State.Dropped) {
-			state = State.RateLimiting;
-		}
+
+	public bool Active() {
+		return (state == State.Dragging || state == State.Dropped || state == State.Fresh);
 	}
 
-	public void startDragging() {
-		distance = Vector3.Distance (transform.position, Camera.main.transform.position);
-		state = State.Dragging;
+	public void Click() {
+		if( Active()) IncrementState();
 	}
+
+	public void IncrementState() {
+		if (state == State.Fresh) {
+			distance = Vector3.Distance (transform.position, Camera.main.transform.position);
+			state = State.Dragging;
+		} else if (state == State.Dragging) 
+			state = State.Dropped;
+		else if (state == State.Dropped) 
+			state = State.RateLimiting;
+		else if (state == State.RateLimiting)
+			state = State.Finished;
+	}
+
+	public void Destroy() {
+		Destroy (this.gameObject);
+	}
+
+//	public void Drag() {
+//
+//	}
+	
+//	void OnMouseDown()
+//	{
+//		if (state == State.Fresh)
+//			startDragging ();
+//		if (state == State.Dropped) {
+//			state = State.RateLimiting;
+//		}
+//	}
+
+//	public void startDragging() {
+//		distance = Vector3.Distance (transform.position, Camera.main.transform.position);
+//		state = State.Dragging;
+//	}
 	
 	void OnMouseUp()
 	{
@@ -70,7 +98,7 @@ public class Token : MonoBehaviour
 			Vector3 rayPoint = ray.GetPoint (distance);
 			transform.position = rayPoint;
 		} else if (state == State.RateLimiting) {
-			if (rateLimit == 0) state = State.Finished;
+			if (rateLimit == 0) IncrementState();
 			else rateLimit --;
 		}
 

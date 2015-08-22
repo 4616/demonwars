@@ -202,7 +202,6 @@ MonoBehaviour:
   nplayers: 2
   PlayerPrefab: {fileID: 168060, guid: 3733ba2b5552cc24f95abca565aac470, type: 2}
   SpawnerPrefab: {fileID: 132890, guid: 1f4bb42ef2e23bc4e97604979201882a, type: 2}
-  HousePrefab: {fileID: 136066, guid: 2604abcb547d5bd46b141f1c29f6aff0, type: 2}
 --- !u!4 &828739536
 Transform:
   m_ObjectHideFlags: 0
@@ -264,7 +263,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2043398287}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .00400000019, y: .00400000019, z: 1000}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

@@ -21,6 +21,8 @@ public class Minion : MonoBehaviour {
 	public Vector2 moveDelta;
 	public GameObject target;
 	public float damage = 1f;
+	public float brownianJumpMagnitude = 5f;
+	public float probabilityToWander = 0.1f;
 	public float range = 1.5f;
 	
 	
@@ -33,8 +35,10 @@ public class Minion : MonoBehaviour {
 	void Update () {
 		switch (state) {
 		case State.Wander:
-			Vector2 delta = deltaV ();
-			gameObject.transform.position += new Vector3 (delta.x, delta.y);
+			if (Random.value < probabilityToWander) {
+			    Vector2 delta = deltaV ();
+			    gameObject.transform.position += new Vector3 (delta.x, delta.y);
+			}
 			break;
 		case State.Move:
 			if (moveDelta != null) {
@@ -69,7 +73,12 @@ public class Minion : MonoBehaviour {
 		}
 		
 	}
-	
+
+//	void OnCollisionEnter2D(Collider2D otherObj) {
+//		print("Collision on minion!");
+//	}
+
+
 	void OnTriggerEnter(Collider other) {
 		if (state != null && state != State.Combat && other.gameObject.tag == "Minion") {
 			Minion minon = other.gameObject.GetComponent<Minion>();
@@ -82,12 +91,11 @@ public class Minion : MonoBehaviour {
 	}
 	
 	Vector2 deltaV() {
-		Vector2 velocity = new Vector2 (Random.Range (-1f,1f), Random.Range (-1f,1f));
 		float minDist = 0f;
 		Token closest = null;
-		if (owner != null) {
+		if (owner != null && owner.tokenManager != null) {
 
-			foreach (Token token in owner.tokenList) {
+			foreach (Token token in owner.tokenManager.tokenList) {
 				float dist = Vector3.Distance (gameObject.transform.position, token.gameObject.transform.position);
 				if (closest == null || minDist > dist) {
 					minDist = dist;
@@ -99,8 +107,11 @@ public class Minion : MonoBehaviour {
 				gameObject.transform.position = Vector3.MoveTowards (gameObject.transform.position, closest.gameObject.transform.position, tokenAtraction);
 			}
 		}
-		velocity.Normalize ();
-		velocity *= wanderMagnitude;
+		Vector2 velocity = new Vector2 (Random.Range (-brownianJumpMagnitude,brownianJumpMagnitude), 
+		                                Random.Range (-brownianJumpMagnitude,brownianJumpMagnitude));
+//		velocity.Normalize ();
+		velocity *= (state == State.Wander ? wanderMagnitude : movePerterbation);
+
 		return velocity;
 	}
 }
