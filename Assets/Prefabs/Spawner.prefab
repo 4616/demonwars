@@ -46,6 +46,7 @@ MonoBehaviour:
   damageable: 0
   health: 100
   MinonPrefab: {fileID: 126286, guid: c055f3fe6a281914cb0bc51bb5cc1a4e, type: 2}
+  owner: {fileID: 11493526, guid: 3733ba2b5552cc24f95abca565aac470, type: 2}
 --- !u!212 &21212102
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -83,6 +84,10 @@ Prefab:
       propertyPath: MinonPrefab
       value: 
       objectReference: {fileID: 126286, guid: c055f3fe6a281914cb0bc51bb5cc1a4e, type: 2}
+    - target: {fileID: 0}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 132890}
