@@ -3,9 +3,10 @@ using System.Collections;
 
 public class Spawner : Obstacle {
 	public GameObject MinonPrefab;
-	public bool ownable = true;
+
 	// Use this for initialization
 	void Start () {
+		ownable = true;
 	
 	}
 	

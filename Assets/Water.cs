@@ -2,12 +2,13 @@
 using System.Collections;
 
 public class Water : Obstacle {
-	public string tag = "Water";
+
 	public float damage = 1000000000000f;
 
 
 	// Use this for initialization
 	void Start () {
+		tag = "Water";
 	
 	}
 	
