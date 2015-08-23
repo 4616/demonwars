@@ -18,7 +18,7 @@ public class CameraBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update(){
-		Debug.Log("scroll"+Input.GetAxis ("Mouse ScrollWheel").ToString());
+		//Debug.Log("scroll"+Input.GetAxis ("Mouse ScrollWheel").ToString());
 		cam.orthographicSize *= 1-Input.GetAxis ("Mouse ScrollWheel");
 	}
 

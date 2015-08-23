@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Obstacle : MonoBehaviour {
-	public string tag = "GenericObstacle";
+
 	public Player owner = null;
 	public bool ownable = false;
 	public bool damageable = false;
@@ -10,7 +10,7 @@ public class Obstacle : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		//tag = "GenericObstacle";
 	}
 	
 	// Update is called once per frame
