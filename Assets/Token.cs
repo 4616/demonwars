@@ -166,10 +166,17 @@ public class Token : MonoBehaviour
 	{
 		if (state == State.Dropped) {
 //			if (Input.GetButton("Fire2")) {
-			xDeg -= Input.GetAxis ("Mouse X") * rotateSpeed / rotateFriction;
-			var target = Quaternion.Euler (0, 0, xDeg);
+			Vector3 mousePos = CameraBehavior.mainCamera.ScreenToWorldPoint(Input.mousePosition);
+			mousePos = new Vector3(mousePos.x, mousePos.y, transform.position.z);
+			//xDeg = Vector3.Angle(transform.position, CameraBehavior.mainCamera.ScreenToWorldPoint(Input.mousePosition));
+			//Debug.Log(xDeg);
+			//Vector3 direction = Vector3.
+
+			//xDeg -= Input.GetAxis ("Mouse X") * rotateSpeed / rotateFriction;
+			//var target = Quaternion.Euler (0, 0, xDeg);
 			// Dampen towards the target rotation
-			transform.rotation = Quaternion.Slerp (transform.rotation, target, Time.deltaTime * rotateSpeed);
+			//transform.rotation = Quaternion.Slerp (transform.rotation, target, Time.deltaTime * rotateSpeed);
+			transform.rotation = Quaternion.FromToRotation(Vector3.right, mousePos - transform.position);
 		} else if (state == State.Dragging) {
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			Vector3 rayPoint = ray.GetPoint (distance);

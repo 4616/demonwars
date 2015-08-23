@@ -11,9 +11,12 @@ public class CameraBehavior : MonoBehaviour {
 
 	Camera cam;
 
+	public static Camera mainCamera;
+
 	// Use this for initialization
 	void Start () {
 		cam = this.GetComponent<Camera>();
+		mainCamera = cam;
 	}
 	
 	// Update is called once per frame
