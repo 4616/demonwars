@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 420516}
   - 212: {fileID: 21213952}
   - 114: {fileID: 11485642}
-  - 58: {fileID: 5887480}
   - 61: {fileID: 6171098}
   m_Layer: 0
   m_Name: Water
@@ -31,19 +30,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!58 &5887480
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 123264}
-  m_Enabled: 0
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: .800000012
 --- !u!61 &6171098
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -54,9 +40,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: .0500000007, y: -.200000003}
+  m_Offset: {x: .0500000007, y: -.100000001}
   serializedVersion: 2
-  m_Size: {x: 2, y: .800000012}
+  m_Size: {x: 2, y: .400000006}
 --- !u!114 &11485642
 MonoBehaviour:
   m_ObjectHideFlags: 1
