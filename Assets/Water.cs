@@ -8,7 +8,7 @@ public class Water : Obstacle {
 
 	// Use this for initialization
 	void Start () {
-		tag = "Water";
+		//tag = "Water";
 	
 	}
 	
@@ -16,10 +16,13 @@ public class Water : Obstacle {
 	void Update () {
 	
 	}
-	void OnCollisionEnter(Collision otherObj) {
+
+	void OnTriggerEnter2D(Collider2D otherObj) {
+		Debug.Log (otherObj);
 		if (otherObj.gameObject.tag == "Minion") {
-			Minion minon = otherObj.gameObject.GetComponent<Minion>();
-			minon.TakeDamage(this.damage);
+			Minion minion = otherObj.gameObject.GetComponent<Minion>();
+			minion.TakeDamage(damage);
+			Debug.Log("Drowning Minion!");
 		}
 	}
 

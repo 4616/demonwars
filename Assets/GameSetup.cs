@@ -6,7 +6,7 @@ public class GameSetup : MonoBehaviour {
 	public GameObject PlayerPrefab;
 	public GameObject SpawnerPrefab;
 	public GameObject HousePrefab;
-
+	public GameObject WaterPrefab;
 	// Use this for initialization
 	void Start () {
 		StartGame();
@@ -24,7 +24,7 @@ public class GameSetup : MonoBehaviour {
 		float flipy = 1;
 		for (int i = 0; i < this.nplayers; i++) {
 
-
+			//Add spawners
 
 			GameObject playergameobji = Instantiate (PlayerPrefab, new Vector3 (0f, -5f * flipy, 0f), Quaternion.identity) as GameObject;
 			GameObject spawnergameobji = Instantiate (SpawnerPrefab, new Vector3 (0f, -5f * flipy, 0f), Quaternion.identity) as GameObject;
@@ -36,6 +36,7 @@ public class GameSetup : MonoBehaviour {
 			flipy = flipy * -1f;
 		}
 
+		//Add houses
 		for (int i = 0; i < this.nplayers * 50; i++) {
 			float xposition = Random.Range(-5f,5f);
 			float yposition = Random.Range(-5f,5f);
@@ -44,10 +45,21 @@ public class GameSetup : MonoBehaviour {
 			//print (yposition);
 			Instantiate (HousePrefab, new Vector3 (xposition, yposition, 0f), Quaternion.identity);
 
-
-
-
 		}
+
+		//Add water
+		for (int i = 0; i < this.nplayers * 10; i++) {
+			float xposition = Random.Range(-5f,5f);
+			float yposition = Random.Range(-5f,5f);
+			//print ("(x,y)");
+			//print (xposition);
+			//print (yposition);
+			Instantiate (WaterPrefab, new Vector3 (xposition, yposition, 0f), Quaternion.identity);
+			
+		}
+
+
+	
 	}	
 	 
 }
