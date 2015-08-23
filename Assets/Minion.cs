@@ -88,10 +88,12 @@ public class Minion : MonoBehaviour {
 //	}
 
 
-	void OnTriggerEnter(Collider other) {
+	void OnTriggerEnter2D(Collider2D other) {
+		Debug.Log ("OnTriggerEnter");
 		if (state != null && state != State.Combat && other.gameObject.tag == "Minion") {
 			Minion minon = other.gameObject.GetComponent<Minion>();
 			if (minon.owner != this.owner) {
+				Debug.Log ("actually start combat");
 				// Come at me bro!
 				state = State.Combat;
 				target = other.gameObject;
