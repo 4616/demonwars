@@ -58,11 +58,11 @@ public class Minion : MonoBehaviour {
 			break;
 		case State.Combat:
 			if (target != null) {
-				float dist = Vector3.Distance(transform.position, target.transform.position);
-				if (dist < range) {
-					target.GetComponent<Minion>().TakeDamage(damage);
+				if (Random.Range(0f,1f)<.5f){
+					gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target.transform.position, combatSpeed);
 				}
-				gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target.transform.position, combatSpeed);
+				else {target.transform.position = Vector3.MoveTowards(target.transform.position, gameObject.transform.position, combatSpeed);
+				}
 			} else {
 				state = State.Wander;
 			}
@@ -76,6 +76,16 @@ public class Minion : MonoBehaviour {
 		if (gameObject.transform.position.x < Global.left || gameObject.transform.position.x > Global.right
 			|| gameObject.transform.position.y < Global.bottom || gameObject.transform.position.y > Global.top) {
 			Destroy(gameObject, 0.05f);
+		}
+	}
+
+	void LateUpdate(){
+		if (target != null) {
+			float dist = Vector3.Distance (transform.position, target.transform.position);
+			if (dist < range) {
+				target.GetComponent<Minion> ().TakeDamage (damage);
+			}
+			CheckDeath ();
 		}
 	}
 
@@ -103,10 +113,12 @@ public class Minion : MonoBehaviour {
 	
 	public void TakeDamage(float damage) {
 		health -= damage;
+	}
+
+	public void CheckDeath(){
 		if(health < 0){
 			Destroy(gameObject, 0.05f);
 		}
-		
 	}
 
 //	void OnCollisionEnter2D(Collider2D otherObj) {
@@ -115,11 +127,9 @@ public class Minion : MonoBehaviour {
 
 
 	void OnTriggerEnter2D(Collider2D other) {
-		Debug.Log ("OnTriggerEnter");
 		if (state != null && state != State.Combat && other.gameObject.tag == "Minion") {
 			Minion minon = other.gameObject.GetComponent<Minion>();
 			if (minon.owner != this.owner) {
-				Debug.Log ("actually start combat");
 				// Come at me bro!
 				state = State.Combat;
 				target = other.gameObject;

@@ -148,7 +148,7 @@ public class Player : MonoBehaviour {
 		tokenManager.trimOldTokens (maxTokensLimit);
 		if (!ifHumanPlayer()) {
 			//Debug.Log ("AI exists");
-			AIBeast ();
+//			AIBeast ();
 		}
 
 		if (this.HumanPlayer == false) {
