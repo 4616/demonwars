@@ -54,10 +54,10 @@ public class House : Obstacle {
 		//Debug.Log (otherObj);
 		if (otherObj.gameObject.tag == "Minion") {
 			Minion minion = otherObj.gameObject.GetComponent<Minion>();
-			this.TakeOwnership(minion.owner);
-			float duration = 1.0f;
-			ChangeTheDamnSprite (); // call method to change sprite
-
+			if(this.owner != minion.owner){
+				this.TakeOwnership(minion.owner);
+				ChangeTheDamnSprite (); // call method to change sprite
+			}
 			//float lerp = Mathf.PingPong(Time.time, duration) / duration;
 			//spr.color = 
 			//this.material.color = Color.Lerp(otherObj.GetComponent<Renderer>().material.color, Color.red, lerp);
