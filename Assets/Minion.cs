@@ -26,17 +26,24 @@ public class Minion : MonoBehaviour {
 	public float probabilityToWander = 0.1f;
 	public float range = 1.5f;
 	public float deathChance;
-	public SpriteRenderer spriteRenderer; 	
+	public int newCommandTimeout = 10;
+	private SpriteRenderer spriteRenderer; 	
+
+	private int _newCommandTimer;
 	
 	// Use this for initialization
 	void Start () {
 		state = State.Wander;
 		spriteRenderer = GetComponent<SpriteRenderer>(); // we are accessing the SpriteRenderer that is attached to the Gameobject
 
+		_newCommandTimer = 0;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (_newCommandTimer > 0) _newCommandTimer--;
+
 		switch (state) {
 		case State.Wander:
 			if (Random.value < probabilityToWander) {
@@ -70,6 +77,17 @@ public class Minion : MonoBehaviour {
 			|| gameObject.transform.position.y < Global.bottom || gameObject.transform.position.y > Global.top) {
 			Destroy(gameObject, 0.05f);
 		}
+	}
+
+	public bool Blocking() {
+		return (_newCommandTimer > 0);
+	}
+
+	public void setState(State s) {
+		if (Blocking())
+			return;
+		state = s;
+		_newCommandTimer = newCommandTimeout;
 	}
 
 	public void TakeOwnership(Player newowner){
