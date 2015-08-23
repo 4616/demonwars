@@ -11,7 +11,6 @@ GameObject:
   - 212: {fileID: 21213952}
   - 114: {fileID: 11485642}
   - 58: {fileID: 5887480}
-  - 61: {fileID: 6171098}
   m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
@@ -27,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 123264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -.264425933, y: -.0897305459, z: .0693359375}
-  m_LocalScale: {x: .800000012, y: .800000012, z: 1}
+  m_LocalScale: {x: .200000003, y: .200000003, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -37,26 +36,13 @@ CircleCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123264}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: .800000012
---- !u!61 &6171098
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 123264}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: .0500000007, y: -.200000003}
-  serializedVersion: 2
-  m_Size: {x: 2, y: .800000012}
+  m_Radius: .0500000007
 --- !u!114 &11485642
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,8 +83,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
+<<<<<<< HEAD
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Color: {r: .679930806, g: .834282875, b: .963235319, a: 1}
+=======
   m_Sprite: {fileID: 21300000, guid: e22334be58269dc4db1c6ec16f946d53, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+>>>>>>> origin/master
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -113,6 +104,17 @@ Prefab:
         type: 3}
     - target: {fileID: 0}
       propertyPath: m_Color.r
+<<<<<<< HEAD
+      value: .679930806
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.g
+      value: .834282875
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.b
+      value: .963235319
+=======
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
@@ -122,6 +124,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Color.b
       value: 1
+>>>>>>> origin/master
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Radius

@@ -6,14 +6,11 @@ public class House : Obstacle {
 	public float sorrowgen = 0f;
 	public float sorrowgenratechange = .00001f;
 
-
+	public SpriteRenderer spr;
 
 	// Use this for initialization
 	void Start () {
-		//tag = "House";
 		ownable = true;
-
-	
 	}
 	
 	// Update is called once per frame
@@ -29,13 +26,21 @@ public class House : Obstacle {
 	}
 
 	void OnTriggerEnter2D(Collider2D otherObj) {
-		Debug.Log (otherObj);
+		//Debug.Log (otherObj);
 		if (otherObj.gameObject.tag == "Minion") {
 			Minion minion = otherObj.gameObject.GetComponent<Minion>();
 			this.TakeOwnership(minion.owner);
+			float duration = 1.0f;
+			
+			float lerp = Mathf.PingPong(Time.time, duration) / duration;
+			//spr.color = 
+			//this.material.color = Color.Lerp(otherObj.GetComponent<Renderer>().material.color, Color.red, lerp);
 			//Debug.Log("owner of house is " + owner);
 		}
 	}
+
+
+
 //	void OnCollisionEnter(Collision otherObj) {
 //		print ("Collision with a house!");
 //		if (otherObj.gameObject.tag == "Minion") {

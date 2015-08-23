@@ -3,6 +3,7 @@ using System.Collections;
 
 public class GameSetup : MonoBehaviour {
 	public int nplayers = 2;
+
 	public GameObject PlayerPrefab;
 	public GameObject SpawnerPrefab;
 	public GameObject HousePrefab;
@@ -35,7 +36,7 @@ public class GameSetup : MonoBehaviour {
 
 		float flipx = 1;
 		float flipy = 1;
-		for (int i = 0; i < this.nplayers; i++) {
+		for (int i = 0; i < nplayers; i++) {
 
 			//Add spawners
 			float posY = (bottom + 1f) * flipy;
