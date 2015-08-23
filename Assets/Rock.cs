@@ -14,11 +14,11 @@ public class Rock : Obstacle {
 	
 	} 
 	void OnTriggerEnter2D(Collider2D otherObj) {
-		Debug.Log (otherObj);
+		//Debug.Log (otherObj);
 		if (otherObj.gameObject.tag == "Minion") {
 			Minion minion = otherObj.gameObject.GetComponent<Minion>();
 			minion.state = Minion.State.Wander;
-			Debug.Log("Wandering Minion!");
+			//Debug.Log("Wandering Minion!");
 		}
 
 
