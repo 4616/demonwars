@@ -11,10 +11,10 @@ public class Player : MonoBehaviour {
 	public Color PlayerColor;
 	public int PlayerNumber;
 	public int PlayerLayer;
-	public int HumanPlayer;
+	public bool HumanPlayer;
 	public float sorrowgen = 0.05f;
-
-
+	public TokenManager tokenManager;
+	private float timer;
 
 	public class TokenManager {
 		private Player owner;
@@ -37,6 +37,20 @@ public class Player : MonoBehaviour {
 			tk.TakeOwnership (owner);
 			tokenList.Insert(0,tk);
 
+		}
+
+		public void createNewTokenAI(Vector3 objectPos) {
+			//objectPos.z = -5;
+			GameObject go = Instantiate(token, objectPos, Quaternion.identity) as GameObject;
+			
+			Token tk = go.GetComponent<Token>();
+			tk.Click ();
+			float rangle = Random.Range(0,360);
+			tk.AIToken (rangle);
+			//tk.init(owner);
+			tk.TakeOwnership (owner);
+			tokenList.Insert(0,tk);
+			
 		}
 
 		public Token getActiveToken() {
@@ -75,11 +89,21 @@ public class Player : MonoBehaviour {
 	}
 	void Start () {
 		//tag = "Player";
+
 		
 	}
 
-	public TokenManager tokenManager;
 
+	public void AIBeast(){
+		timer += Time.deltaTime;
+		
+		if (timer >= 10f) {
+			Vector3 objectPos = new Vector3 (1, 14, 0); //error on this line
+			tokenManager.createNewTokenAI (objectPos);
+			timer = 0f;
+		}
+
+	}
 
 
 	//public List<Token>  getTokenList() {
@@ -91,6 +115,11 @@ public class Player : MonoBehaviour {
 		sorrow += sorrowgen;
 		if (tokenManager == null) tokenManager = new TokenManager (this, token);
 		tokenManager.trimOldTokens (maxTokensLimit);
+		if (HumanPlayer == false) {
+			//Debug.Log ("AI exists");
+			AIBeast ();
+		}
+
 	}
 
 

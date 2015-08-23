@@ -14,8 +14,6 @@ public class GameSetup : MonoBehaviour {
 	public int numHouses = 50;
 	public int numLakes = 12;
 	public int numRocks = 17;
-	public float boardWidth = 20f;
-	public float boardHeight = 30f;
 	List<Color> PlayerColorList = new List<Color>(){
 		Color.red,
 		Color.green,
@@ -38,23 +36,27 @@ public class GameSetup : MonoBehaviour {
 	}
 
 	void StartGame(){
-		float bottom = - boardHeight / 2f;
-		float top = boardHeight / 2f;
-		float left = - boardWidth / 2f;
-		float right = boardWidth / 2f;
 
 		float flipx = 1;
 		float flipy = 1;
 		for (int i = 0; i < nplayers; i++) {
 
 			//Add spawners
-			float posY = (bottom + 1f) * flipy;
+			float posY = (Global.bottom + 1f) * flipy;
 			GameObject playergameobji = Instantiate (PlayerPrefab, new Vector3 (0f, posY, 0f), Quaternion.identity) as GameObject;
 			GameObject spawnergameobji = Instantiate (SpawnerPrefab, new Vector3 (0f, posY, 0f), Quaternion.identity) as GameObject;
 			Player playeri = playergameobji.GetComponent<Player> ();
 			playeri.PlayerColor = PlayerColorList[i];
 			playeri.PlayerNumber = i;
 			playeri.PlayerLayer = i + 8;
+			if(i == 0){
+				playeri.HumanPlayer = true;
+			}
+			else{
+				playeri.HumanPlayer = false;
+				//playeri.AIBeast();
+			}
+
 			Spawner spawneri = spawnergameobji.GetComponent<Spawner> ();
 			spawneri.Init ();
 			//print (playeri);
@@ -64,8 +66,8 @@ public class GameSetup : MonoBehaviour {
 
 		//Add houses
 		for (int i = 0; i < numHouses; i+=2) {
-			float xposition = Random.Range(left,right);
-			float yposition = Random.Range(bottom,top);
+			float xposition = Random.Range(Global.left,Global.right);
+			float yposition = Random.Range(Global.bottom,Global.top);
 			//print ("(x,y)");
 			//print (xposition);
 			//print (yposition);
@@ -76,8 +78,8 @@ public class GameSetup : MonoBehaviour {
 
 		//Add water
 		for (int i = 0; i < numLakes; i+=2) {
-			float xposition = Random.Range(left,right);
-			float yposition = Random.Range(bottom,top);
+			float xposition = Random.Range(Global.left,Global.right);
+			float yposition = Random.Range(Global.bottom,Global.top);
 			//print ("(x,y)");
 			//print (xposition);
 			//print (yposition);
@@ -88,8 +90,8 @@ public class GameSetup : MonoBehaviour {
 
 		//Add rocks
 		for (int i = 0; i < numRocks; i+=2) {
-			float xposition = Random.Range(left,right);
-			float yposition = Random.Range(bottom,top);
+			float xposition = Random.Range(Global.left,Global.right);
+			float yposition = Random.Range(Global.bottom,Global.top);
 			//print ("(x,y)");
 			//print (xposition);
 			//print (yposition);
@@ -99,14 +101,14 @@ public class GameSetup : MonoBehaviour {
 			
 		}
 
-		for (float i = bottom; i < top; i += 0.25f) {
-			Instantiate (RockPrefab, new Vector3 (left, i, 0f), Quaternion.identity);
-			Instantiate (RockPrefab, new Vector3 (right, i, 0f), Quaternion.identity);
+		for (float i = Global.bottom; i < Global.top; i += 0.25f) {
+			Instantiate (RockPrefab, new Vector3 (Global.left, i, 0f), Quaternion.identity);
+			Instantiate (RockPrefab, new Vector3 (Global.right, i, 0f), Quaternion.identity);
 		}
 
-		for (float i = left; i < right; i += 0.25f) {
-			Instantiate (RockPrefab, new Vector3 (i, top, 0f), Quaternion.identity);
-			Instantiate (RockPrefab, new Vector3 (i, bottom, 0f), Quaternion.identity);
+		for (float i = Global.left; i < Global.right; i += 0.25f) {
+			Instantiate (RockPrefab, new Vector3 (i, Global.top, 0f), Quaternion.identity);
+			Instantiate (RockPrefab, new Vector3 (i, Global.bottom, 0f), Quaternion.identity);
 		}
 	
 	}	
