@@ -13,7 +13,7 @@ public class House : Obstacle {
 	void Start () {
 		ownable = true;
 		///
-				spriteRenderer = GetComponent<SpriteRenderer>(); // we are accessing the SpriteRenderer that is attached to the Gameobject
+		spriteRenderer = GetComponent<SpriteRenderer>(); // we are accessing the SpriteRenderer that is attached to the Gameobject
 		if (spriteRenderer.sprite == null) // if the sprite on spriteRenderer is null then
 			spriteRenderer.sprite = sprite1; // set the sprite to sprite1
 		///
@@ -61,7 +61,7 @@ public class House : Obstacle {
 			//float lerp = Mathf.PingPong(Time.time, duration) / duration;
 			//spr.color = 
 			//this.material.color = Color.Lerp(otherObj.GetComponent<Renderer>().material.color, Color.red, lerp);
-			/Debug.Log("owner of house is " + owner);
+			//Debug.Log("owner of house is " + owner);
 		}
 	}
 
