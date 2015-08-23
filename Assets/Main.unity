@@ -134,6 +134,10 @@ Prefab:
       propertyPath: maxTokensLimit
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 11493526, guid: 3733ba2b5552cc24f95abca565aac470, type: 2}
+      propertyPath: sorrow
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3733ba2b5552cc24f95abca565aac470, type: 2}
   m_IsPrefabParent: 0
@@ -534,9 +538,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Sprite: {fileID: 21300000, guid: fea8540b4a78f41f199df4d82e3ae8eb, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -651,6 +655,11 @@ MonoBehaviour:
   HousePrefab: {fileID: 136066, guid: 2604abcb547d5bd46b141f1c29f6aff0, type: 2}
   WaterPrefab: {fileID: 123264, guid: 916504bda2c465c40bf288d867608c75, type: 2}
   RockPrefab: {fileID: 135898, guid: 0002b0eb9ba78b34789aad269cadf5eb, type: 2}
+  numHouses: 50
+  numLakes: 12
+  numRocks: 17
+  boardWidth: 20
+  boardHeight: 30
 --- !u!4 &1735396976
 Transform:
   m_ObjectHideFlags: 0
@@ -838,7 +847,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 74d8c8f0e445a2140b521f4b960be3e7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fea8540b4a78f41f199df4d82e3ae8eb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
