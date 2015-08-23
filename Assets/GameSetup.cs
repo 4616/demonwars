@@ -7,6 +7,7 @@ public class GameSetup : MonoBehaviour {
 	public GameObject SpawnerPrefab;
 	public GameObject HousePrefab;
 	public GameObject WaterPrefab;
+	public GameObject RockPrefab;
 	// Use this for initialization
 	void Start () {
 		StartGame();
@@ -48,7 +49,7 @@ public class GameSetup : MonoBehaviour {
 		}
 
 		//Add water
-		for (int i = 0; i < this.nplayers * 10; i++) {
+		for (int i = 0; i < this.nplayers * 50; i++) {
 			float xposition = Random.Range(-5f,5f);
 			float yposition = Random.Range(-5f,5f);
 			//print ("(x,y)");
@@ -58,7 +59,17 @@ public class GameSetup : MonoBehaviour {
 			
 		}
 
-
+		//Add rocks
+		for (int i = 0; i < this.nplayers * 50; i++) {
+			float xposition = Random.Range(-5f,5f);
+			float yposition = Random.Range(-5f,5f);
+			//print ("(x,y)");
+			//print (xposition);
+			//print (yposition);
+			Instantiate (RockPrefab, new Vector3 (xposition, yposition, 0f), Quaternion.identity);
+			//Debug.Log("Creating rocks");
+			
+		}
 	
 	}	
 	 

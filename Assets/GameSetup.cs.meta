@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: bc02f573434582f42af374d84286c818
-timeCreated: 1440289569
+timeCreated: 1440291684
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
@@ -9,6 +9,7 @@ MonoImporter:
   - SpawnerPrefab: {fileID: 132890, guid: 1f4bb42ef2e23bc4e97604979201882a, type: 2}
   - HousePrefab: {fileID: 136066, guid: 2604abcb547d5bd46b141f1c29f6aff0, type: 2}
   - WaterPrefab: {fileID: 123264, guid: 916504bda2c465c40bf288d867608c75, type: 2}
+  - RockPrefab: {fileID: 137624, guid: 0002b0eb9ba78b34789aad269cadf5eb, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
