@@ -43,7 +43,7 @@ public class Player : MonoBehaviour {
 		}
 
 		public void createNewTokenAI(Vector3 objectPos) {
-			if (owner.ifHumanPlayer())
+			if (owner.HumanPlayer)
 				return;
 			//objectPos.z = -5;
 			GameObject go = Instantiate(token, objectPos, Quaternion.identity) as GameObject;
@@ -146,15 +146,15 @@ public class Player : MonoBehaviour {
 		sorrow += sorrowgen;
 		if (tokenManager == null) tokenManager = new TokenManager (this, token);
 		tokenManager.trimOldTokens (maxTokensLimit);
-		if (!ifHumanPlayer()) {
+		if (HumanPlayer) {
 			//Debug.Log ("AI exists");
 //			AIBeast ();
 		}
 
-		if (this.HumanPlayer == false) {
-			Debug.Log ("AI expect player 1: " + PlayerNumber);
-
-		}
+//		if (this.HumanPlayer == false) {
+//			Debug.Log ("AI expect player 1: " + PlayerNumber);
+//
+//		}
 
 	}
 
