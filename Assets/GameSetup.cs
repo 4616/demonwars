@@ -59,45 +59,48 @@ public class GameSetup : MonoBehaviour {
 		}
 
 		//Add houses
-		for (int i = 0; i < numHouses; i++) {
+		for (int i = 0; i < numHouses; i+=2) {
 			float xposition = Random.Range(left,right);
 			float yposition = Random.Range(bottom,top);
 			//print ("(x,y)");
 			//print (xposition);
 			//print (yposition);
 			Instantiate (HousePrefab, new Vector3 (xposition, yposition, 0f), Quaternion.identity);
+			Instantiate (HousePrefab, new Vector3 (-xposition, -yposition, 0f), Quaternion.identity);
 
 		}
 
 		//Add water
-		for (int i = 0; i < numLakes; i++) {
+		for (int i = 0; i < numLakes; i+=2) {
 			float xposition = Random.Range(left,right);
 			float yposition = Random.Range(bottom,top);
 			//print ("(x,y)");
 			//print (xposition);
 			//print (yposition);
 			Instantiate (WaterPrefab, new Vector3 (xposition, yposition, 0f), Quaternion.identity);
+			Instantiate (WaterPrefab, new Vector3 (-xposition, -yposition, 0f), Quaternion.identity);
 			
 		}
 
 		//Add rocks
-		for (int i = 0; i < numRocks; i++) {
+		for (int i = 0; i < numRocks; i+=2) {
 			float xposition = Random.Range(left,right);
 			float yposition = Random.Range(bottom,top);
 			//print ("(x,y)");
 			//print (xposition);
 			//print (yposition);
 			Instantiate (RockPrefab, new Vector3 (xposition, yposition, 0f), Quaternion.identity);
+			Instantiate (RockPrefab, new Vector3 (-xposition, -yposition, 0f), Quaternion.identity);
 			//Debug.Log("Creating rocks");
 			
 		}
 
-		for (float i = bottom; i < top; i += 0.2f) {
+		for (float i = bottom; i < top; i += 0.25f) {
 			Instantiate (RockPrefab, new Vector3 (left, i, 0f), Quaternion.identity);
 			Instantiate (RockPrefab, new Vector3 (right, i, 0f), Quaternion.identity);
 		}
 
-		for (float i = left; i < right; i += 0.2f) {
+		for (float i = left; i < right; i += 0.25f) {
 			Instantiate (RockPrefab, new Vector3 (i, top, 0f), Quaternion.identity);
 			Instantiate (RockPrefab, new Vector3 (i, bottom, 0f), Quaternion.identity);
 		}
