@@ -123,7 +123,7 @@ public class Player : MonoBehaviour {
 
 		timer += Time.deltaTime;
 		
-		if (timer >= 100f) {
+		if (timer >= 10f) {
 			float xpos = Random.Range(Global.left,Global.right);
 			float ypos = Random.Range(Global.bottom,Global.top);
 
