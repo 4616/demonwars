@@ -11,6 +11,7 @@ public class Player : MonoBehaviour {
 	public Color PlayerColor;
 	public int PlayerNumber;
 	public int PlayerLayer;
+	public int HumanPlayer;
 
 
 	public class TokenManager {
