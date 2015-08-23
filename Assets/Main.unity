@@ -609,7 +609,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 493918, guid: 5ca2e3d0144464325b9ddf04b0531209, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 493918, guid: 5ca2e3d0144464325b9ddf04b0531209, type: 2}
       propertyPath: m_LocalScale.z
