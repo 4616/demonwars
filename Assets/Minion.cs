@@ -29,7 +29,6 @@ public class Minion : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		state = State.Wander;
-
 		//tag = "Minion";
 	}
 	
@@ -62,6 +61,11 @@ public class Minion : MonoBehaviour {
 		default:
 			break;
 		}
+	}
+
+	public void TakeOwnership(Player owner){
+		this.owner = owner;
+		this.gameObject.layer = 8;
 	}
 	
 	private void findNewTarget() {

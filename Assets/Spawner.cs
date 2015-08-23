@@ -24,6 +24,6 @@ public class Spawner : Obstacle {
 	void Spawn () {
 		GameObject obj = Instantiate (MinonPrefab, this.transform.position, this.transform.rotation) as GameObject;
 		Minion mini = obj.GetComponent<Minion> ();
-		mini.owner = owner;
+		mini.TakeOwnership(owner);
 	}
 }
