@@ -25,9 +25,10 @@ public class Minion : MonoBehaviour {
 	public float probabilityToWander = 0.1f;
 	public float range = 1.5f;
 	public int newCommandTimeout = 10;
-	public SpriteRenderer spriteRenderer; 	
+	private SpriteRenderer spriteRenderer; 	
 
 	private int _newCommandTimer;
+
 	
 	// Use this for initialization
 	void Start () {

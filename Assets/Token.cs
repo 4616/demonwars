@@ -48,7 +48,7 @@ public class Token : MonoBehaviour
 	public void TakeOwnership(Player newowner){
 		this.owner = newowner;
 		spriteRenderer = GetComponent<SpriteRenderer>();
-		//spriteRenderer.color = newowner.PlayerColor;
+		spriteRenderer.color = newowner.PlayerColor;
 
 	}
 
