@@ -96,6 +96,11 @@ public class Player : MonoBehaviour {
 		}
 	}
 	void Start () {
+		if (HumanPlayer == false) {
+
+			Debug.Log ("A non-human just started playing!!!");
+		}
+
 		//tag = "Player";
 
 		
@@ -118,7 +123,7 @@ public class Player : MonoBehaviour {
 
 		timer += Time.deltaTime;
 		
-		if (timer >= 1f) {
+		if (timer >= 100f) {
 			float xpos = Random.Range(Global.left,Global.right);
 			float ypos = Random.Range(Global.bottom,Global.top);
 
@@ -144,6 +149,11 @@ public class Player : MonoBehaviour {
 		if (!ifHumanPlayer()) {
 			//Debug.Log ("AI exists");
 			AIBeast ();
+		}
+
+		if (this.HumanPlayer == false) {
+			Debug.Log ("AI expect player 1: " + PlayerNumber);
+
 		}
 
 	}

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class GameSetup : MonoBehaviour {
 	public int nplayers = 2;
+	//public bool testing = false;
 
 	public GameObject PlayerPrefab;
 	public GameObject SpawnerPrefab;
@@ -55,6 +56,7 @@ public class GameSetup : MonoBehaviour {
 			}
 			else{
 				playeri.HumanPlayer = false;
+				Debug.Log ("AI player created");
 				//playeri.AIBeast();
 			}
 
