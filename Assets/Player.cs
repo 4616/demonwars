@@ -11,6 +11,8 @@ public class Player : MonoBehaviour {
 	public Color PlayerColor;
 	public int PlayerNumber;
 	public int PlayerLayer;
+
+
 	public class TokenManager {
 		private Player owner;
 		private GameObject token;
@@ -28,7 +30,8 @@ public class Player : MonoBehaviour {
 			
 			Token tk = go.GetComponent<Token>();
 			tk.Click ();
-			tk.init(owner);
+			//tk.init(owner);
+			tk.TakeOwnership (owner);
 			tokenList.Insert(0,tk);
 
 		}

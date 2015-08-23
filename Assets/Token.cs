@@ -24,6 +24,7 @@ public class Token : MonoBehaviour
 	public Player owner;
 
 	public GameObject explosion;
+	public SpriteRenderer spriteRenderer;
 	
 	void Start() {
 
@@ -31,6 +32,13 @@ public class Token : MonoBehaviour
 
 	public void init(Player owner) {
 		this.owner = owner;
+	}
+
+	public void TakeOwnership(Player newowner){
+		this.owner = newowner;
+		spriteRenderer = GetComponent<SpriteRenderer>();
+		//spriteRenderer.color = newowner.PlayerColor;
+
 	}
 
 	public bool Blocking() {
