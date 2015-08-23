@@ -68,7 +68,7 @@ public class Minion : MonoBehaviour {
 		this.owner = newowner;
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		spriteRenderer.color = newowner.PlayerColor;
-		this.gameObject.layer = 8;
+		this.gameObject.layer = newowner.PlayerLayer;
 	}
 	
 	private void findNewTarget() {
