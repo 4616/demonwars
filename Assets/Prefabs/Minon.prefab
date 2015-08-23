@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21238962}
   - 58: {fileID: 5838432}
   - 114: {fileID: 11419146}
-  - 50: {fileID: 5012618}
+  - 50: {fileID: 5062340}
   m_Layer: 0
   m_Name: Minon
   m_TagString: Minion
@@ -34,7 +34,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &412612
 Transform:
   m_ObjectHideFlags: 1
@@ -60,7 +60,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 412612}
   m_RootOrder: 0
---- !u!50 &5012618
+--- !u!50 &5062340
 Rigidbody2D:
   serializedVersion: 2
   m_ObjectHideFlags: 1
@@ -97,7 +97,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 126286}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
@@ -113,17 +113,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680325155673b5f408cc6ea298dfe365, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tag: Minion
   health: 10
   state: 0
   owner: {fileID: 0}
   wanderMagnitude: .100000001
   movePerterbation: .0500000007
   moveSpeed: .100000001
-  tokenAtraction: 2
   moveDelta: {x: 0, y: 0}
   target: {fileID: 0}
   damage: 1
-  brownianJumpMagnitude: 5
+  brownianJumpMagnitude: 1
   probabilityToWander: .100000001
   range: 1.5
 --- !u!212 &21238962
@@ -161,19 +161,47 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Radius
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
+      propertyPath: m_Mass
+      value: 9.99999975e-05
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_SleepingMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_TagString
       value: Minion
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: brownianJumpMagnitude
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
