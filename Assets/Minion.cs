@@ -24,7 +24,7 @@ public class Minion : MonoBehaviour {
 	public float brownianJumpMagnitude = 1f;
 	public float probabilityToWander = 0.1f;
 	public float range = 1.5f;
-	public SpriteRenderer spriteRenderer; 	
+	private SpriteRenderer spriteRenderer; 	
 	
 	// Use this for initialization
 	void Start () {
