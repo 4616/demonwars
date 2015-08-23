@@ -29,6 +29,7 @@ public class Minion : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		state = State.Wander;
+
 		//tag = "Minion";
 	}
 	

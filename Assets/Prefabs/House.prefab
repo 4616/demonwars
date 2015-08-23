@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 422964}
   - 212: {fileID: 21276114}
   - 114: {fileID: 11473536}
-  - 58: {fileID: 5835562}
+  - 61: {fileID: 6112336}
   m_Layer: 0
   m_Name: House
   m_TagString: Untagged
@@ -26,23 +26,23 @@ Transform:
   m_GameObject: {fileID: 136066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -.264425933, y: -.0897305459, z: .0693359375}
-  m_LocalScale: {x: .200000003, y: .200000003, z: 1}
+  m_LocalScale: {x: .300000012, y: .300000012, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!58 &5835562
-CircleCollider2D:
+--- !u!61 &6112336
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 136066}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: .100000001
+  m_Size: {x: 1.60000002, y: 1.5}
 --- !u!114 &11473536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -61,6 +61,8 @@ MonoBehaviour:
   sorrow: 1
   sorrowgen: 0
   sorrowgenratechange: 9.99999975e-06
+  sprite1: {fileID: 0}
+  sprite2: {fileID: 0}
 --- !u!212 &21276114
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -133,11 +135,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x
-      value: .200000003
+      value: .300000012
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.y
-      value: .200000003
+      value: .300000012
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.x
+      value: 1.60000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.y
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
