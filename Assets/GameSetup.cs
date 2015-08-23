@@ -3,6 +3,10 @@ using System.Collections;
 
 public class GameSetup : MonoBehaviour {
 	public int nplayers = 2;
+	public int nhouse = 50;
+	public int nrock = 20;
+	public int nwater = 5;
+
 	public GameObject PlayerPrefab;
 	public GameObject SpawnerPrefab;
 	public GameObject HousePrefab;
@@ -23,7 +27,7 @@ public class GameSetup : MonoBehaviour {
 	void StartGame(){
 		float flipx = 1;
 		float flipy = 1;
-		for (int i = 0; i < this.nplayers; i++) {
+		for (int i = 0; i < nplayers; i++) {
 
 			//Add spawners
 
@@ -38,7 +42,7 @@ public class GameSetup : MonoBehaviour {
 		}
 
 		//Add houses
-		for (int i = 0; i < this.nplayers * 50; i++) {
+		for (int i = 0; i < nhouse; i++) {
 			float xposition = Random.Range(-5f,5f);
 			float yposition = Random.Range(-5f,5f);
 			//print ("(x,y)");
@@ -49,7 +53,7 @@ public class GameSetup : MonoBehaviour {
 		}
 
 		//Add water
-		for (int i = 0; i < this.nplayers * 10; i++) {
+		for (int i = 0; i < nwater; i++) {
 			float xposition = Random.Range(-5f,5f);
 			float yposition = Random.Range(-5f,5f);
 			//print ("(x,y)");
@@ -60,7 +64,7 @@ public class GameSetup : MonoBehaviour {
 		}
 
 		//Add rocks
-		for (int i = 0; i < this.nplayers * 20; i++) {
+		for (int i = 0; i < nrock; i++) {
 			float xposition = Random.Range(-5f,5f);
 			float yposition = Random.Range(-5f,5f);
 			//print ("(x,y)");

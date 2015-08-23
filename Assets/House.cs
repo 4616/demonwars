@@ -33,9 +33,16 @@ public class House : Obstacle {
 		if (otherObj.gameObject.tag == "Minion") {
 			Minion minion = otherObj.gameObject.GetComponent<Minion>();
 			this.TakeOwnership(minion.owner);
+			float duration = 1.0f;
+			
+			float lerp = Mathf.PingPong(Time.time, duration) / duration;
+			//this.material.color = Color.Lerp(otherObj.GetComponent<Renderer>().material.color, Color.red, lerp);
 			//Debug.Log("owner of house is " + owner);
 		}
 	}
+
+
+
 //	void OnCollisionEnter(Collision otherObj) {
 //		print ("Collision with a house!");
 //		if (otherObj.gameObject.tag == "Minion") {
