@@ -136,14 +136,14 @@ public class Token : MonoBehaviour
 	
 	void OnMouseDown()
 	{
-		if (CanBeMadeDestructible ()) {
-			_destroyerOfObjects = Instantiate (destroyer, transform.position, transform.rotation) as GameObject;
-			state = State.MarkedDestruction;
-			_destructionTimeout = destructionTimeoutDefault;
-		} else if (Destructible ()) {
-			Destroy (_destroyerOfObjects);
-			Destroy();
-		}
+//		if (CanBeMadeDestructible ()) {
+//			_destroyerOfObjects = Instantiate (destroyer, transform.position, transform.rotation) as GameObject;
+//			state = State.MarkedDestruction;
+//			_destructionTimeout = destructionTimeoutDefault;
+//		} else if (Destructible ()) {
+//			Destroy (_destroyerOfObjects);
+//			Destroy();
+//		}
 	}
 
 //	public void startDragging() {
@@ -179,12 +179,12 @@ public class Token : MonoBehaviour
 			else rateLimit --;
 		}
 
-		if (_destructionTimeout > 0) {
-			_destructionTimeout--;
-		} else if (_destroyerOfObjects != null) {
-			Destroy (_destroyerOfObjects);
-			_destroyerOfObjects = null;
-			state = State.Finished;
-		}
+//		if (_destructionTimeout > 0) {
+//			_destructionTimeout--;
+//		} else if (_destroyerOfObjects != null) {
+//			Destroy (_destroyerOfObjects);
+//			_destroyerOfObjects = null;
+//			state = State.Finished;
+//		}
 	}
 }
