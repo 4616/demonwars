@@ -76,10 +76,6 @@ public class Minion : MonoBehaviour {
 	}
 
 	public void setState(State s) {
-		Debug.Log ("Attempting to change state");
-		Debug.Log (_newCommandTimer);
-		Debug.Log (s);
-		Debug.Log (state);
 		if (Blocking())
 			return;
 		state = s;

@@ -39,8 +39,12 @@ public class Token : MonoBehaviour
 	public void AIToken(float deg) {
 		this.state = State.Finished;
 		this.xDeg = deg;
-	}
 
+		var target = Quaternion.Euler (0, 0, xDeg);
+		// Dampen towards the target rotation
+		transform.rotation = Quaternion.Slerp (transform.rotation, target, 0);
+	}
+	
 	public void TakeOwnership(Player newowner){
 		this.owner = newowner;
 		spriteRenderer = GetComponent<SpriteRenderer>();
