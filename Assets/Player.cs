@@ -9,8 +9,10 @@ public class Player : MonoBehaviour {
 
 	public int maxTokensLimit;
 	public Color PlayerColor;
+	public int PlayerNumber;
 	public int PlayerLayer;
 	public float sorrowgen = 0.05f;
+
 
 	public class TokenManager {
 		private Player owner;
@@ -29,7 +31,8 @@ public class Player : MonoBehaviour {
 			
 			Token tk = go.GetComponent<Token>();
 			tk.Click ();
-			tk.init(owner);
+			//tk.init(owner);
+			tk.TakeOwnership (owner);
 			tokenList.Insert(0,tk);
 
 		}

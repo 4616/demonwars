@@ -24,6 +24,7 @@ public class Token : MonoBehaviour
 	public Player owner;
 
 	public GameObject explosion;
+	public SpriteRenderer spriteRenderer;
 	
 	void Start() {
 
@@ -31,6 +32,13 @@ public class Token : MonoBehaviour
 
 	public void init(Player owner) {
 		this.owner = owner;
+	}
+
+	public void TakeOwnership(Player newowner){
+		this.owner = newowner;
+		spriteRenderer = GetComponent<SpriteRenderer>();
+		//spriteRenderer.color = newowner.PlayerColor;
+
 	}
 
 	public bool Blocking() {
@@ -62,7 +70,11 @@ public class Token : MonoBehaviour
 	}
 
 	void OnTriggerStay2D(Collider2D other) {
-		if (Blocking () || other.gameObject.tag != "Minion" || Random.value > 0.1)
+		if (other.gameObject.tag != "Minion")
+			return;
+
+		Minion miniontest = (other.gameObject.GetComponent<Minion> ());
+		if (Blocking () || Random.value > 0.1 || this.owner.PlayerNumber != miniontest.owner.PlayerNumber)
 			return;
 
 		Minion minion = (other.gameObject.GetComponent<Minion> ());
