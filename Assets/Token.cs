@@ -34,6 +34,11 @@ public class Token : MonoBehaviour
 		this.owner = owner;
 	}
 
+	public void AIToken(float deg) {
+		this.state = State.Finished;
+		this.xDeg = deg;
+	}
+
 	public void TakeOwnership(Player newowner){
 		this.owner = newowner;
 		spriteRenderer = GetComponent<SpriteRenderer>();
