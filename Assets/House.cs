@@ -6,14 +6,11 @@ public class House : Obstacle {
 	public float sorrowgen = 0f;
 	public float sorrowgenratechange = .00001f;
 
-
+	public SpriteRenderer spr;
 
 	// Use this for initialization
 	void Start () {
-		//tag = "House";
 		ownable = true;
-
-	
 	}
 	
 	// Update is called once per frame
@@ -36,6 +33,7 @@ public class House : Obstacle {
 			float duration = 1.0f;
 			
 			float lerp = Mathf.PingPong(Time.time, duration) / duration;
+			//spr.color = 
 			//this.material.color = Color.Lerp(otherObj.GetComponent<Renderer>().material.color, Color.red, lerp);
 			//Debug.Log("owner of house is " + owner);
 		}
