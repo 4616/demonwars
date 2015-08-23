@@ -49,7 +49,7 @@ public class GameSetup : MonoBehaviour {
 		}
 
 		//Add water
-		for (int i = 0; i < this.nplayers * 50; i++) {
+		for (int i = 0; i < this.nplayers * 10; i++) {
 			float xposition = Random.Range(-5f,5f);
 			float yposition = Random.Range(-5f,5f);
 			//print ("(x,y)");
@@ -60,7 +60,7 @@ public class GameSetup : MonoBehaviour {
 		}
 
 		//Add rocks
-		for (int i = 0; i < this.nplayers * 50; i++) {
+		for (int i = 0; i < this.nplayers * 20; i++) {
 			float xposition = Random.Range(-5f,5f);
 			float yposition = Random.Range(-5f,5f);
 			//print ("(x,y)");
