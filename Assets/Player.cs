@@ -15,7 +15,14 @@ public class Player : MonoBehaviour {
 	public float sorrowgen = 0.05f;
 	public TokenManager tokenManager;
 	private float timer;
-
+	public float bottom;
+	public float top;
+	public float left;
+	public float right;
+	public float baseposY;
+	private bool basearrow = false;
+	
+	
 	public class TokenManager {
 		private Player owner;
 		private GameObject token;
@@ -40,6 +47,8 @@ public class Player : MonoBehaviour {
 		}
 
 		public void createNewTokenAI(Vector3 objectPos) {
+			if (owner.HumanPlayer == true)
+				return;
 			//objectPos.z = -5;
 			GameObject go = Instantiate(token, objectPos, Quaternion.identity) as GameObject;
 			
@@ -95,10 +104,23 @@ public class Player : MonoBehaviour {
 
 
 	public void AIBeast(){
+		if (basearrow == false) {
+			Vector3 objectPos = new Vector3 (0, baseposY, 0); //error on this line
+			tokenManager.createNewTokenAI (objectPos);
+			timer = 0f;
+			basearrow = true;
+			
+		}
+
 		timer += Time.deltaTime;
 		
 		if (timer >= 10f) {
-			Vector3 objectPos = new Vector3 (1, 14, 0); //error on this line
+			float xpos = Random.Range(left,right);
+			float ypos = Random.Range(bottom,top);
+
+			//Debug.Log (xpos);
+			Random.Range(0,360);
+			Vector3 objectPos = new Vector3 (xpos, ypos, 0); //error on this line
 			tokenManager.createNewTokenAI (objectPos);
 			timer = 0f;
 		}
