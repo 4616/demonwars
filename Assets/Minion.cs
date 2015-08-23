@@ -58,7 +58,7 @@ public class Minion : MonoBehaviour {
 			break;
 		case State.Combat:
 			if (target != null) {
-				if (Random.Range(0f,1f)<.5){
+				if (Random.Range(0f,1f)<.5f){
 					gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target.transform.position, combatSpeed);
 				}
 				else {target.transform.position = Vector3.MoveTowards(target.transform.position, gameObject.transform.position, combatSpeed);
