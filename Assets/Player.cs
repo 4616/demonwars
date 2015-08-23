@@ -95,13 +95,13 @@ public class Player : MonoBehaviour {
 
 
 	public void AIBeast(){
-		timer += Time.deltaTime;
-		
-		if (timer >= 10f) {
-			Vector3 objectPos = new Vector3 (1, 14, 0); //error on this line
-			tokenManager.createNewTokenAI (objectPos);
-			timer = 0f;
-		}
+//		timer += Time.deltaTime;
+//		
+//		if (timer >= 10f) {
+//			Vector3 objectPos = new Vector3 (1, 14, 0); //error on this line
+//			tokenManager.createNewTokenAI (objectPos);
+//			timer = 0f;
+//		}
 
 	}
 
