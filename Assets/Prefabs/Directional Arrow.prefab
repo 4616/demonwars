@@ -54,11 +54,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b30c3df9863d50468c174d501924dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 1
   rotateSpeed: 40
   rotateFriction: 2
   rateLimit: 10
   minionAttractionRate: .100000001
+  towerStrength: .100000001
   owner: {fileID: 0}
+  destroyer: {fileID: 132248, guid: 8766a219a8e6b41deb9df5fb98c65579, type: 2}
   explosion: {fileID: 100004, guid: 2857e183f4cd3df4e9096e5b578bd32f, type: 2}
 --- !u!212 &21291266
 SpriteRenderer:
@@ -130,6 +133,10 @@ Prefab:
       propertyPath: explosion
       value: 
       objectReference: {fileID: 100004, guid: 2857e183f4cd3df4e9096e5b578bd32f, type: 2}
+    - target: {fileID: 0}
+      propertyPath: destroyer
+      value: 
+      objectReference: {fileID: 132248, guid: 8766a219a8e6b41deb9df5fb98c65579, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 123686}

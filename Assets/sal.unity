@@ -654,8 +654,6 @@ MonoBehaviour:
   numHouses: 50
   numLakes: 12
   numRocks: 17
-  boardWidth: 20
-  boardHeight: 30
 --- !u!4 &1735396976
 Transform:
   m_ObjectHideFlags: 0
