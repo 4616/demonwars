@@ -52,6 +52,11 @@ public class GameSetup : MonoBehaviour {
 			GameObject playergameobji = Instantiate (PlayerPrefab, new Vector3 (0f, posY, 0f), Quaternion.identity) as GameObject;
 			GameObject spawnergameobji = Instantiate (SpawnerPrefab, new Vector3 (0f, posY, 0f), Quaternion.identity) as GameObject;
 			Player playeri = playergameobji.GetComponent<Player> ();
+			playeri.bottom = bottom;
+			playeri.top =top;
+			playeri.left = left;
+			playeri.right = right;
+			playeri.baseposY = posY;
 			playeri.PlayerColor = PlayerColorList[i];
 			playeri.PlayerNumber = i;
 			playeri.PlayerLayer = i + 8;
