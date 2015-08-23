@@ -9,7 +9,7 @@ public class Token : MonoBehaviour
 	public enum State {Fresh, Dragging, Dropped, RateLimiting, Finished};
 
 //	[HideInInspector]
-	private State state = State.Dragging;
+	public State state = State.Dragging;
 
 	//Don't allow the player to re-drag if they already dragged the tower.  They can still rotate though.
 //	private bool alreadyDragged = false;
@@ -21,12 +21,12 @@ public class Token : MonoBehaviour
 
 	public float minionAttractionRate = 0.1f;
 
-	private float towerStrength = 0.1f;
+	public float towerStrength = 0.1f;
 
 	public Player owner;
 
 	public GameObject explosion;
-	public SpriteRenderer spriteRenderer;
+	private SpriteRenderer spriteRenderer;
 	
 	void Start() {
 
