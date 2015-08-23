@@ -48,7 +48,9 @@ public class GameSetup : MonoBehaviour {
 			Player playeri = playergameobji.GetComponent<Player> ();
 			playeri.baseposY = posY;
 			playeri.PlayerColor = PlayerColorList[i];
+			playeri.PlayerColor.a = 1f;
 			playeri.PlayerNumber = i;
+			Debug.Log(playeri.PlayerColor.ToString());
 			playeri.PlayerLayer = i + 8;
 			if(i == 0){
 				playeri.HumanPlayer = true;
