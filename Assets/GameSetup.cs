@@ -23,6 +23,8 @@ public class GameSetup : MonoBehaviour {
 		Color.white,
 	};
 
+
+
 	// Use this for initialization
 	void Start () {
 		StartGame();
@@ -51,6 +53,7 @@ public class GameSetup : MonoBehaviour {
 			GameObject spawnergameobji = Instantiate (SpawnerPrefab, new Vector3 (0f, posY, 0f), Quaternion.identity) as GameObject;
 			Player playeri = playergameobji.GetComponent<Player> ();
 			playeri.PlayerColor = PlayerColorList[i];
+			playeri.PlayerLayer = i + 8;
 			Spawner spawneri = spawnergameobji.GetComponent<Spawner> ();
 			spawneri.Init ();
 			//print (playeri);
