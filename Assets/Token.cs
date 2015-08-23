@@ -21,6 +21,8 @@ public class Token : MonoBehaviour
 
 	public float minionAttractionRate = 0.1f;
 
+	private float towerStrength = 0.1f;
+
 	public Player owner;
 
 	public GameObject explosion;
@@ -78,24 +80,28 @@ public class Token : MonoBehaviour
 		if (other.gameObject.tag != "Minion")
 			return;
 
-		Minion miniontest = (other.gameObject.GetComponent<Minion> ());
-		if (Blocking () || Random.value > 0.1 || this.owner.PlayerNumber != miniontest.owner.PlayerNumber)
-			return;
-
 		Minion minion = (other.gameObject.GetComponent<Minion> ());
-		if ( minion.state != Minion.State.Wander)
+
+//		Debug.Log ("We got here");
+
+		if (Blocking () || 
+		    (Random.value > 0.1) || 
+		    (this.owner.PlayerNumber != minion.owner.PlayerNumber) ||
+		    minion.Blocking())
 			return;
+//		Debug.Log ("We got here2");
+		
 		Vector2 distanceDiff = new Vector2 (this.transform.position.x - minion.transform.position.x, 
 		                                   this.transform.position.y - minion.transform.position.y);
+//		Debug.Log ("We got here3");
 		if(distanceDiff.sqrMagnitude < 0.1f) {
-			minion.state = Minion.State.Move;
+			minion.setState(Minion.State.Move);
 			float tokenAngle = this.transform.rotation.eulerAngles.z;
 			float x = Mathf.Cos(tokenAngle*Mathf.PI/180);
 			float y = Mathf.Sin(tokenAngle*Mathf.PI/180);
-			minion.moveDelta = new Vector2(0.1f * x,0.1f * y);
+			minion.moveDelta = new Vector2(towerStrength * x,towerStrength * y);
 		} else {
-			Debug.Log (distanceDiff);
-			Debug.Log (distanceDiff.normalized);
+			minion.setState(Minion.State.Wander);
 		    Vector2 normalizedDistance = distanceDiff.normalized * minionAttractionRate;
 
 			minion.transform.position += new Vector3 (normalizedDistance.x, normalizedDistance.y);
@@ -123,11 +129,12 @@ public class Token : MonoBehaviour
 	
 	void OnMouseUp()
 	{
+		//These increments may be unnecessary at this point
 		if (state == State.Dragging) {
-			state = State.Dropped;
+			IncrementState();
 		} else if (state == State.Dropped) {
 			new WaitForSeconds(1.0f);
-			state = State.Finished;
+			IncrementState();
 		}
 	}
 
