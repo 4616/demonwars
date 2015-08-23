@@ -5,18 +5,15 @@ public class House : Obstacle {
 	public float sorrow = 1f;
 	public float sorrowgen = 0f;
 	public float sorrowgenratechange = .00001f;
-
-	public Sprite sprite1; // Drag your first sprite here
-	public Sprite sprite2; // Drag your second sprite here
-
+	public SpriteRenderer spriteRenderer;
 	// Use this for initialization
 	void Start () {
 		ownable = true;
-		///
 		spriteRenderer = GetComponent<SpriteRenderer>(); // we are accessing the SpriteRenderer that is attached to the Gameobject
-		if (spriteRenderer.sprite == null) // if the sprite on spriteRenderer is null then
-			spriteRenderer.sprite = sprite1; // set the sprite to sprite1
+
 		///
+
+
 	}
 	
 	// Update is called once per frame
@@ -32,21 +29,12 @@ public class House : Obstacle {
 		}
 	}
 
-
-	
-	private SpriteRenderer spriteRenderer; 
-	
-
-
-	void ChangeTheDamnSprite ()
-	{
-		if (spriteRenderer.sprite == sprite1) // if the spriteRenderer sprite = sprite1 then change to sprite2
-		{
-			spriteRenderer.sprite = sprite2;
-		}
-		else
-		{
-			spriteRenderer.sprite = sprite1; // otherwise change it back to sprite1
+	public void TakeOwnership(Player newowner) {
+		if (ownable) {
+			this.owner = newowner;
+			spriteRenderer.color = newowner.PlayerColor;
+			print (this.tag);
+			
 		}
 	}
 
@@ -56,7 +44,8 @@ public class House : Obstacle {
 			Minion minion = otherObj.gameObject.GetComponent<Minion>();
 			if(this.owner != minion.owner){
 				this.TakeOwnership(minion.owner);
-				ChangeTheDamnSprite (); // call method to change sprite
+				Debug.Log("Home Owner!");
+				//spriteRenderer.color = new Color(1f, 0f, 1f, 1f);
 			}
 			//float lerp = Mathf.PingPong(Time.time, duration) / duration;
 			//spr.color = 

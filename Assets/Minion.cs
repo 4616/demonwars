@@ -24,12 +24,13 @@ public class Minion : MonoBehaviour {
 	public float brownianJumpMagnitude = 1f;
 	public float probabilityToWander = 0.1f;
 	public float range = 1.5f;
-	
+	public SpriteRenderer spriteRenderer; 	
 	
 	// Use this for initialization
 	void Start () {
 		state = State.Wander;
-		//tag = "Minion";
+		spriteRenderer = GetComponent<SpriteRenderer>(); // we are accessing the SpriteRenderer that is attached to the Gameobject
+
 	}
 	
 	// Update is called once per frame
@@ -63,8 +64,10 @@ public class Minion : MonoBehaviour {
 		}
 	}
 
-	public void TakeOwnership(Player owner){
-		this.owner = owner;
+	public void TakeOwnership(Player newowner){
+		this.owner = newowner;
+		spriteRenderer = GetComponent<SpriteRenderer>();
+		spriteRenderer.color = newowner.PlayerColor;
 		this.gameObject.layer = 8;
 	}
 	

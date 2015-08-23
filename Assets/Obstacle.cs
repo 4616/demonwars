@@ -8,9 +8,13 @@ public class Obstacle : MonoBehaviour {
 	public bool damageable = false;
 	public float health = 100f;
 
+
+
 	// Use this for initialization
 	void Start () {
 		//tag = "GenericObstacle";
+
+
 	}
 	
 	// Update is called once per frame
@@ -24,14 +28,11 @@ public class Obstacle : MonoBehaviour {
 		if (ownable) {
 			this.owner = newowner;
 			print (this.tag);
-			if(this.tag == "House"){
-			print ("You are a home owner");
-			}
-
+			
 		}
-
-
-		}
+		
+		
+	}
 
 
 	public void TakeDamage(float damage) {

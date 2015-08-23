@@ -3,10 +3,13 @@ using System.Collections;
 
 public class Spawner : Obstacle {
 	public GameObject MinonPrefab;
+	public SpriteRenderer spriteRenderer;
 
 	// Use this for initialization
 	public void Init () {
 		ownable = true;
+		spriteRenderer = GetComponent<SpriteRenderer>(); // we are accessing the SpriteRenderer that is attached to the Gameobject
+
 		//this.TakeOwnership (owner);
 	}
 	
@@ -18,6 +21,17 @@ public class Spawner : Obstacle {
 			owner.sorrow -= 1f;
 			//print (owner.sorrow);
 
+		}
+	}
+
+	public void TakeOwnership(Player newowner) {
+		//print (newowner);
+		print (ownable);
+		if (ownable) {
+			this.owner = newowner;
+			spriteRenderer.color = newowner.PlayerColor;
+			print (this.tag);
+			
 		}
 	}
 

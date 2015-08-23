@@ -8,7 +8,7 @@ public class Player : MonoBehaviour {
 	public GameObject token;
 
 	public int maxTokensLimit;
-
+	public Color PlayerColor;
 	public class TokenManager {
 		private Player owner;
 		private GameObject token;
@@ -66,7 +66,7 @@ public class Player : MonoBehaviour {
 		}
 	}
 	void Start () {
-		tag = "Player";
+		//tag = "Player";
 		
 	}
 

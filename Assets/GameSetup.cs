@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameSetup : MonoBehaviour {
 	public int nplayers = 2;
@@ -15,6 +16,12 @@ public class GameSetup : MonoBehaviour {
 	public int numRocks = 17;
 	public float boardWidth = 20f;
 	public float boardHeight = 30f;
+	List<Color> PlayerColorList = new List<Color>(){
+		Color.red,
+		Color.green,
+		Color.magenta,
+		Color.white,
+	};
 
 	// Use this for initialization
 	void Start () {
@@ -43,6 +50,7 @@ public class GameSetup : MonoBehaviour {
 			GameObject playergameobji = Instantiate (PlayerPrefab, new Vector3 (0f, posY, 0f), Quaternion.identity) as GameObject;
 			GameObject spawnergameobji = Instantiate (SpawnerPrefab, new Vector3 (0f, posY, 0f), Quaternion.identity) as GameObject;
 			Player playeri = playergameobji.GetComponent<Player> ();
+			playeri.PlayerColor = PlayerColorList[i];
 			Spawner spawneri = spawnergameobji.GetComponent<Spawner> ();
 			spawneri.Init ();
 			//print (playeri);
