@@ -22,7 +22,7 @@ public class Water : Obstacle {
 		if (otherObj.gameObject.tag == "Minion") {
 			Minion minion = otherObj.gameObject.GetComponent<Minion>();
 			minion.TakeDamage(damage);
-			Debug.Log("Drowning Minion!");
+			//Debug.Log("Drowning Minion!");
 		}
 	}
 
