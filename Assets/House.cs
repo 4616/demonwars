@@ -42,6 +42,7 @@ public class House : Obstacle {
 		//Debug.Log (otherObj);
 		if (otherObj.gameObject.tag == "Minion") {
 			Minion minion = otherObj.gameObject.GetComponent<Minion>();
+			minion.state = Minion.State.Wander;
 			if(this.owner != minion.owner){
 				this.TakeOwnership(minion.owner);
 				Debug.Log("Home Owner!");
