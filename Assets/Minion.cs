@@ -14,13 +14,13 @@ public class Minion : MonoBehaviour {
 	public float health = 10f;
 	public State state;
 	public Player owner;
-	public float wanderMagnitude = 0.1f;
+	public float wanderMagnitude = 0f;
 	public float movePerterbation = 0.05f;
 	public float moveSpeed = 0.1f;
 	public Vector2 moveDelta;
 	public GameObject target;
 	public float damage = 1f;
-	public float brownianJumpMagnitude = 5f;
+	public float brownianJumpMagnitude = 1f;
 	public float probabilityToWander = 0.1f;
 	public float range = 1.5f;
 	

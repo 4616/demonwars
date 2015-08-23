@@ -19,6 +19,8 @@ public class Token : MonoBehaviour
 
 	public int rateLimit = 10;
 
+	public float minionAttractionRate = 0.1f;
+
 	public Player owner;
 
 	public GameObject explosion;
@@ -57,6 +59,31 @@ public class Token : MonoBehaviour
 
 	public void Destroy() {
 		Destroy (this.gameObject);
+	}
+
+	void OnTriggerStay2D(Collider2D other) {
+		if (Blocking () || other.gameObject.tag != "Minion" || Random.value > 0.1)
+			return;
+
+		Minion minion = (other.gameObject.GetComponent<Minion> ());
+		if ( minion.state != Minion.State.Wander)
+			return;
+		Vector2 distanceDiff = new Vector2 (this.transform.position.x - minion.transform.position.x, 
+		                                   this.transform.position.y - minion.transform.position.y);
+		if(distanceDiff.sqrMagnitude < 0.1f) {
+			minion.state = Minion.State.Move;
+			float tokenAngle = this.transform.rotation.eulerAngles.z;
+			float x = Mathf.Cos(tokenAngle*Mathf.PI/180);
+			float y = Mathf.Sin(tokenAngle*Mathf.PI/180);
+			minion.moveDelta = new Vector2(0.1f * x,0.1f * y);
+		} else {
+			Debug.Log (distanceDiff);
+			Debug.Log (distanceDiff.normalized);
+		    Vector2 normalizedDistance = distanceDiff.normalized * minionAttractionRate;
+
+			minion.transform.position += new Vector3 (normalizedDistance.x, normalizedDistance.y);
+		}
+
 	}
 
 //	public void Drag() {
