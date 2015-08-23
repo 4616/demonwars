@@ -6,7 +6,7 @@ public class Token : MonoBehaviour
 	private float distance;
 	private float xDeg = 90;
 
-	public enum State {Fresh, Dragging, Dropped, RateLimiting, Finished};
+	public enum State {Fresh, Dragging, Dropped, RateLimiting, Finished, MarkedDestruction};
 
 //	[HideInInspector]
 	public State state = State.Dragging;
@@ -25,8 +25,13 @@ public class Token : MonoBehaviour
 
 	public Player owner;
 
+	public GameObject destroyer;
 	public GameObject explosion;
 	private SpriteRenderer spriteRenderer;
+
+	private int destructionTimeoutDefault = 60;
+	private int _destructionTimeout = 0;
+	private GameObject _destroyerOfObjects;
 	
 	void Start() {
 
@@ -51,13 +56,21 @@ public class Token : MonoBehaviour
 	
 	public void TakeOwnership(Player newowner){
 		this.owner = newowner;
-		spriteRenderer = GetComponent<SpriteRenderer>();
-		spriteRenderer.color = newowner.PlayerColor;
+//		spriteRenderer = GetComponent<SpriteRenderer>();
+//		spriteRenderer.color = newowner.PlayerColor;
 
 	}
 
 	public bool Blocking() {
-		return !(state == State.Finished);
+		return !(state == State.Finished || state == State.MarkedDestruction);
+	}
+
+	public bool CanBeMadeDestructible() {
+		return (state == State.Finished);
+	}
+	
+	public bool Destructible() {
+		return (state == State.MarkedDestruction);
 	}
 
 	public bool Active() {
@@ -121,14 +134,17 @@ public class Token : MonoBehaviour
 //
 //	}
 	
-//	void OnMouseDown()
-//	{
-//		if (state == State.Fresh)
-//			startDragging ();
-//		if (state == State.Dropped) {
-//			state = State.RateLimiting;
-//		}
-//	}
+	void OnMouseDown()
+	{
+		if (CanBeMadeDestructible ()) {
+			_destroyerOfObjects = Instantiate (destroyer, transform.position, transform.rotation) as GameObject;
+			state = State.MarkedDestruction;
+			_destructionTimeout = destructionTimeoutDefault;
+		} else if (Destructible ()) {
+			Destroy (_destroyerOfObjects);
+			Destroy();
+		}
+	}
 
 //	public void startDragging() {
 //		distance = Vector3.Distance (transform.position, Camera.main.transform.position);
@@ -163,5 +179,12 @@ public class Token : MonoBehaviour
 			else rateLimit --;
 		}
 
+		if (_destructionTimeout > 0) {
+			_destructionTimeout--;
+		} else if (_destroyerOfObjects != null) {
+			Destroy (_destroyerOfObjects);
+			_destroyerOfObjects = null;
+			state = State.Finished;
+		}
 	}
 }
