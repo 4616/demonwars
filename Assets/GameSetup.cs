@@ -49,6 +49,14 @@ public class GameSetup : MonoBehaviour {
 			playeri.PlayerColor = PlayerColorList[i];
 			playeri.PlayerNumber = i;
 			playeri.PlayerLayer = i + 8;
+			if(i == 0){
+				playeri.HumanPlayer = true;
+			}
+			else{
+				playeri.HumanPlayer = false;
+				//playeri.AIBeast();
+			}
+
 			Spawner spawneri = spawnergameobji.GetComponent<Spawner> ();
 			spawneri.Init ();
 			//print (playeri);
