@@ -42,7 +42,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 126286}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.345455289, y: -.118230678, z: 0}
+  m_LocalPosition: {x: 1.09368992, y: -.254944623, z: 0}
   m_LocalScale: {x: .100000001, y: .100000001, z: 1}
   m_Children:
   - {fileID: 419892}
@@ -88,7 +88,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 10
 --- !u!58 &5838432
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -119,6 +119,7 @@ MonoBehaviour:
   wanderMagnitude: .100000001
   movePerterbation: .0500000007
   moveSpeed: .100000001
+  combatSpeed: .200000003
   tokenAtraction: 2
   moveDelta: {x: 0, y: 0}
   target: {fileID: 0}
@@ -126,6 +127,8 @@ MonoBehaviour:
   brownianJumpMagnitude: 1
   probabilityToWander: .100000001
   range: 1.5
+  deathChance: .00300000003
+  spriteRenderer: {fileID: 0}
 --- !u!212 &21238962
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -149,7 +152,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1574785953
-  m_SortingOrder: 0
+  m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: c0aef15305aa2a24fac414b357165723, type: 3}
   m_Color: {r: 1, g: .00751514593, b: .00751514593, a: 1}
 --- !u!1001 &100100000
@@ -219,6 +222,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: deathChance
+      value: .00300000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_SortingOrder
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

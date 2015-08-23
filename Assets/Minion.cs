@@ -17,6 +17,7 @@ public class Minion : MonoBehaviour {
 	public float wanderMagnitude = 0f;
 	public float movePerterbation = 0.05f;
 	public float moveSpeed = 0.1f;
+	public float combatSpeed = 0.2f;
 	public float tokenAtraction = 2f;
 	public Vector2 moveDelta;
 	public GameObject target;
@@ -24,6 +25,7 @@ public class Minion : MonoBehaviour {
 	public float brownianJumpMagnitude = 1f;
 	public float probabilityToWander = 0.1f;
 	public float range = 1.5f;
+	public float deathChance;
 	public SpriteRenderer spriteRenderer; 	
 	
 	// Use this for initialization
@@ -52,15 +54,21 @@ public class Minion : MonoBehaviour {
 				float dist = Vector3.Distance(transform.position, target.transform.position);
 				if (dist < range) {
 					target.GetComponent<Minion>().TakeDamage(damage);
-				}else {
-					gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target.transform.position, moveSpeed);
 				}
+				gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, target.transform.position, combatSpeed);
 			} else {
 				state = State.Wander;
 			}
 			break;
 		default:
 			break;
+		}
+		if (Random.Range (0f, 1f) <= deathChance) {
+			Destroy(gameObject, 0.05f);
+		}
+		if (gameObject.transform.position.x < Global.left || gameObject.transform.position.x > Global.right
+			|| gameObject.transform.position.y < Global.bottom || gameObject.transform.position.y > Global.top) {
+			Destroy(gameObject, 0.05f);
 		}
 	}
 
@@ -78,7 +86,7 @@ public class Minion : MonoBehaviour {
 	public void TakeDamage(float damage) {
 		health -= damage;
 		if(health < 0){
-			Destroy(gameObject,.5f);
+			Destroy(gameObject, 0.05f);
 		}
 		
 	}
