@@ -4,6 +4,7 @@ using System.Collections;
 public class House : Obstacle {
 	public float sorrow = 1f;
 	public float sorrowgen = 0f;
+	public float maxSorrowStorage = 10f;
 	public float sorrowgenratechange = .00001f;
 	public SpriteRenderer spriteRenderer;
 	// Use this for initialization
@@ -21,6 +22,7 @@ public class House : Obstacle {
 
 		sorrowgen += sorrowgenratechange;
 		sorrow += sorrowgen;
+		sorrow = Mathf.Min (sorrow, maxSorrowStorage);
 
 		if (owner != null){
 			owner.sorrow += sorrow;
