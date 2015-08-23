@@ -9,6 +9,7 @@ public class Player : MonoBehaviour {
 
 	public int maxTokensLimit;
 	public Color PlayerColor;
+	public int PlayerNumber;
 	public int PlayerLayer;
 	public class TokenManager {
 		private Player owner;

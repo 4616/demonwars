@@ -62,7 +62,11 @@ public class Token : MonoBehaviour
 	}
 
 	void OnTriggerStay2D(Collider2D other) {
-		if (Blocking () || other.gameObject.tag != "Minion" || Random.value > 0.1)
+		if (other.gameObject.tag != "Minion")
+			return;
+
+		Minion miniontest = (other.gameObject.GetComponent<Minion> ());
+		if (Blocking () || Random.value > 0.1 || this.owner.PlayerNumber != miniontest.owner.PlayerNumber)
 			return;
 
 		Minion minion = (other.gameObject.GetComponent<Minion> ());
