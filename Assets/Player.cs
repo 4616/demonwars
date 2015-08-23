@@ -12,6 +12,8 @@ public class Player : MonoBehaviour {
 	public int PlayerNumber;
 	public int PlayerLayer;
 	public int HumanPlayer;
+	public float sorrowgen = 0.05f;
+
 
 
 	public class TokenManager {
@@ -86,6 +88,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		sorrow += sorrowgen;
 		if (tokenManager == null) tokenManager = new TokenManager (this, token);
 		tokenManager.trimOldTokens (maxTokensLimit);
 	}
