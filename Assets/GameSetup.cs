@@ -50,6 +50,7 @@ public class GameSetup : MonoBehaviour {
 			string layername = i == 0 ? "side1" : "side2";
 			spawnergameobji.layer = LayerMask.NameToLayer(layername);
 			Player playeri = playergameobji.GetComponent<Player> ();
+
 			playeri.baseposY = posY;
 			playeri.PlayerColor = PlayerColorList[i];
 			playeri.PlayerColor.a = 1f;
@@ -62,14 +63,17 @@ public class GameSetup : MonoBehaviour {
 				ClickForegroundPrefab.GetComponent<ClickForegroundController>().owner = playeri;
 			}
 			else{
+
+
 				if(testing == false){
 					playeri.HumanPlayer = false;
 					playeri.sorrow = Global.difficulty * 25;
+					playeri.maxTokensLimit = Global.difficulty * 20;
 					Debug.Log ("AI player created");
 					//playeri.AIBeast();
 				}
 			}
-
+			Debug.Log(playeri.maxTokensLimit);
 			Spawner spawneri = spawnergameobji.GetComponent<Spawner> ();
 			spawneri.Init ();
 			//print (playeri);
