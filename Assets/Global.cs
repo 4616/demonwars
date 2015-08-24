@@ -11,4 +11,6 @@ public class Global{
 	public static float right = 10f;
 
 	public static float difficulty = 1;
+	public static bool GameOver = false;
+
 }

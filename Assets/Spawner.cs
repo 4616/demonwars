@@ -35,6 +35,16 @@ public class Spawner : Obstacle {
 		}
 	}
 
+	public void TakeDamage(float damage) {
+		if (damageable) {
+			health -= damage;
+			if(health < 0){
+				Destroy(gameObject,.5f);
+				Application.LoadLevel ("MainMenu");
+			}
+		}
+	}
+
 	void Spawn () {
 		GameObject obj = Instantiate (MinonPrefab, this.transform.position, this.transform.rotation) as GameObject;
 		Minion mini = obj.GetComponent<Minion> ();
