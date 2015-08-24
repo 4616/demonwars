@@ -596,6 +596,7 @@ MonoBehaviour:
   HousePrefab: {fileID: 136066, guid: 2604abcb547d5bd46b141f1c29f6aff0, type: 2}
   WaterPrefab: {fileID: 123264, guid: 916504bda2c465c40bf288d867608c75, type: 2}
   RockPrefab: {fileID: 135898, guid: 0002b0eb9ba78b34789aad269cadf5eb, type: 2}
+  ClickForegroundPrefab: {fileID: 2089994902}
   numHouses: 50
   numLakes: 12
   numRocks: 17
@@ -827,3 +828,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!1 &2089994902 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 141960, guid: 5ca2e3d0144464325b9ddf04b0531209, type: 2}
+  m_PrefabInternal: {fileID: 1635274589}

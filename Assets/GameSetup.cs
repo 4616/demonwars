@@ -11,6 +11,7 @@ public class GameSetup : MonoBehaviour {
 	public GameObject HousePrefab;
 	public GameObject WaterPrefab;
 	public GameObject RockPrefab;
+	public GameObject ClickForegroundPrefab;
 
 	public int numHouses = 50;
 	public int numLakes = 12;
@@ -57,6 +58,7 @@ public class GameSetup : MonoBehaviour {
 			//playeri.PlayerLayer = i + 8;
 			if(i == 0){
 				playeri.HumanPlayer = true;
+				ClickForegroundPrefab.GetComponent<ClickForegroundController>().owner = playeri;
 			}
 			else{
 				if(testing == false){
