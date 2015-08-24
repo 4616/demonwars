@@ -10,7 +10,8 @@ public class House : Obstacle {
 	// Use this for initialization
 	void Start () {
 		ownable = true;
-		GetComponent<SpriteRenderer>().sprite = this.RandomSprite();
+		spriteRenderer = GetComponent<SpriteRenderer> ();
+		spriteRenderer.sprite = this.RandomSprite();
 		///
 
 
