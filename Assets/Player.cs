@@ -123,7 +123,7 @@ public class Player : MonoBehaviour {
 
 		timer += Time.deltaTime;
 		
-		if (timer >= 10f) {
+		if (timer >= 2f) {
 			float xpos = Random.Range(Global.left,Global.right);
 			float ypos = Random.Range(Global.bottom,Global.top);
 
@@ -146,9 +146,9 @@ public class Player : MonoBehaviour {
 		sorrow += sorrowgen;
 		if (tokenManager == null) tokenManager = new TokenManager (this, token);
 		tokenManager.trimOldTokens (maxTokensLimit);
-		if (HumanPlayer) {
+		if (HumanPlayer == false) {
 			//Debug.Log ("AI exists");
-//			AIBeast ();
+			AIBeast ();
 		}
 
 //		if (this.HumanPlayer == false) {
