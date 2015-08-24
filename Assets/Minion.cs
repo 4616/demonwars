@@ -104,7 +104,6 @@ public class Minion : MonoBehaviour {
 		this.owner = newowner;
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		spriteRenderer.color = newowner.PlayerColor;
-		Debug.Log (newowner.PlayerLayer);
 		this.gameObject.layer = newowner.PlayerLayer;
 	}
 	
