@@ -23,7 +23,7 @@ public class Water : Obstacle {
 			Minion minion = otherObj.gameObject.GetComponent<Minion>();
 			//minion.state = Minion.State.Wander;
 			minion.TakeDamage(damage);
-			//Debug.Log("Drowning Minion!");
+			Debug.Log("Drowning Minion!");
 		}
 	}
 

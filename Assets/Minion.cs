@@ -13,6 +13,7 @@ public class Minion : MonoBehaviour {
 	public Sprite spriteminion1; // Drag your first sprite here
 	public Sprite spriteminion2; // Drag your second sprite here
 	private SpriteRenderer spriteRenderer; 
+	public GameObject explosion;
 	
 	//public string tag = "Minion";
 	public float health = 10f;
@@ -106,7 +107,7 @@ public class Minion : MonoBehaviour {
 			if (dist < range) {
 				target.GetComponent<Minion> ().TakeDamage (damage);
 			}
-			CheckDeath ();
+			//CheckDeath ();
 		}
 	}
 
@@ -161,11 +162,15 @@ public class Minion : MonoBehaviour {
 	
 	public void TakeDamage(float damage) {
 		health -= damage;
+		CheckDeath ();
 	}
 
 	public void CheckDeath(){
 		if(health < 0){
+			Instantiate (explosion, this.transform.position, this.transform.rotation);
+			Debug.Log ("minion death");
 			Destroy(gameObject, 0.05f);
+
 		}
 	}
 
