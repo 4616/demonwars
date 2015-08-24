@@ -37,6 +37,9 @@ public class Spawner : Obstacle {
 
 	void Spawn () {
 		GameObject obj = Instantiate (MinonPrefab, this.transform.position, this.transform.rotation) as GameObject;
+		//Debug.Log (LayerMask.LayerToName(gameObject.layer));
+		//Debug.Log (gameObject.layer);
+		//obj.layer = gameObject.layer;
 		Minion mini = obj.GetComponent<Minion> ();
 		mini.TakeOwnership(owner);
 	}
