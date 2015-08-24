@@ -10,7 +10,7 @@ using System.Collections;
 public class MainMenu : MonoBehaviour {
 	public Texture backgroudTexture;
 	public Texture backgroudTextureWin;
-
+	public Texture backgroudTextureLose;
 	public float guiPlacementX1 = .25f;
 	public float guiPlacementY1 = .45f;
 	public float guiPlacementX2 = .25f;
@@ -41,9 +41,16 @@ public class MainMenu : MonoBehaviour {
 	}
 	public void SetBackGround(){
 		// Displays background texture
-		if (Global.Winner == true) {
-			GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroudTextureWin);
-		} else {
+		if(Global.GameOver == false){
+			if (Global.Winner == true) {
+				GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroudTextureWin);
+			}
+			if (Global.Winner == false) {
+				GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroudTextureLose);
+			}
+		}
+
+		else {
 			GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroudTexture);
 		}
 	}
