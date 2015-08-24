@@ -49,7 +49,7 @@ public class MainMenu : MonoBehaviour {
 		//button location x, button location y, buttion size x, button size y
 		if (GUI.Button (new Rect (Screen.width * guiPlacementX1, Screen.height * guiPlacementY1, Screen.width * .5f, Screen.height * .1f), "Play Game")) {
 			print ("Clicked Play Game");
-			Application.LoadLevel (1);
+			Application.LoadLevel ("Main");
 		}
 			
 		if (GUI.Button (new Rect (Screen.width * guiPlacementX2, Screen.height * guiPlacementY2, Screen.width * .5f, Screen.height * .1f), "Difficulty" + " (" + diffstring + ")")) {
@@ -69,30 +69,35 @@ public class MainMenu : MonoBehaviour {
 	
 		if(GUI.Button (new Rect (Screen.width * guiPlacementX1, Screen.height * .3f, Screen.width * .5f, Screen.height * .1f), "I'm too young to die")){
 			diffstring = "I'm too young to die";
+			Global.difficulty = 1;
 			NavGate("Main");
 
 		}
 
 		if(GUI.Button (new Rect (Screen.width * guiPlacementX2, Screen.height * .45f, Screen.width * .5f, Screen.height * .1f), "Hey, not too rough")){
 			diffstring = "Hey, not too rough";
+			Global.difficulty = 2;
 			NavGate("Main");
 
 		}
 
 		if(GUI.Button (new Rect (Screen.width * guiPlacementX3, Screen.height * .6f, Screen.width * .5f, Screen.height * .1f), "Hurt me plenty")){
 			diffstring = "Hurt me plenty";
+			Global.difficulty = 3;
 			NavGate("Main");
 
 		}
 
 		if(GUI.Button (new Rect (Screen.width * guiPlacementX3, Screen.height * .75f, Screen.width * .5f, Screen.height * .1f), "Ultra-Violence")){
 			diffstring = "Ultra-Violence";
+			Global.difficulty = 4;
 			NavGate("Main");
 
 		}
 
 		if(GUI.Button (new Rect (Screen.width * guiPlacementX3, Screen.height * .9f, Screen.width * .5f, Screen.height * .1f), "Nightmare!")){
 			diffstring = "Nightmare!";
+			Global.difficulty = 5;
 			NavGate("Main");
 			
 		}
