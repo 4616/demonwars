@@ -48,6 +48,7 @@ public class GameSetup : MonoBehaviour {
 			GameObject playergameobji = Instantiate (PlayerPrefab, new Vector3 (0f, posY, 0f), Quaternion.identity) as GameObject;
 			GameObject spawnergameobji = Instantiate (SpawnerPrefab, new Vector3 (0f, posY, 0f), Quaternion.identity) as GameObject;
 			string layername = i == 0 ? "side1" : "side2";
+			spawnergameobji.layer = LayerMask.NameToLayer(layername);
 			Player playeri = playergameobji.GetComponent<Player> ();
 			playeri.baseposY = posY;
 			playeri.PlayerColor = PlayerColorList[i];
@@ -55,7 +56,7 @@ public class GameSetup : MonoBehaviour {
 			playeri.PlayerNumber = i;
 			playeri.PlayerLayer = LayerMask.NameToLayer(layername);
 			Debug.Log(playeri.PlayerColor.ToString());
-			//playeri.PlayerLayer = i + 8;
+
 			if(i == 0){
 				playeri.HumanPlayer = true;
 				ClickForegroundPrefab.GetComponent<ClickForegroundController>().owner = playeri;
