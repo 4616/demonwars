@@ -9,6 +9,7 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour {
 	public Texture backgroudTexture;
+	public Texture backgroudTextureWin;
 
 	public float guiPlacementX1 = .25f;
 	public float guiPlacementY1 = .45f;
@@ -42,7 +43,11 @@ public class MainMenu : MonoBehaviour {
 
 	public void Main_Menu(){
 		// Displays background texture
-		GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroudTexture);
+		if (Global.Winner == true) {
+			GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroudTextureWin);
+		} else {
+			GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroudTextureWin);
+		}
 			
 			
 		// Displays our Buttons (with GUI Outline)
