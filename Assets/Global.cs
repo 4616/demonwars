@@ -9,4 +9,6 @@ public class Global{
 	public static float top = 15f;
 	public static float left = -10f;
 	public static float right = 10f;
+
+	public static float difficulty = 1;
 }
