@@ -18,6 +18,7 @@ public class MainMenu : MonoBehaviour {
 	public float guiPlacementY3 = .75f;
 	public string CurrentMenu = "Main";
 	public GUIStyle Random1;
+	public string diffstring = "I'm too young to die";
 
 	void OnGUI(){
 
@@ -41,31 +42,24 @@ public class MainMenu : MonoBehaviour {
 
 	public void Main_Menu(){
 		// Displays background texture
-			GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroudTexture);
+		GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroudTexture);
 			
 			
-			// Displays our Buttons (with GUI Outline)
-			//button location x, button location y, buttion size x, button size y
-			if(GUI.Button (new Rect (Screen.width * guiPlacementX1, Screen.height * guiPlacementY1, Screen.width * .5f, Screen.height * .1f), "Play Game")){
-				print ("Clicked Play Game");
-				Application.LoadLevel(1);
-			}
-			
-			if(GUI.Button (new Rect (Screen.width * guiPlacementX2, Screen.height * guiPlacementY2, Screen.width * .5f, Screen.height * .1f), "Options")){
-				NavGate("Options");
-				print ("Clicked Options");
-			}
-			
-			// Displays our Buttons (with GUI Outline)
-			//button location x, button location y, buttion size x, button size y
-			if(GUI.Button (new Rect (Screen.width * guiPlacementX1, Screen.height * guiPlacementY1, Screen.width * .5f, Screen.height * .1f), "", Random1)){
-				print ("Clicked Play Game");
-			}
-			
-			if(GUI.Button (new Rect (Screen.width * guiPlacementX2, Screen.height * guiPlacementY2, Screen.width * .5f, Screen.height * .1f),"", Random1)){
-				print ("Clicked Options");
-			}
+		// Displays our Buttons (with GUI Outline)
+		//button location x, button location y, buttion size x, button size y
+		if (GUI.Button (new Rect (Screen.width * guiPlacementX1, Screen.height * guiPlacementY1, Screen.width * .5f, Screen.height * .1f), "Play Game")) {
+			print ("Clicked Play Game");
+			Application.LoadLevel (1);
 		}
+			
+		if (GUI.Button (new Rect (Screen.width * guiPlacementX2, Screen.height * guiPlacementY2, Screen.width * .5f, Screen.height * .1f), "Difficulty" + " (" + diffstring + ")")) {
+			NavGate ("Options");
+
+		}
+
+	}
+			
+
 
 	public void Options_Menu(){
 		// Displays background texture
@@ -73,22 +67,34 @@ public class MainMenu : MonoBehaviour {
 
 
 	
-		if(GUI.Button (new Rect (Screen.width * guiPlacementX1, Screen.height * guiPlacementY1, Screen.width * .5f, Screen.height * .1f), "Singleplayer")){
+		if(GUI.Button (new Rect (Screen.width * guiPlacementX1, Screen.height * .3f, Screen.width * .5f, Screen.height * .1f), "I'm too young to die")){
+			diffstring = "I'm too young to die";
 			NavGate("Main");
-			//set to single player
-			print ("Clicked single player, returning to main menu");
+
 		}
 
-		if(GUI.Button (new Rect (Screen.width * guiPlacementX2, Screen.height * guiPlacementY2, Screen.width * .5f, Screen.height * .1f), "Multiplayer")){
+		if(GUI.Button (new Rect (Screen.width * guiPlacementX2, Screen.height * .45f, Screen.width * .5f, Screen.height * .1f), "Hey, not too rough")){
+			diffstring = "Hey, not too rough";
 			NavGate("Main");
-			//set to multiplayer
-			print ("Clicked multiplayer, returning to main menu");
+
 		}
 
-		if(GUI.Button (new Rect (Screen.width * guiPlacementX3, Screen.height * guiPlacementY3, Screen.width * .5f, Screen.height * .1f), "Back")){
+		if(GUI.Button (new Rect (Screen.width * guiPlacementX3, Screen.height * .6f, Screen.width * .5f, Screen.height * .1f), "Hurt me plenty")){
+			diffstring = "Hurt me plenty";
 			NavGate("Main");
-			//set to multiplayer
-			print ("Clicked back, returning to main menu");
+
+		}
+
+		if(GUI.Button (new Rect (Screen.width * guiPlacementX3, Screen.height * .75f, Screen.width * .5f, Screen.height * .1f), "Ultra-Violence")){
+			diffstring = "Ultra-Violence";
+			NavGate("Main");
+
+		}
+
+		if(GUI.Button (new Rect (Screen.width * guiPlacementX3, Screen.height * .9f, Screen.width * .5f, Screen.height * .1f), "Nightmare!")){
+			diffstring = "Nightmare!";
+			NavGate("Main");
+			
 		}
 	
 	}
