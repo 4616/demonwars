@@ -62,9 +62,10 @@ public class GameSetup : MonoBehaviour {
 			}
 			else{
 				if(testing == false){
-				playeri.HumanPlayer = false;
-				Debug.Log ("AI player created");
-				//playeri.AIBeast();
+					playeri.HumanPlayer = false;
+					playeri.sorrow = Global.difficulty * 25;
+					Debug.Log ("AI player created");
+					//playeri.AIBeast();
 				}
 			}
 
