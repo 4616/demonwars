@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Minion
+  - House
   layers:
   - Default
   - TransparentFX

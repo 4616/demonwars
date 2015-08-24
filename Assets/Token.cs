@@ -142,7 +142,8 @@ public class Token : MonoBehaviour
 			_destructionTimeout = destructionTimeoutDefault;
 		} else if (Destructible ()) {
 			Destroy (_destroyerOfObjects);
-			Destroy();
+//			Destroy();
+			owner.tokenManager.Destroy(this);
 		}
 	}
 
