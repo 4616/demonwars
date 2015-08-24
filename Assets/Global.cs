@@ -10,8 +10,9 @@ public class Global{
 	public static float left = -10f;
 	public static float right = 10f;
 
-	public static float difficulty = 1;
+	public static int difficulty = 1;
 	public static bool GameOver = false;
 	public static bool Winner = false;
+
 
 }
