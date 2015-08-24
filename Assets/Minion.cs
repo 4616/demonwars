@@ -8,7 +8,10 @@ public class Minion : MonoBehaviour {
 		Move,
 		Combat
 	};
-	
+
+	public Sprite spriteminion1; // Drag your first sprite here
+	public Sprite spriteminion2; // Drag your second sprite here
+	private SpriteRenderer spriteRenderer; 
 	
 	//public string tag = "Minion";
 	public float health = 10f;
@@ -27,7 +30,7 @@ public class Minion : MonoBehaviour {
 	public float range = 1.5f;
 	public float deathChance;
 	public int newCommandTimeout = 10;
-	private SpriteRenderer spriteRenderer; 	
+
 
 	private int _newCommandTimer;
 	
@@ -105,9 +108,31 @@ public class Minion : MonoBehaviour {
 		_newCommandTimer = newCommandTimeout;
 	}
 
+
+	void RandomSprite (){
+		int spritenumber = Random.Range (1, 3);
+		if (spritenumber == 1) // if the spriteRenderer sprite = sprite1 then change to sprite2
+		{
+			spriteRenderer.sprite = spriteminion1;
+		}
+
+		if (spritenumber == 2) // if the spriteRenderer sprite = sprite1 then change to sprite2
+		{
+			spriteRenderer.sprite = spriteminion2;
+		}
+		else
+		{
+			spriteRenderer.sprite = spriteminion1; // otherwise change it back to sprite1
+		}
+	}
+
 	public void TakeOwnership(Player newowner){
 		this.owner = newowner;
 		spriteRenderer = GetComponent<SpriteRenderer>();
+		RandomSprite ();
+		//spriteRenderer.sprite = spriteminion2;
+		//Debug.Log ("taking ownership of minion");
+		//Debug.Log (spriteminion2);
 		spriteRenderer.color = newowner.PlayerColor;
 		this.gameObject.layer = newowner.PlayerLayer;
 	}
