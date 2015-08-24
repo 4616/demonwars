@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteminion1: {fileID: 21300000, guid: c0aef15305aa2a24fac414b357165723, type: 3}
   spriteminion2: {fileID: 21300000, guid: 6c5af7d31107e5548a4eece5f7b0090a, type: 3}
+  explosion: {fileID: 167692, guid: 54759977d2a315646960715fc7e054ad, type: 2}
   health: 10
   state: 0
   owner: {fileID: 0}
@@ -243,6 +244,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 6c5af7d31107e5548a4eece5f7b0090a,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 167692, guid: 54759977d2a315646960715fc7e054ad, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 126286}

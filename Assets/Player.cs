@@ -88,8 +88,8 @@ public class Player : MonoBehaviour {
 					//TODO: Play destruction animation
 					Debug.Log (maxTokens);
 					Debug.Log (tokenList.Count);
-					tk.Destroy();
 					Instantiate (tk.explosion, tk.transform.position, tk.transform.rotation);
+					tk.Destroy();
 				}
 				tokenList = tokenList.GetRange (0, maxTokens);
 			}

@@ -17,12 +17,11 @@ public class Water : Obstacle {
 	}
 
 	void OnTriggerEnter2D(Collider2D otherObj) {
-		Debug.Log (otherObj);
 		if (otherObj.gameObject.tag == "Minion") {
 			Minion minion = otherObj.gameObject.GetComponent<Minion>();
 			//minion.state = Minion.State.Wander;
 			minion.TakeDamage(damage);
-			//Debug.Log("Drowning Minion!");
+			Debug.Log("Drowning Minion!");
 		}
 	}
 
