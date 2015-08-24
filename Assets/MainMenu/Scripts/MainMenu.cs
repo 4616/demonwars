@@ -39,21 +39,25 @@ public class MainMenu : MonoBehaviour {
 		CurrentMenu = nextmenu;
 	
 	}
-
-
-	public void Main_Menu(){
+	public void SetBackGround(){
 		// Displays background texture
 		if (Global.Winner == true) {
 			GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroudTextureWin);
 		} else {
-			GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroudTextureWin);
+			GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroudTexture);
 		}
+	}
+
+	public void Main_Menu(){
+		SetBackGround ();
 			
 			
 		// Displays our Buttons (with GUI Outline)
 		//button location x, button location y, buttion size x, button size y
 		if (GUI.Button (new Rect (Screen.width * guiPlacementX1, Screen.height * guiPlacementY1, Screen.width * .5f, Screen.height * .1f), "Play Game")) {
 			print ("Clicked Play Game");
+			Global.GameOver = false;
+			Global.Winner = false;
 			Application.LoadLevel ("Main");
 		}
 			
@@ -68,8 +72,7 @@ public class MainMenu : MonoBehaviour {
 
 	public void Options_Menu(){
 		// Displays background texture
-		GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroudTexture);
-
+		SetBackGround ();
 
 	
 		if(GUI.Button (new Rect (Screen.width * guiPlacementX1, Screen.height * .3f, Screen.width * .5f, Screen.height * .1f), "I'm too young to die")){

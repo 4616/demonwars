@@ -185,6 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroudTexture: {fileID: 2800000, guid: 6e78974c7ee378e4cb530ed41c0e80eb, type: 3}
+  backgroudTextureWin: {fileID: 2800000, guid: 05126812f90364e48aed1484670b0561, type: 3}
   guiPlacementX1: .25
   guiPlacementY1: .5
   guiPlacementX2: .25
@@ -251,3 +252,4 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  diffstring: I'm too young to die
