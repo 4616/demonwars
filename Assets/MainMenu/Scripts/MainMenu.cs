@@ -41,7 +41,7 @@ public class MainMenu : MonoBehaviour {
 	}
 	public void SetBackGround(){
 		// Displays background texture
-		if(Global.GameOver == false){
+		if(Global.GameOver == true){
 			if (Global.Winner == true) {
 				GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), backgroudTextureWin);
 			}
