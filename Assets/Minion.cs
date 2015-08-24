@@ -6,7 +6,8 @@ public class Minion : MonoBehaviour {
 	{
 		Wander,
 		Move,
-		Combat
+		Combat,
+		AttackSpawner
 	};
 
 	public Sprite spriteminion1; // Drag your first sprite here
@@ -24,6 +25,7 @@ public class Minion : MonoBehaviour {
 	public float tokenAtraction = 2f;
 	public Vector2 moveDelta;
 	public GameObject target;
+	public GameObject spawnerTarget;
 	public float damage = 1f;
 	public float brownianJumpMagnitude = 1f;
 	public float probabilityToWander = 0.1f;
@@ -70,6 +72,17 @@ public class Minion : MonoBehaviour {
 				state = State.Wander;
 			}
 			break;
+		case State.AttackSpawner:
+			if (spawnerTarget != null) {
+				gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, spawnerTarget.transform.position, moveSpeed);
+				float dist = Vector3.Distance (transform.position, spawnerTarget.transform.position);
+				if (dist < range) {
+					spawnerTarget.GetComponent<Spawner> ().TakeDamage (damage);
+				}
+			} else {
+				state = State.Wander;
+			}
+			break;
 		default:
 			break;
 		}
@@ -88,7 +101,7 @@ public class Minion : MonoBehaviour {
 	}
 
 	void LateUpdate(){
-		if (target != null) {
+		if (state == State.Combat && target != null) {
 			float dist = Vector3.Distance (transform.position, target.transform.position);
 			if (dist < range) {
 				target.GetComponent<Minion> ().TakeDamage (damage);
@@ -135,6 +148,11 @@ public class Minion : MonoBehaviour {
 		//Debug.Log (spriteminion2);
 		spriteRenderer.color = newowner.PlayerColor;
 		this.gameObject.layer = newowner.PlayerLayer;
+
+		foreach(Transform child in transform)
+		{
+			child.gameObject.layer = newowner.PlayerLayer;
+		}
 	}
 	
 	private void findNewTarget() {
@@ -156,13 +174,37 @@ public class Minion : MonoBehaviour {
 //	}
 
 
-	void OnTriggerEnter2D(Collider2D other) {
-		if (state != null && state != State.Combat && other.gameObject.tag == "Minion") {
-			Minion minon = other.gameObject.GetComponent<Minion>();
-			if (minon.owner != this.owner) {
-				// Come at me bro!
-				state = State.Combat;
-				target = other.gameObject;
+//	void OnTriggerEnter2D(Collider2D other) {
+//		if (state != null && state != State.Combat && other.gameObject.tag == "Minion") {
+//			Minion minon = other.gameObject.GetComponent<Minion>();
+//			if (minon.owner != this.owner) {
+//				// Come at me bro!
+//				state = State.Combat;
+//				target = other.gameObject;
+//			}
+//		}
+//	}
+
+	void OnTriggerStay2D(Collider2D other) {
+		if (state != null && state != State.Combat) {
+			if (other.gameObject.tag == "Minion") {
+				Minion minon = other.gameObject.GetComponent<Minion>();
+				if (minon.owner != this.owner) {
+					// Come at me bro!
+					state = State.Combat;
+					target = other.gameObject;
+				} else {
+					Debug.Log("Same team, man");
+				}
+			} else if (state != State.AttackSpawner && other.gameObject.tag == "Spawner") {
+				Spawner spawn = other.gameObject.GetComponent<Spawner>();
+				if (spawn.owner != this.owner) {
+					state = State.AttackSpawner;
+					spawnerTarget = other.gameObject;
+					Debug.Log("Attack the spawner");
+				} else {
+					Debug.Log("No, the other base");
+				}
 			}
 		}
 	}
