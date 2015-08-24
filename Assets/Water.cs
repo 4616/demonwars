@@ -8,8 +8,7 @@ public class Water : Obstacle {
 
 	// Use this for initialization
 	void Start () {
-		//tag = "Water";
-	
+		GetComponent<SpriteRenderer>().sprite = this.RandomSprite();
 	}
 	
 	// Update is called once per frame
@@ -27,5 +26,10 @@ public class Water : Obstacle {
 		}
 	}
 
+	Sprite RandomSprite(){
+		Sprite[] Lakes = Resources.LoadAll<Sprite>("Lakes");
+		int choice = Random.Range (0, Lakes.Length);
+		return Lakes [choice];
+	}	
 
 }

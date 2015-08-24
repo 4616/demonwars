@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 public class Minion : MonoBehaviour {
 	public enum State
@@ -9,8 +10,6 @@ public class Minion : MonoBehaviour {
 		Combat
 	};
 
-	public Sprite spriteminion1; // Drag your first sprite here
-	public Sprite spriteminion2; // Drag your second sprite here
 	private SpriteRenderer spriteRenderer; 
 	
 	//public string tag = "Minion";
@@ -37,8 +36,7 @@ public class Minion : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		state = State.Wander;
-		spriteRenderer = GetComponent<SpriteRenderer>(); // we are accessing the SpriteRenderer that is attached to the Gameobject
-
+		GetComponent<SpriteRenderer>().sprite = this.RandomSprite();
 		_newCommandTimer = 0;
 
 	}
@@ -109,21 +107,10 @@ public class Minion : MonoBehaviour {
 	}
 
 
-	void RandomSprite (){
-		int spritenumber = Random.Range (1, 3);
-		if (spritenumber == 1) // if the spriteRenderer sprite = sprite1 then change to sprite2
-		{
-			spriteRenderer.sprite = spriteminion1;
-		}
-
-		if (spritenumber == 2) // if the spriteRenderer sprite = sprite1 then change to sprite2
-		{
-			spriteRenderer.sprite = spriteminion2;
-		}
-		else
-		{
-			spriteRenderer.sprite = spriteminion1; // otherwise change it back to sprite1
-		}
+	Sprite RandomSprite (){
+		Sprite[] monsters = Resources.LoadAll<Sprite>("Monsters");
+		int choice = Random.Range (0, monsters.Length);
+		return monsters [choice];
 	}
 
 	public void TakeOwnership(Player newowner){

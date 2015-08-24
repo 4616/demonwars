@@ -10,8 +10,7 @@ public class House : Obstacle {
 	// Use this for initialization
 	void Start () {
 		ownable = true;
-		spriteRenderer = GetComponent<SpriteRenderer>(); // we are accessing the SpriteRenderer that is attached to the Gameobject
-
+		GetComponent<SpriteRenderer>().sprite = this.RandomSprite();
 		///
 
 
@@ -57,7 +56,11 @@ public class House : Obstacle {
 		}
 	}
 
-
+	Sprite RandomSprite(){
+		Sprite[] Houses = Resources.LoadAll<Sprite>("Houses");
+		int choice = Random.Range (0, Houses.Length);
+		return Houses [choice];
+	}
 
 //	void OnCollisionEnter(Collision otherObj) {
 //		print ("Collision with a house!");
