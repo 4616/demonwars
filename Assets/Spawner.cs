@@ -40,6 +40,8 @@ public class Spawner : Obstacle {
 			health -= damage;
 			if(health < 0){
 				Destroy(gameObject,.5f);
+				Global.GameOver = true;
+				Global.Winner = true;
 				Application.LoadLevel ("MainMenu");
 			}
 		}
