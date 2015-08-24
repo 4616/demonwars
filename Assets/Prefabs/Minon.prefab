@@ -113,6 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680325155673b5f408cc6ea298dfe365, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteminion1: {fileID: 21300000, guid: c0aef15305aa2a24fac414b357165723, type: 3}
+  spriteminion2: {fileID: 21300000, guid: 6c5af7d31107e5548a4eece5f7b0090a, type: 3}
   health: 10
   state: 0
   owner: {fileID: 0}
@@ -128,7 +130,7 @@ MonoBehaviour:
   probabilityToWander: .100000001
   range: 1.5
   deathChance: .00300000003
-  spriteRenderer: {fileID: 0}
+  newCommandTimeout: 10
 --- !u!212 &21238962
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -231,6 +233,16 @@ Prefab:
       propertyPath: m_SortingOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spriteminion1
+      value: 
+      objectReference: {fileID: 21300000, guid: c0aef15305aa2a24fac414b357165723,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: spriteminion2
+      value: 
+      objectReference: {fileID: 21300000, guid: 6c5af7d31107e5548a4eece5f7b0090a,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 126286}

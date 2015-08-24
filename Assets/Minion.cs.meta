@@ -1,10 +1,14 @@
 fileFormatVersion: 2
 guid: 680325155673b5f408cc6ea298dfe365
-timeCreated: 1440218795
+timeCreated: 1440379054
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - spriteminion1: {fileID: 21300000, guid: c0aef15305aa2a24fac414b357165723, type: 3}
+  - spriteminion2: {fileID: 21300000, guid: 6c5af7d31107e5548a4eece5f7b0090a, type: 3}
+  - owner: {instanceID: 0}
+  - target: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
