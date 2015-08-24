@@ -590,6 +590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nplayers: 2
+  testing: 0
   PlayerPrefab: {fileID: 168060, guid: 3733ba2b5552cc24f95abca565aac470, type: 2}
   SpawnerPrefab: {fileID: 132890, guid: 1f4bb42ef2e23bc4e97604979201882a, type: 2}
   HousePrefab: {fileID: 136066, guid: 2604abcb547d5bd46b141f1c29f6aff0, type: 2}
