@@ -18,7 +18,6 @@ public class Water : Obstacle {
 	}
 
 	void OnTriggerEnter2D(Collider2D otherObj) {
-		Debug.Log (otherObj);
 		if (otherObj.gameObject.tag == "Minion") {
 			Minion minion = otherObj.gameObject.GetComponent<Minion>();
 			//minion.state = Minion.State.Wander;
