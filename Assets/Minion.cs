@@ -73,9 +73,14 @@ public class Minion : MonoBehaviour {
 		if (Random.Range (0f, 1f) <= deathChance) {
 			Destroy(gameObject, 0.05f);
 		}
-		if (gameObject.transform.position.x < Global.left || gameObject.transform.position.x > Global.right
-			|| gameObject.transform.position.y < Global.bottom || gameObject.transform.position.y > Global.top) {
-			Destroy(gameObject, 0.05f);
+		if (gameObject.transform.position.x < Global.left) {
+			transform.position = new Vector3(Global.left, transform.position.y, transform.position.z);
+		} else if (gameObject.transform.position.x > Global.right) {
+			transform.position = new Vector3(Global.right, transform.position.y, transform.position.z);
+		} else if (gameObject.transform.position.y < Global.bottom) {
+			transform.position = new Vector3(transform.position.x, Global.bottom, transform.position.z);
+		} else if (gameObject.transform.position.y > Global.top) {
+			transform.position = new Vector3(transform.position.x, Global.top, transform.position.z);
 		}
 	}
 
