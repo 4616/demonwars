@@ -248,6 +248,10 @@ public class Player : MonoBehaviour {
 			baseTower = _player.tokenManager.createNewTokenAI (new Vector3 (_playerPosition.x, _playerPosition.y, 0), angle);
 			
 		}
+
+		public void destoryTower() {
+			baseTower.Destroy ();
+		}
 	}
 
 	private class BeardedDemonAIStrategy : AIStrategy {

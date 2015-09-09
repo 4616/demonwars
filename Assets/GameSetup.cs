@@ -61,6 +61,7 @@ public class GameSetup : MonoBehaviour {
 			if(i == 0){
 				playeri.HumanPlayer = true;
 				playeri.maxTokensLimit = 23 - (3 * Global.difficulty);
+				playeri.sorrow = 55 - (Global.difficulty * 10);
 				ClickForegroundPrefab.GetComponent<ClickForegroundController>().owner = playeri;
 			}
 			else{
@@ -68,7 +69,7 @@ public class GameSetup : MonoBehaviour {
 
 				if(testing == false){
 					playeri.HumanPlayer = false;
-					playeri.sorrow = Global.difficulty * 100;
+					playeri.sorrow = Global.difficulty * 50;
 					playeri.maxTokensLimit = Global.difficulty * 20;
 					Debug.Log ("AI player created");
 					//playeri.AIBeast();
