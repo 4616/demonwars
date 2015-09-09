@@ -69,7 +69,7 @@ public class GameSetup : MonoBehaviour {
 
 				if(testing == false){
 					playeri.HumanPlayer = false;
-					playeri.sorrow = Global.difficulty * 50;
+					playeri.sorrow = Global.difficulty * 10;
 					playeri.maxTokensLimit = Global.difficulty * 20;
 					Debug.Log ("AI player created");
 					//playeri.AIBeast();
