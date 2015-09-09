@@ -60,6 +60,7 @@ public class GameSetup : MonoBehaviour {
 
 			if(i == 0){
 				playeri.HumanPlayer = true;
+				playeri.maxTokensLimit = 23 - (3 * Global.difficulty);
 				ClickForegroundPrefab.GetComponent<ClickForegroundController>().owner = playeri;
 			}
 			else{
