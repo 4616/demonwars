@@ -59,9 +59,10 @@ MonoBehaviour:
   damageable: 0
   health: 100
   sorrow: 1
-  sorrowgen: 0
+  sorrowgen: .0500000007
   maxSorrowStorage: 10
-  sorrowgenratechange: 9.99999975e-06
+  sorrowgenratechange: 9.99999997e-07
+  maxSorrowGen: .200000003
   spriteRenderer: {fileID: 0}
 --- !u!212 &21276114
 SpriteRenderer:
@@ -131,7 +132,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: sorrowgenratechange
-      value: 9.99999975e-06
+      value: 9.99999997e-07
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x
@@ -152,6 +153,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: ownable
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxSorrowGen
+      value: .200000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: sorrowgen
+      value: .0500000007
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
