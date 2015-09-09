@@ -5,7 +5,8 @@ public class House : Obstacle {
 	public float sorrow = 1f;
 	public float sorrowgen = 0f;
 	public float maxSorrowStorage = 10f;
-	public float sorrowgenratechange = .00001f;
+	public float sorrowgenratechange = .000001f;
+	public float maxSorrowGen = .1f;
 	public SpriteRenderer spriteRenderer;
 	// Use this for initialization
 	void Start () {
@@ -21,6 +22,7 @@ public class House : Obstacle {
 	void Update () {
 
 		sorrowgen += sorrowgenratechange;
+		sorrowgen = Mathf.Min (sorrowgen, maxSorrowGen);
 		sorrow += sorrowgen;
 		sorrow = Mathf.Min (sorrow, maxSorrowStorage);
 
