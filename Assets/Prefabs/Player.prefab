@@ -46,7 +46,7 @@ MonoBehaviour:
   PlayerNumber: 0
   PlayerLayer: 0
   HumanPlayer: 0
-  sorrowgen: .0399999991
+  sorrowgen: .0500000007
   baseposY: 0
   aiLayermask:
     serializedVersion: 2
@@ -88,7 +88,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: sorrowgen
-      value: .0399999991
+      value: .0500000007
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
