@@ -176,9 +176,12 @@ public class Player : MonoBehaviour {
 			private bool _foundFurthestLocation = false;
 
 			private Vector2 closestHouseLocationFound;
+			private float closestHouseDistance;
+			private House closestHouse;
 			private bool _foundClosestHouseLocation = false;
 			
 			private Vector2 NextHousePosition2d;
+			private float housedistance;
 
 			public Vector2 getLockedDirection() {
 				return Vector2.ClampMagnitude(furthestLocationFound - _playerPosition,4) + _playerPosition;
@@ -192,6 +195,14 @@ public class Player : MonoBehaviour {
 			
 			private Vector2 _enemySpawnerLocation;
 			private bool _foundEnemySpawnerLocation = false;
+
+			public float absoluteDistance(Vector2 point1,Vector2  point2){
+				float xdistance = Mathf.Abs (point1.x - point2.x);
+				float ydistance  = Mathf.Abs(point1.y - point2.y);
+				float totaldistance = xdistance + ydistance;
+				return totaldistance;
+
+				}
 			
 			public void houseTower() {
 				
@@ -200,66 +211,78 @@ public class Player : MonoBehaviour {
 
 				
 				List<House> unclaimedHouses = new List<House>();
-				
-				
-			if (!_foundClosestHouseLocation) {
-					closestHouseLocationFound = _playerPosition - Vector2.down;
-					_foundClosestHouseLocation = true;
+
+
+				if (!_foundFurthestLocation) {
+					furthestLocationFound = _playerPosition - Vector2.down;
+					_foundFurthestLocation = true;
 				}
-
-			if (!_foundFurthestLocation) {
-				furthestLocationFound = _playerPosition - Vector2.down;
-				_foundFurthestLocation = true;
-			}
-			
-				//Determine direction base tower should face
-				for (int counter = 1; counter <= 20; counter++) {
-				Vector2 randomPos = new Vector2 (Random.Range (Global.left * 8, Global.right * 8), -15);
-				Vector2 offset = new Vector2 (Random.value, Random.value);
-				Vector2 tryPosition = _startPosition + offset;
-				GameObject go = AIStrategy.findClosestGameObject (tryPosition, randomPos);
-					if (go.tag == "House") {
-						House house = go.GetComponent<House> ();
-						if (house.owner == null || house.owner != _player) {
-							unclaimedHouses.Add (house);
-
-							if (!_foundClosestHouseLocation) {
-								closestHouseLocationFound = go.gameObject.transform.position;
-								_foundClosestHouseLocation = true;
-								
-							}
-							if ((_startPosition.y - go.gameObject.transform.position.y) < (_startPosition.y - closestHouseLocationFound.y)) {
-								closestHouseLocationFound = go.gameObject.transform.position;
-							}
-						} 
+				
+					//Determine direction base tower should face
+					for (int counter = 1; counter <= 20; counter++) {
+					Vector2 randomPos = new Vector2 (Random.Range (Global.left * 8, Global.right * 8), -15);
+					Vector2 offset = new Vector2 (Random.value, Random.value);
+					Vector2 tryPosition = _startPosition + offset;
+					GameObject go = AIStrategy.findClosestGameObject (tryPosition, randomPos);
+						if (go.tag == "House") {
+							House house = go.GetComponent<House> ();
+							if (house.owner == null || house.owner != _player) {
+								unclaimedHouses.Add (house);
+							} 
+						}
 					}
+
+				foreach (House house in unclaimedHouses) {
+
+
+					if (!_foundClosestHouseLocation) {
+						closestHouseLocationFound = house.transform.position;
+						closestHouseDistance = 100f;
+						// closestHouseDistance = absoluteDistance(_startPosition, go.gameObject.transform.position);
+						closestHouse = house;
+						_foundClosestHouseLocation = true;
+					
+					
+						}
+						housedistance = absoluteDistance (_startPosition, house.transform.position);
+						Debug.Log (house.transform.position + " " + closestHouseLocationFound + " " + housedistance + " " + closestHouseDistance);
+				
+					if (housedistance < closestHouseDistance) {
+						closestHouseLocationFound = house.transform.position;
+						closestHouseDistance = housedistance;
+						closestHouse = house;
+					
+					}
+
 				}
 				float angle = 270f;
 				
 				Debug.Log ("Unclaimed houses " + unclaimedHouses.Count);
-				//Debug.Log (unclaimedHouses.Count);
-				if (unclaimedHouses.Count > 0) {
-					House randomHouse = unclaimedHouses [Random.Range (0, unclaimedHouses.Count)];
-					//Vector3 housePosition = closestHouseLocationFound;
-					Vector3 housePosition = randomHouse.transform.position;
-					NextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
-					//				angle = Vector2.Angle (
-					//					new Vector2(0, _player.baseposY),
-					//					HousePosition2d
-					//					);
-					angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
-					Locked = true;
-					
-					//				Debug.Log (HousePosition2d);
+					//Debug.Log (unclaimedHouses.Count);
+					if (unclaimedHouses.Count > 0) {
+						//House randomHouse = unclaimedHouses [Random.Range (0, unclaimedHouses.Count)];
+						Vector3 housePosition = closestHouseLocationFound;
+						//Vector3 housePosition = randomHouse.transform.position;
+						//Vector3 housePosition = closestHouse.transform.position;
+						NextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
+						//				angle = Vector2.Angle (
+						//					new Vector2(0, _player.baseposY),
+						//					HousePosition2d
+						//					);
+						angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
+						Locked = true;
+						
+						//Debug.Log ("next house position " + NextHousePosition2d);
+						Debug.Log("Current position " + _startPosition + " and next position " + NextHousePosition2d);
 					//				Debug.Log (new Vector2(0, _player.baseposY));
-					//				Debug.Log (angle);
+						//				Debug.Log (angle);
+						
+					}
+
+
+					baseTower = _player.tokenManager.createNewTokenAI (new Vector3 (_startPosition.x, _startPosition.y, 0), angle);
 					
 				}
-
-
-				baseTower = _player.tokenManager.createNewTokenAI (new Vector3 (_startPosition.x, _startPosition.y, 0), angle);
-				
-			}
 		}
 
 	private class RotatingTower {
@@ -468,7 +491,7 @@ public class Player : MonoBehaviour {
 			if (Time.time > nextTower) {
 				nextTower = Time.time + towerRate;
 			} else {
-				Debug.Log ("time is working");
+				//Debug.Log ("time is working");
 				return;
 			}
 
@@ -484,7 +507,7 @@ public class Player : MonoBehaviour {
 			// && lastTower.getLockedDirection().y < -11
 			if (lastTower.Locked && !lastTower.finalLocked && towers.Count <= 15) {
 				//Debug.Log ("Next house position");\
-				towers.Add (new HouseTower(_player, towers[towers.Count - 1].getLockedDirection(), towers[towers.Count - 1].getLockedPosition()));
+				towers.Add (new HouseTower(_player, towers[towers.Count - 1].getLockedPosition(), towers[towers.Count - 1].getLockedPosition()));
 			}
 //			
 //			foreach (HouseTower t in towers) {
