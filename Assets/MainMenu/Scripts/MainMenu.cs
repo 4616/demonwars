@@ -22,6 +22,21 @@ public class MainMenu : MonoBehaviour {
 	public string diffstring = "I'm too young to die";
 
 	void OnGUI(){
+		if (Global.difficulty == 1) {
+			diffstring = "I'm too young to die";
+		}
+		if (Global.difficulty == 2) {
+			diffstring = "Hey, not too rough";
+		}
+		if (Global.difficulty == 3) {
+			diffstring = "Hurt me plenty";
+		}
+		if (Global.difficulty == 4) {
+			diffstring = "Ultra-Violence";
+		}
+		if (Global.difficulty == 5) {
+			diffstring = "Nightmare!";
+		}
 
 		if (CurrentMenu == "Main")
 			Main_Menu();
