@@ -106,6 +106,16 @@ public class Player : MonoBehaviour {
 				tokenList = tokenList.GetRange (0, maxTokens);
 			}
 		}
+
+		public void deleteAllTokens(){
+			foreach (Token tk in tokenList) {
+				Instantiate (tk.explosion, tk.transform.position, tk.transform.rotation);
+				tk.Destroy();
+			}
+			tokenList = new List<Token> ();
+
+		
+		}
 	}
 
 	private abstract class AIStrategy {
@@ -142,6 +152,7 @@ public class Player : MonoBehaviour {
 		 * These pulses should happen less often than game ticks as set by a parameter
 		 **/
 		abstract public void pulse ();
+		//abstract public void resetTokenList ();
 	}
 
 	private class RotatingTower {
@@ -286,6 +297,50 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	private class BeardedShavingDemonAIStrategy : AIStrategy {
+		public BeardedShavingDemonAIStrategy(Player player) : base(player)
+		{}
+		
+		//		private static Vector2 objectLocation(GameObject go)
+		
+		private List<RotatingTower> towers = new List<RotatingTower>();
+		
+		public override void pulse ()
+		{
+			//Only act every 20 ticks or so for sanity
+			if (Random.value > .05)
+				return;
+			
+			if (towers.Count == 0) {
+				towers.Add(new RotatingTower(_player, new Vector2 (0, _player.baseposY )));
+			}
+			
+			RotatingTower lastTower = towers [towers.Count - 1];
+			// && lastTower.getLockedDirection().y < -11
+			if (lastTower.Locked && !lastTower.finalLocked && towers.Count <= 15) {
+				towers.Add (new RotatingTower(_player, towers[towers.Count - 1].getLockedDirection()));
+			}
+			
+			foreach (RotatingTower t in towers) {
+				t.rotateTower();
+			}
+
+			if(towers.Count > 10){
+				Debug.Log ("removing all towers");
+				this.resetTokenList();
+				Debug.Log (towers.Count);
+			}
+			
+
+			
+			//			findClosestGameObject (new Vector3 (0, _player.baseposY, 0), -Vector2.up);
+		}
+		public void resetTokenList(){
+			_player.tokenManager.deleteAllTokens ();
+			this.towers = new List<RotatingTower>();
+		}
+	}
+
 	private class RandomArrowAIStrategy : AIStrategy {
 		private bool basearrow = false;
 		private float timer;
@@ -322,8 +377,8 @@ public class Player : MonoBehaviour {
 		if (HumanPlayer == false) {
 
 			Debug.Log ("A non-human just started playing!!!");
-
-			ai = new BeardedDemonAIStrategy(this);
+			ai = new BeardedShavingDemonAIStrategy(this);
+			//ai = new BeardedDemonAIStrategy(this);
 		}
 
 		//tag = "Player";
