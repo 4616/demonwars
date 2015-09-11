@@ -219,9 +219,9 @@ public class Player : MonoBehaviour {
 				}
 				
 					//Determine direction base tower should face
-					for (int counter = 1; counter <= 20; counter++) {
+				for (int counter = 1; counter <= 20; counter++) {
 					Vector2 randomPos = new Vector2 (Random.Range (Global.left * 8, Global.right * 8), -15);
-					Vector2 offset = new Vector2 (Random.value, Random.value);
+					Vector2 offset = new Vector2 (Random.Range(0.2f, 0.4f), Random.Range(0.2f, 0.4f));
 					Vector2 tryPosition = _startPosition + offset;
 					GameObject go = AIStrategy.findClosestGameObject (tryPosition, randomPos);
 						if (go.tag == "House") {
@@ -233,6 +233,7 @@ public class Player : MonoBehaviour {
 					}
 
 				foreach (House house in unclaimedHouses) {
+			
 
 
 					if (!_foundClosestHouseLocation) {
@@ -241,18 +242,18 @@ public class Player : MonoBehaviour {
 						// closestHouseDistance = absoluteDistance(_startPosition, go.gameObject.transform.position);
 						closestHouse = house;
 						_foundClosestHouseLocation = true;
-					
-					
 						}
-						housedistance = absoluteDistance (_startPosition, house.transform.position);
-						Debug.Log (house.transform.position + " " + closestHouseLocationFound + " " + housedistance + " " + closestHouseDistance);
+					if(house.transform.position.x !=  _startPosition.x | house.transform.position.y != _startPosition.y){
+							housedistance = absoluteDistance (_startPosition, house.transform.position);
+							Debug.Log (house.transform.position + " " + closestHouseLocationFound + " " + housedistance + " " + closestHouseDistance);
 				
-					if (housedistance < closestHouseDistance) {
-						closestHouseLocationFound = house.transform.position;
-						closestHouseDistance = housedistance;
-						closestHouse = house;
+						if (housedistance < closestHouseDistance) {
+							closestHouseLocationFound = house.transform.position;
+							closestHouseDistance = housedistance;
+							closestHouse = house;
 					
 					}
+				}
 
 				}
 				float angle = 270f;
@@ -478,7 +479,7 @@ public class Player : MonoBehaviour {
 		
 		private List<HouseTower> towers = new List<HouseTower>();
 		private bool reset = false;
-		private float towerRate = 1f;
+		private float towerRate = 0.5f;
 		private float nextTower = 0.0f;
 		
 		public override void pulse ()
@@ -505,7 +506,7 @@ public class Player : MonoBehaviour {
 			Debug.Log ("Towers count"  + towers.Count);
 			HouseTower lastTower = towers [towers.Count - 1];
 			// && lastTower.getLockedDirection().y < -11
-			if (lastTower.Locked && !lastTower.finalLocked && towers.Count <= 15) {
+			if (lastTower.Locked && !lastTower.finalLocked && towers.Count <= 8) {
 				//Debug.Log ("Next house position");\
 				towers.Add (new HouseTower(_player, towers[towers.Count - 1].getLockedPosition(), towers[towers.Count - 1].getLockedPosition()));
 			}
@@ -514,8 +515,8 @@ public class Player : MonoBehaviour {
 //				t.houseTower();
 //			}
 			
-			if(towers.Count > 15){
-				if(Random.value > .99){
+			if(towers.Count > 8){
+				if(Random.value > .9){
 				Debug.Log ("removing all towers");
 				this.resetTokenList();
 				Debug.Log (towers.Count);
