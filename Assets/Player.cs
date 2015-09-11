@@ -168,6 +168,8 @@ public class Player : MonoBehaviour {
 				_startPosition = startPosition;
 				this.houseTower();
 			}
+
+			
 			
 			public bool Locked = false;
 			public bool finalLocked = false;
@@ -182,6 +184,8 @@ public class Player : MonoBehaviour {
 			
 			private Vector2 NextHousePosition2d;
 			private float housedistance;
+
+			private float angle;
 
 			public Vector2 getLockedDirection() {
 				return Vector2.ClampMagnitude(furthestLocationFound - _playerPosition,4) + _playerPosition;
@@ -209,7 +213,10 @@ public class Player : MonoBehaviour {
 				if (Locked)
 					return;
 
-				
+				if (baseTower == null) {
+					angle = 270f;
+					baseTower = _player.tokenManager.createNewTokenAI (new Vector3 (_startPosition.x, _startPosition.y, 0), angle);
+				}				
 				List<House> unclaimedHouses = new List<House>();
 
 
@@ -219,7 +226,7 @@ public class Player : MonoBehaviour {
 				}
 				
 					//Determine direction base tower should face
-				for (int counter = 1; counter <= 20; counter++) {
+				for (int counter = 1; counter <= 100; counter++) {
 					Vector2 randomPos = new Vector2 (Random.Range (Global.left * 8, Global.right * 8), -15);
 					Vector2 offset = new Vector2 (Random.Range(0.2f, 0.4f), Random.Range(0.2f, 0.4f));
 					Vector2 tryPosition = _startPosition + offset;
@@ -252,39 +259,51 @@ public class Player : MonoBehaviour {
 							closestHouseDistance = housedistance;
 							closestHouse = house;
 					
+						}
 					}
 				}
 
-				}
-				float angle = 270f;
+				
 				
 				Debug.Log ("Unclaimed houses " + unclaimedHouses.Count);
 					//Debug.Log (unclaimedHouses.Count);
-					if (unclaimedHouses.Count > 0) {
-						//House randomHouse = unclaimedHouses [Random.Range (0, unclaimedHouses.Count)];
-						Vector3 housePosition = closestHouseLocationFound;
-						//Vector3 housePosition = randomHouse.transform.position;
-						//Vector3 housePosition = closestHouse.transform.position;
-						NextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
-						//				angle = Vector2.Angle (
-						//					new Vector2(0, _player.baseposY),
-						//					HousePosition2d
-						//					);
-						angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
-						Locked = true;
-						
-						//Debug.Log ("next house position " + NextHousePosition2d);
-						Debug.Log("Current position " + _startPosition + " and next position " + NextHousePosition2d);
-					//				Debug.Log (new Vector2(0, _player.baseposY));
-						//				Debug.Log (angle);
-						
-					}
+				if (unclaimedHouses.Count > 0) {
+					House randomHouse = unclaimedHouses [Random.Range (0, unclaimedHouses.Count)];
+					//Vector3 housePosition = closestHouseLocationFound;
+					Vector3 housePosition = randomHouse.transform.position;
+					//Vector3 housePosition = closestHouse.transform.position;
+					NextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
 
+					angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
 
-					baseTower = _player.tokenManager.createNewTokenAI (new Vector3 (_startPosition.x, _startPosition.y, 0), angle);
 					
+				//Debug.Log ("next house position " + NextHousePosition2d);
+				Debug.Log ("Current position " + _startPosition + " and next position " + NextHousePosition2d);
+				//				Debug.Log (new Vector2(0, _player.baseposY));
+				//				Debug.Log (angle);
+				//Locked = true;
+				if(Random.value > 0.9){
+					Locked = true;
+					}
+				
+				} else {
+					Vector3 housePosition = closestHouseLocationFound;
+					Vector3 NextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
+					//angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
+
+
+					Locked = true;
+
 				}
+
+			_player.tokenManager.Destroy(baseTower);
+			baseTower = null;			
+			baseTower = _player.tokenManager.createNewTokenAI (new Vector3 (_startPosition.x, _startPosition.y, 0), angle);
+
+
+				
 		}
+	}
 
 	private class RotatingTower {
 
@@ -438,7 +457,7 @@ public class Player : MonoBehaviour {
 		public override void pulse ()
 		{
 			//Only act every 20 ticks or so for sanity
-			if (Random.value > .05)
+			if (Random.value > .95)
 				return;
 			
 			if (towers.Count == 0) {
@@ -479,7 +498,7 @@ public class Player : MonoBehaviour {
 		
 		private List<HouseTower> towers = new List<HouseTower>();
 		private bool reset = false;
-		private float towerRate = 0.5f;
+		private float towerRate = 1f;
 		private float nextTower = 0.0f;
 		
 		public override void pulse ()
@@ -506,17 +525,17 @@ public class Player : MonoBehaviour {
 			Debug.Log ("Towers count"  + towers.Count);
 			HouseTower lastTower = towers [towers.Count - 1];
 			// && lastTower.getLockedDirection().y < -11
-			if (lastTower.Locked && !lastTower.finalLocked && towers.Count <= 8) {
+			if (lastTower.Locked && !lastTower.finalLocked && towers.Count <= 12) {
 				//Debug.Log ("Next house position");\
 				towers.Add (new HouseTower(_player, towers[towers.Count - 1].getLockedPosition(), towers[towers.Count - 1].getLockedPosition()));
 			}
-//			
-//			foreach (HouseTower t in towers) {
-//				t.houseTower();
-//			}
 			
-			if(towers.Count > 8){
-				if(Random.value > .9){
+			foreach (HouseTower t in towers) {
+				t.houseTower();
+			}
+			
+			if(towers.Count > 12){
+				if(Random.value > .95){
 				Debug.Log ("removing all towers");
 				this.resetTokenList();
 				Debug.Log (towers.Count);
