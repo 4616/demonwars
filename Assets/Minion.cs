@@ -155,7 +155,7 @@ public class Minion : MonoBehaviour {
 	public void CheckDeath(){
 		if(health < 0){
 			Instantiate (explosion, this.transform.position, this.transform.rotation);
-			Debug.Log ("minion death");
+			//Debug.Log ("minion death");
 			Destroy(gameObject, 0.05f);
 
 		}
