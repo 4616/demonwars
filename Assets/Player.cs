@@ -157,10 +157,11 @@ public class Player : MonoBehaviour {
 
 
 	private class HouseTower{
+
 			
-			private Player _player;
-			private Vector2 _playerPosition;
-			private Vector2 _startPosition;
+		private Player _player;
+		private Vector2 _playerPosition;
+		private Vector2 _startPosition;
 			
 		public HouseTower(Player player, Vector2 playerPosition, Vector2 startPosition, float timoutLockRate) {
 				_player = player;
@@ -171,82 +172,82 @@ public class Player : MonoBehaviour {
 
 			
 			
-			public bool Locked = false;
-			public bool finalLocked = false;
+		public bool Locked = false;
+		public bool finalLocked = false;
 			
-			private Vector2 furthestLocationFound;
-			private bool _foundFurthestLocation = false;
+		private Vector2 furthestLocationFound;
+		private bool _foundFurthestLocation = false;
 
-			private Vector2 closestHouseLocationFound;
-			private float closestHouseDistance;
-			private House closestHouse;
-			private bool _foundClosestHouseLocation = false;
-			
-			private Vector2 NextHousePosition2d;
-			private float housedistance;
+		private Vector2 closestHouseLocationFound;
+		private float closestHouseDistance;
+		private House closestHouse;
+		private bool _foundClosestHouseLocation = false;
 
-			private float angle;
-			private float timeoutLockRate = 4f;
-			private float timeoutLock = 0f;
+		private Vector2 NextHousePosition2d;
+		private float housedistance;
+		private float angle;
+		private float timeoutLockRate = 4f;
+		private float timeoutLock = 0f;
+		List<House> ownHouses = new List<House> ();
 
-			public Vector2 getLockedDirection() {
-				return Vector2.ClampMagnitude(furthestLocationFound - _playerPosition,4) + _playerPosition;
+		public Vector2 getLockedDirection() {
+			return Vector2.ClampMagnitude(furthestLocationFound - _playerPosition,4) + _playerPosition;
 			}
 
-			public Vector2 getLockedPosition(){
+		public Vector2 getLockedPosition(){
 			return NextHousePosition2d;
 		}
 			
-			private Token baseTower;
+		private Token baseTower;
 			
-			private Vector2 _enemySpawnerLocation;
-			private bool _foundEnemySpawnerLocation = false;
+		private Vector2 _enemySpawnerLocation;
+		private bool _foundEnemySpawnerLocation = false;
 			
 
-			public float absoluteDistance(Vector2 point1,Vector2  point2){
-				float xdistance = Mathf.Abs (point1.x - point2.x);
-				float ydistance  = Mathf.Abs(point1.y - point2.y);
-				float totaldistance = xdistance + ydistance;
-				return totaldistance;
+		public float absoluteDistance(Vector2 point1,Vector2  point2){
+			float xdistance = Mathf.Abs (point1.x - point2.x);
+			float ydistance  = Mathf.Abs(point1.y - point2.y);
+			float totaldistance = xdistance + ydistance;
+			return totaldistance;
 
-				}
+			}
 			
-			public void houseTower() {
-				
-				if (Locked)
-					return;
+		public void houseTower() {
+			
+			if (Locked)
+				return;
 
-				if (baseTower == null) {
-					angle = 270f;
-					baseTower = _player.tokenManager.createNewTokenAI (new Vector3 (_startPosition.x, _startPosition.y, 0), angle);
-					timeoutLock = Time.time + timeoutLockRate;
-				}
-				List<House> unclaimedHouses = new List<House>();
-				List<House> ownHouses = new List<House> ();
+			if (baseTower == null) {
+				angle = 270f;
+				baseTower = _player.tokenManager.createNewTokenAI (new Vector3 (_startPosition.x, _startPosition.y, 0), angle);
+				timeoutLock = Time.time + timeoutLockRate;
+			}
+			List<House> unclaimedHouses = new List<House>();
+			List<House> ownHouses = new List<House> ();
 
 
-				if (!_foundFurthestLocation) {
-					furthestLocationFound = _playerPosition - Vector2.down;
-					_foundFurthestLocation = true;
-				}
-				
-					//Determine direction base tower should face
-				for (int counter = 1; counter <= 50; counter++) {
-					Vector2 randomPos = new Vector2 (Random.Range (Global.left * 8, Global.right * 8), -15);
-					Vector2 offset = new Vector2 (Random.Range(-0.4f, 0.4f), Random.Range(0.4f, 0.4f));
-					Vector2 tryPosition = _startPosition + offset;
-					GameObject go = AIStrategy.findClosestGameObject (tryPosition, randomPos);
-					if (go.tag == "House") {
-						House house = go.GetComponent<House> ();
-						if (house.owner == null || house.owner != _player) {
-							unclaimedHouses.Add (house);
-						}	
-						Vector2 hPosition = new Vector2 (house.transform.position.x, house.transform.position.y);
-						if (house.owner == _player  && hPosition != _startPosition){
-							ownHouses.Add(house);
-							}
+			if (!_foundFurthestLocation) {
+				furthestLocationFound = _playerPosition - Vector2.down;
+				_foundFurthestLocation = true;
+			}
+			
+				//Determine direction base tower should face
+			for (int counter = 1; counter <= 50; counter++) {
+				Vector2 randomPos = new Vector2 (Random.Range (Global.left * 8, Global.right * 8), -15);
+				Vector2 offset = new Vector2 (Random.Range(-0.4f, 0.4f), Random.Range(-0.4f, 0.4f));
+				Vector2 tryPosition = _startPosition + offset;
+				GameObject go = AIStrategy.findClosestGameObject (tryPosition, randomPos);
+				if (go.tag == "House") {
+					House house = go.GetComponent<House> ();
+					if (house.owner == null || house.owner != _player) {
+						unclaimedHouses.Add (house);
+					}	
+					Vector2 hPosition = new Vector2 (house.transform.position.x, house.transform.position.y);
+					if (house.owner == _player  && hPosition != _startPosition){
+						ownHouses.Add(house);
 						}
 					}
+				}
 
 //				foreach (House house in unclaimedHouses) {
 //			
@@ -272,121 +273,128 @@ public class Player : MonoBehaviour {
 //					}
 //				}
 
-				
-				
-				//Debug.Log ("Unclaimed houses " + unclaimedHouses.Count);
-					//Debug.Log (unclaimedHouses.Count);
-				if (unclaimedHouses.Count > 0) {
-					House randomHouse = unclaimedHouses [Random.Range (0, unclaimedHouses.Count)];
-					//Vector3 housePosition = closestHouseLocationFound;
-					Vector3 housePosition = randomHouse.transform.position;
-					//Vector3 housePosition = closestHouse.transform.position;
-					NextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
+			
+			
+			//Debug.Log ("Unclaimed houses " + unclaimedHouses.Count);
+				//Debug.Log (unclaimedHouses.Count);
+			if (unclaimedHouses.Count > 0) {
+				House randomHouse = unclaimedHouses [Random.Range (0, unclaimedHouses.Count)];
+				//Vector3 housePosition = closestHouseLocationFound;
+				Vector3 housePosition = randomHouse.transform.position;
+				//Vector3 housePosition = closestHouse.transform.position;
+				NextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
 
-					angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
+				angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
 
-					
-				//Debug.Log ("next house position " + NextHousePosition2d);
-				//Debug.Log ("Current position " + _startPosition + " and next position " + NextHousePosition2d);
-				//				Debug.Log (new Vector2(0, _player.baseposY));
-				//				Debug.Log (angle);
-				//Locked = true;
+				
+			//Debug.Log ("next house position " + NextHousePosition2d);
+			//Debug.Log ("Current position " + _startPosition + " and next position " + NextHousePosition2d);
+			//				Debug.Log (new Vector2(0, _player.baseposY));
+			//				Debug.Log (angle);
+			//Locked = true;
 //				if(Random.value > 1){
 //					Locked = true;
 //					}
-				
-				} else {
-				if(Random.value > .9)
-				{
-					Locked = true;
-					Debug.Log ("Locking in else statement");
-				}
+			
+			} else {
+			if(Random.value > .9)
+			{
+				Locked = true;
+				Debug.Log ("Locking in else statement");
+			}
 
-				}
+			}
 			if (Time.time > timeoutLock) {
 				Locked = true;
 				}
-			if (Locked) {
-				//Debug.Log("AI found houses owned by AI: " + ownHouses.Count);
-				bool foundHome = false;
-				if (ownHouses.Count > 0) {
-					Debug.Log ("Looking for house owned by AI");
-					//while(foundHome == false){
-					foreach (House house in ownHouses) {
-						Vector3 housePosition = house.transform.position;
-						Vector2 NextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
-						Vector2 housePos = new Vector2 (Random.Range (NextHousePosition2d.x, NextHousePosition2d.y), -15);
-						Vector2 offset = new Vector2 (Random.Range (-0.4f, 0.4f), Random.Range (0.4f, 0.4f));
-						Vector2 tryPosition = _startPosition + offset;
-						GameObject go = AIStrategy.findClosestGameObject (tryPosition, housePos);
-						if (go.tag == "House") {
-							House checkhouse = go.GetComponent<House> ();
-							if (checkhouse.transform.position == house.transform.position && Global.boardHeight/6 > absoluteDistance (_startPosition, house.transform.position)) {
-								angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
-								Debug.Log ("Found house owned by AI");
-								foundHome = true;
-								break;
-							}
-						}
-						}
-
-					//}
-
-//					if (foundHome == false){
-//						Debug.Log("Could not find occupied home");
-//						foreach (House house in ownHouses) {										
-//							if (!_foundClosestHouseLocation) {
-//								closestHouseLocationFound = house.transform.position;
-//								closestHouseDistance = 100f;
-//								// closestHouseDistance = absoluteDistance(_startPosition, go.gameObject.transform.position);
-//								closestHouse = house;
-//								_foundClosestHouseLocation = true;
-//							}
-//							if(house.transform.position.x !=  _startPosition.x | house.transform.position.y != _startPosition.y){
-//								housedistance = absoluteDistance (_startPosition, house.transform.position);
-//								//Debug.Log (house.transform.position + " " + closestHouseLocationFound + " " + housedistance + " " + closestHouseDistance);
-//								
-//								if (housedistance < closestHouseDistance) {
-//									closestHouseLocationFound = house.transform.position;
-//									closestHouseDistance = housedistance;
-//									closestHouse = house;
-//									
+//			if (Locked) {
+//				//Debug.Log("AI found houses owned by AI: " + ownHouses.Count);
+//				bool foundHome = false;
+//				if (ownHouses.Count > 0) {
+//					Debug.Log ("Looking for house owned by AI really close to current house");
+//					int checkCount = 0;
+//					while (foundHome == false) {
+//						foreach (House house in ownHouses) {
+//							Vector3 housePosition = house.transform.position;
+//							Vector2 testNextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
+//							Vector2 housePos = new Vector2 (Random.Range (testNextHousePosition2d.x, testNextHousePosition2d.y), -15);
+//							Vector2 offset = new Vector2 (Random.Range (-0.4f, 0.4f), Random.Range (0.4f, 0.4f));
+//							Vector2 tryPosition = _startPosition + offset;
+//							GameObject go = AIStrategy.findClosestGameObject (tryPosition, housePos);
+//							if (go.tag == "House") {
+//								House checkhouse = go.GetComponent<House> ();
+//								if (checkhouse.transform.position == house.transform.position && Global.boardHeight / 6 > absoluteDistance (_startPosition, house.transform.position)) {
+//									Vector2 NextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
+//									angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
+//									Debug.Log ("Found house owned by AI");
+//									foundHome = true;
+//									break;
 //								}
 //							}
 //						}
-//						foundHome = true;
-//						Vector3 housePosition = closestHouse.transform.position;
-//						Vector2 NextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
-//						angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
-//						Locked = true;
-//				}
-
-				}
-//				else{
-//					Debug.Log ("Cannot find any houses owned by AI");
-//					Locked = false;
-//					timeoutLock = Time.time + timeoutLockRate;
-//					if(unclaimedHouses.Count > 0){
-//						House randomHouse = unclaimedHouses [Random.Range (0, unclaimedHouses.Count)];
-//						Vector3 housePosition = randomHouse.transform.position;
-//						Vector2 NextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
-//						angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
-//						Locked = true;
-//					}else{
-//					Debug.Log ("Cannot find anything, lost in the desert");
+//						checkCount += 1;
+//						if (checkCount > 5 | foundHome == true) {
+//							break;
+//						}
+//
 //					}
 //
+////					if (foundHome == false) {
+////						Debug.Log ("Checking for really close house by distance");
+//////					//Locked = false;
+//////				
+////						foreach (House house in ownHouses) {										
+////							if (!_foundClosestHouseLocation) {
+////								closestHouseLocationFound = house.transform.position;
+////								closestHouseDistance = 100f;
+////								// closestHouseDistance = absoluteDistance(_startPosition, go.gameObject.transform.position);
+////								closestHouse = house;
+////								_foundClosestHouseLocation = true;
+////							}
+////							if (house.transform.position.x != _startPosition.x | house.transform.position.y != _startPosition.y) {
+////								housedistance = absoluteDistance (_startPosition, house.transform.position);
+////								//Debug.Log (house.transform.position + " " + closestHouseLocationFound + " " + housedistance + " " + closestHouseDistance);
+////							
+////								if (housedistance < closestHouseDistance) {
+////									closestHouseLocationFound = house.transform.position;
+////									closestHouseDistance = housedistance;
+////									closestHouse = house;
+////								
+////								}
+////							}
+////
+////						}
+////						Vector2 NextHousePosition2d = new Vector2 (closestHouseLocationFound.x, closestHouseLocationFound.y);
+////						angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
+////					
+////   
+////					} 
+////					else {
+////						Debug.Log ("No houses in AI list");
+////						//Locked = false;
+////						//					timeoutLock = Time.time + timeoutLockRate;
+////						//					if(unclaimedHouses.Count > 0){
+////						//						House randomHouse = unclaimedHouses [Random.Range (0, unclaimedHouses.Count)];
+////						//						Vector3 housePosition = randomHouse.transform.position;
+////						//						Vector2 NextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
+////						//						angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
+////						//						Locked = true;
+////						//					}else{
+////						//					Debug.Log ("Cannot find anything, lost in the desert");
+////						//					}
+////						//
+////					}
+//
 //				}
+//
+//
+//			}
+		_player.tokenManager.Destroy(baseTower);
+		baseTower = null;			
+		baseTower = _player.tokenManager.createNewTokenAI (new Vector3 (_startPosition.x, _startPosition.y, 0), angle);
 
-				}
 
-
-			_player.tokenManager.Destroy(baseTower);
-			baseTower = null;			
-			baseTower = _player.tokenManager.createNewTokenAI (new Vector3 (_startPosition.x, _startPosition.y, 0), angle);
-
-
-				
+			
 		}
 	}
 
@@ -592,15 +600,15 @@ public class Player : MonoBehaviour {
 		{
 
 			if (towers.Count == 0) {
-				towers.Add(new HouseTower(_player, new Vector2 (0, _player.baseposY ), new Vector2 (0, _player.baseposY ), 10f));
+				towers.Add(new HouseTower(_player, new Vector2 (0, _player.baseposY ), new Vector2 (0, _player.baseposY ), 8f));
 			}
 			//Debug.Log ("Towers count"  + towers.Count);
 			HouseTower lastTower = towers [towers.Count - 1];
 			// && lastTower.getLockedDirection().y < -11
-			if (lastTower.Locked && !lastTower.finalLocked && towers.Count <= 12) {
+			if (lastTower.Locked && !lastTower.finalLocked && towers.Count <= 7) {
 				if (Time.time > nextTower) {
 					nextTower = Time.time + newTowerRate;
-					towers.Add (new HouseTower(_player, towers[towers.Count - 1].getLockedPosition(), towers[towers.Count - 1].getLockedPosition(), 8f));
+					towers.Add (new HouseTower(_player, towers[towers.Count - 1].getLockedPosition(), towers[towers.Count - 1].getLockedPosition(), 4f));
 				} 
 
 			}
@@ -614,7 +622,7 @@ public class Player : MonoBehaviour {
 			}
 
 			
-			if(towers.Count > 12){
+			if(towers.Count > 7){
 				if(Random.value > .95){
 				Debug.Log ("removing all towers");
 				this.resetTokenList();
@@ -669,8 +677,8 @@ public class Player : MonoBehaviour {
 
 			Debug.Log ("A non-human just started playing!!!");
 
-			//ai = new HouseDemonAIStrategy(this);
-			ai = new BeardedShavingDemonAIStrategy(this);
+			ai = new HouseDemonAIStrategy(this);
+			//ai = new BeardedShavingDemonAIStrategy(this);
 			//ai = new BeardedDemonAIStrategy(this);
 		}
 
