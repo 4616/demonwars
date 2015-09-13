@@ -155,6 +155,41 @@ public class Player : MonoBehaviour {
 		//abstract public void resetTokenList ();
 	}
 
+	public class Line{
+		private float alpha;
+		private float beta;
+		private Vector2 source;
+		private Vector2 target;
+		public Line line90;
+
+		public Line(Vector2 point1, Vector2 point2){
+			beta = (point1.y-point2.y)/(point1.x - point2.x);
+			alpha = point1.y - beta * point1.x;
+			source = point1;
+			target = point2;
+
+		}
+
+
+		public Vector2 pointOnLine(float x){
+			float y = alpha + beta * x;
+			return new Vector2 (x, y);
+		}
+
+		public Vector2 randomPoint(float drawrange){
+			float xdraw = source.x + Random.Range (-drawrange, drawrange);
+			float ydraw = alpha + beta * xdraw;
+			return new Vector2 (xdraw, ydraw); 
+
+		}
+
+		public void calc90Line(){
+			Vector2 zeropoint = new Vector2 (source.x + (source.x - alpha), 0);
+			line90 = new Line(source, zeropoint);
+
+		}
+	}
+
 
 	private class HouseTower{
 
@@ -230,6 +265,8 @@ public class Player : MonoBehaviour {
 			float totaldistance = xdistance * xdistance * xdistance + ydistance ;
 			return totaldistance;
 		}
+
+
 		
 		public void attackSpawner(){
 			Debug.Log ("Attacking spawner");
@@ -264,7 +301,7 @@ public class Player : MonoBehaviour {
 			}
 			
 				//Determine direction base tower should face
-			for (int counter = 1; counter <= 1000; counter++) {
+			for (int counter = 1; counter <= 500; counter++) {
 				Vector2 randomPos = new Vector2 (Random.Range (Global.left * 8, Global.right * 8), -14f);
 				Vector2 offset = new Vector2 (Random.Range(-0.4f, 0.4f), Random.Range(-0.4f, 0.4f));
 				Vector2 tryPosition = _startPosition + offset;
@@ -346,19 +383,19 @@ public class Player : MonoBehaviour {
 				Locked = true;
 				}
 			if (Locked) {
-				//Debug.Log("AI found houses owned by AI: " + ownHouses.Count);
+				Debug.Log("AI found houses owned by AI: " + ownHouses.Count);
 				bool foundHome = false;
 				if (ownHouses.Count > 0) {
-//					Debug.Log ("Looking for house owned by AI really close to current house");
+					Debug.Log ("Looking for house with vectors");
 //					int checkCount = 0;
 //					while (foundHome == false) {
 //						foreach (House house in ownHouses) {
 //							Vector3 housePosition = house.transform.position;
 //							Vector2 testNextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
-//							Vector2 housePos = new Vector2 (Random.Range (testNextHousePosition2d.x, testNextHousePosition2d.y), -15);
-//							Vector2 offset = new Vector2 (Random.Range (-0.4f, 0.4f), Random.Range (0.4f, 0.4f));
-//							Vector2 tryPosition = _startPosition + offset;
-//							GameObject go = AIStrategy.findClosestGameObject (tryPosition, housePos);
+//							Line attackLine = new Line(_startPosition, testNextHousePosition2d);
+//							attackLine.calc90Line();
+//							Vector2 tryPosition = attackLine.line90.randomPoint(0.5f);
+//							GameObject go = AIStrategy.findClosestGameObject (tryPosition, testNextHousePosition2d);
 //							if (go.tag == "House") {
 //								House checkhouse = go.GetComponent<House> ();
 //								if (checkhouse.transform.position == house.transform.position && Global.boardHeight / 6 > absoluteDistance (_startPosition, house.transform.position)) {
@@ -376,7 +413,8 @@ public class Player : MonoBehaviour {
 //						}
 //
 //					}
-//
+				
+
 					if (foundHome == false) {
 						Debug.Log ("Checking for really close house by distance");
 //					//Locked = false;
@@ -695,7 +733,7 @@ public class Player : MonoBehaviour {
 				}
 			
 			
-			Debug.Log ("Tower count: " + towers.Count);
+			//Debug.Log ("Tower count: " + towers.Count);
 			//			findClosestGameObject (new Vector3 (0, _player.baseposY, 0), -Vector2.up);
 		}
 		public void resetTokenList(){
