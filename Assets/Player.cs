@@ -98,8 +98,8 @@ public class Player : MonoBehaviour {
 			if (tokenList.Count > maxTokens) {
 				foreach (Token tk in tokenList.GetRange (maxTokens, (tokenList.Count-(maxTokens)))) {
 					//TODO: Play destruction animation
-					Debug.Log (maxTokens);
-					Debug.Log (tokenList.Count);
+					//Debug.Log (maxTokens);
+					//Debug.Log (tokenList.Count);
 					Instantiate (tk.explosion, tk.transform.position, tk.transform.rotation);
 					tk.Destroy();
 				}
@@ -177,10 +177,9 @@ public class Player : MonoBehaviour {
 		}
 
 		public Vector2 randomPoint(float drawrange){
-			float xdraw = source.x + Random.Range (-drawrange, drawrange);
-			float ydraw = alpha + beta * xdraw;
-			return new Vector2 (xdraw, ydraw); 
-
+			float distance = source.x + Random.Range (-drawrange, drawrange);
+			float drawx = source.x + Mathf.Sqrt (Mathf.Pow (distance, 2) / (1 + Mathf.Pow (beta, 2)));
+			return pointOnLine(drawx);
 		}
 
 		public void calc90Line(){
@@ -213,8 +212,12 @@ public class Player : MonoBehaviour {
 		public bool Locked = false;
 		public bool finalLocked = false;
 			
-		private Vector2 furthestLocationFound;
-		private bool _foundFurthestLocation = false;
+		private Vector2 furthestHouseLocationFound;
+		private float furthestHouseDistance;
+		private House furthestHouse;
+		private bool _foundFurthestHouseLocation = false;
+		
+
 
 		private Vector2 closestHouseLocationFound;
 		private float closestHouseDistance;
@@ -237,9 +240,6 @@ public class Player : MonoBehaviour {
 			return false;
 		}
 		
-		public Vector2 getLockedDirection() {
-			return Vector2.ClampMagnitude(furthestLocationFound - _playerPosition,4) + _playerPosition;
-			}
 
 		public Vector2 getLockedPosition(){
 			return NextHousePosition2d;
@@ -292,13 +292,6 @@ public class Player : MonoBehaviour {
 			}
 			List<House> unclaimedHouses = new List<House>();
 			List<House> ownHouses = new List<House> ();
-
-
-
-			if (!_foundFurthestLocation) {
-				furthestLocationFound = _playerPosition - Vector2.down;
-				_foundFurthestLocation = true;
-			}
 			
 				//Determine direction base tower should face
 			for (int counter = 1; counter <= 500; counter++) {
@@ -387,30 +380,43 @@ public class Player : MonoBehaviour {
 				bool foundHome = false;
 				if (ownHouses.Count > 0) {
 					Debug.Log ("Looking for house with vectors");
-//					int checkCount = 0;
-//					while (foundHome == false) {
-//						foreach (House house in ownHouses) {
-//							Vector3 housePosition = house.transform.position;
-//							Vector2 testNextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
-//							Line attackLine = new Line(_startPosition, testNextHousePosition2d);
-//							attackLine.calc90Line();
-//							Vector2 tryPosition = attackLine.line90.randomPoint(0.5f);
-//							GameObject go = AIStrategy.findClosestGameObject (tryPosition, testNextHousePosition2d);
-//							if (go.tag == "House") {
-//								House checkhouse = go.GetComponent<House> ();
-//								if (checkhouse.transform.position == house.transform.position && Global.boardHeight / 6 > absoluteDistance (_startPosition, house.transform.position)) {
-//									Vector2 NextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
-//									angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
-//									Debug.Log ("Found house owned by AI");
-//									foundHome = true;
-//									break;
-//								}
-//							}
-//						}
-//						checkCount += 1;
-//						if (checkCount > 5 | foundHome == true) {
-//							break;
-//						}
+
+					foreach (House house in ownHouses) {
+						Vector3 housePosition = house.transform.position;
+						Vector2 testNextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
+						Line attackLine = new Line(_startPosition, testNextHousePosition2d);
+						attackLine.calc90Line();
+						Vector2 tryPosition = attackLine.line90.randomPoint(0.5f);
+						GameObject go = AIStrategy.findClosestGameObject (tryPosition, testNextHousePosition2d);
+						if (go.tag == "House") {
+							Debug.Log ("Found a house with vectors");
+							House checkhouse = go.GetComponent<House> ();
+							if (checkhouse.transform.position == house.transform.position && Global.boardHeight / 2 > absoluteDistance (_startPosition, house.transform.position)) {
+								Debug.Log ("Found house owned by AI");
+								foundHome = true;
+
+
+								if (!_foundFurthestHouseLocation) {
+									furthestHouseLocationFound = house.transform.position;
+									furthestHouseDistance = 0f;
+									furthestHouse = house;
+									_foundClosestHouseLocation = true;
+								}
+
+								housedistance = _startPosition.y - house.transform.position.y;
+
+								if (housedistance > furthestHouseDistance) {
+									furthestHouseLocationFound = house.transform.position;
+									furthestHouseDistance = housedistance;
+									furthestHouse = house;
+									NextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
+									angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
+									
+								}
+							}
+						}
+					}
+
 //
 //					}
 				
