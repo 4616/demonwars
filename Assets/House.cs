@@ -49,7 +49,7 @@ public class House : Obstacle {
 			minion.state = Minion.State.Wander;
 			if(this.owner != minion.owner){
 				this.TakeOwnership(minion.owner);
-				Debug.Log("Home Owner!");
+				//Debug.Log("Home Owner!");
 				//spriteRenderer.color = new Color(1f, 0f, 1f, 1f);
 			}
 			//float lerp = Mathf.PingPong(Time.time, duration) / duration;
