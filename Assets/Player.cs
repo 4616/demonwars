@@ -394,33 +394,33 @@ public class Player : MonoBehaviour {
 				//Debug.Log("AI found houses owned by AI: " + ownHouses.Count);
 				bool foundHome = false;
 				if (ownHouses.Count > 0) {
-//					Debug.Log ("Looking for house with vectors");
-//
-//					foreach (House house in ownHouses) {
-//						if (checkHousePath(house)){
-//								//Debug.Log ("Found house owned by AI with vectors");
-//								foundHome = true;
-//
-//
-//								if (!_foundFurthestHouseLocation) {
-//									furthestHouseLocationFound = house.transform.position;
-//									furthestHouseDistance = 0f;
-//									furthestHouse = house;
-//									_foundClosestHouseLocation = true;
-//								}
-//
-//								housedistance = _startPosition.y - house.transform.position.y;
-//
-//								if (housedistance > furthestHouseDistance) {
-//									furthestHouseLocationFound = house.transform.position;
-//									furthestHouseDistance = housedistance;
-//									furthestHouse = house;
-//									NextHousePosition2d = new Vector2 (house.transform.position.x, house.transform.position.y);
-//									angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
-//									
-//								}
-//							}
-//						}
+					Debug.Log ("Looking for house with vectors");
+
+					foreach (House house in ownHouses) {
+						if (checkHousePath(house)){
+								//Debug.Log ("Found house owned by AI with vectors");
+								foundHome = true;
+
+
+								if (!_foundFurthestHouseLocation) {
+									furthestHouseLocationFound = house.transform.position;
+									furthestHouseDistance = 0f;
+									furthestHouse = house;
+									_foundClosestHouseLocation = true;
+								}
+
+								housedistance = _startPosition.y - house.transform.position.y;
+
+								if (housedistance > furthestHouseDistance) {
+									furthestHouseLocationFound = house.transform.position;
+									furthestHouseDistance = housedistance;
+									furthestHouse = house;
+									NextHousePosition2d = new Vector2 (house.transform.position.x, house.transform.position.y);
+									angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
+									
+								}
+							}
+						}
 
 
 //
@@ -681,7 +681,7 @@ public class Player : MonoBehaviour {
 		private float nextTower = 0.0f;
 		private float callTowerRate = 0.2f;
 		private float nextTowerCall = 0.0f;
-		private float timeAttackingSpawner = 10f;
+		private float timeAttackingSpawner = 20f;
 		private float stopAttackingSpawner = 0f;
 
 
@@ -697,7 +697,7 @@ public class Player : MonoBehaviour {
 			if (lastTower.Locked && !lastTower.finalLocked && towers.Count <= 8) {
 				if (Time.time > nextTower) {
 					nextTower = Time.time + newTowerRate;
-					towers.Add (new HouseTower (_player, towers [towers.Count - 1].getLockedPosition (), towers [towers.Count - 1].getLockedPosition (), 3f, towers));
+					towers.Add (new HouseTower (_player, towers [towers.Count - 1].getLockedPosition (), towers [towers.Count - 1].getLockedPosition (), 5f, towers));
 				}
 				lastTower = towers [towers.Count - 1];
 				if (towers.Count > 8 | lastTower.finalLocked) {
@@ -706,6 +706,7 @@ public class Player : MonoBehaviour {
 				}
 
 			}
+			Debug.Log ("Is the last tower finalLocked on enemy spawner " + lastTower.finalLocked);
 
 			if (Time.time > nextTowerCall){
 				nextTowerCall = Time.time + callTowerRate;
@@ -716,7 +717,8 @@ public class Player : MonoBehaviour {
 			}
 
 			
-			if(towers.Count > 8 | lastTower.finalLocked){
+			if(lastTower.finalLocked){
+				Debug.Log ("Checking to see in attack time is up");
 				if(Time.time > stopAttackingSpawner){
 					Debug.Log ("removing all towers");
 					this.resetTokenList();
@@ -726,7 +728,7 @@ public class Player : MonoBehaviour {
 				
 			}
 
-			if (towers.Count <= 8 | !lastTower.finalLocked) {
+			if (!lastTower.finalLocked) {
 				stopAttackingSpawner = Time.time + timeAttackingSpawner;
 
 				}
