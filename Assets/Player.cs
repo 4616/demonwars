@@ -262,7 +262,7 @@ public class Player : MonoBehaviour {
 			float xdistance = Mathf.Abs (point1.x - point2.x);
 			float ydistance  = Mathf.Abs(point1.y - point2.y);
 			float forwardBonus = Mathf.Min (40, Mathf.Abs (point2.y - Global.top));
-			float totaldistance = xdistance * xdistance * xdistance + ydistance ;
+			float totaldistance = xdistance + xdistance + ydistance ;
 			return totaldistance;
 		}
 
@@ -379,43 +379,43 @@ public class Player : MonoBehaviour {
 				Debug.Log("AI found houses owned by AI: " + ownHouses.Count);
 				bool foundHome = false;
 				if (ownHouses.Count > 0) {
-					Debug.Log ("Looking for house with vectors");
-
-					foreach (House house in ownHouses) {
-						Vector3 housePosition = house.transform.position;
-						Vector2 testNextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
-						Line attackLine = new Line(_startPosition, testNextHousePosition2d);
-						attackLine.calc90Line();
-						Vector2 tryPosition = attackLine.randomPoint(0.5f, 0.5f);
-						GameObject go = AIStrategy.findClosestGameObject (tryPosition, testNextHousePosition2d);
-						if (go.tag == "House") {
-							Debug.Log ("Found a house with vectors");
-							House checkhouse = go.GetComponent<House> ();
-							if (checkhouse.transform.position == house.transform.position && Global.boardHeight / 2 > absoluteDistance (_startPosition, house.transform.position)) {
-								Debug.Log ("Found house owned by AI");
-								foundHome = true;
-
-
-								if (!_foundFurthestHouseLocation) {
-									furthestHouseLocationFound = house.transform.position;
-									furthestHouseDistance = 0f;
-									furthestHouse = house;
-									_foundClosestHouseLocation = true;
-								}
-
-								housedistance = _startPosition.y - house.transform.position.y;
-
-								if (housedistance > furthestHouseDistance) {
-									furthestHouseLocationFound = house.transform.position;
-									furthestHouseDistance = housedistance;
-									furthestHouse = house;
-									NextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
-									angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
-									
-								}
-							}
-						}
-					}
+//					Debug.Log ("Looking for house with vectors");
+//
+//					foreach (House house in ownHouses) {
+//						Vector3 housePosition = house.transform.position;
+//						Vector2 testNextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
+//						Line attackLine = new Line(_startPosition, testNextHousePosition2d);
+//						attackLine.calc90Line();
+//						Vector2 tryPosition = attackLine.randomPoint(0.3f, 0.3f);
+//						GameObject go = AIStrategy.findClosestGameObject (tryPosition, testNextHousePosition2d);
+//						if (go.tag == "House") {
+//							Debug.Log ("Found a house with vectors");
+//							House checkhouse = go.GetComponent<House> ();
+//							if (checkhouse.transform.position == house.transform.position && Global.boardHeight / 2 > absoluteDistance (_startPosition, house.transform.position)) {
+//								Debug.Log ("Found house owned by AI");
+//								foundHome = true;
+//
+//
+//								if (!_foundFurthestHouseLocation) {
+//									furthestHouseLocationFound = house.transform.position;
+//									furthestHouseDistance = 0f;
+//									furthestHouse = house;
+//									_foundClosestHouseLocation = true;
+//								}
+//
+//								housedistance = _startPosition.y - house.transform.position.y;
+//
+//								if (housedistance > furthestHouseDistance) {
+//									furthestHouseLocationFound = house.transform.position;
+//									furthestHouseDistance = housedistance;
+//									furthestHouse = house;
+//									NextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
+//									angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
+//									
+//								}
+//							}
+//						}
+//					}
 
 //
 //					}
@@ -456,7 +456,7 @@ public class Player : MonoBehaviour {
 						//Vector2 NextHousePosition2d = new Vector2(housePosition.x, housePosition.y);
 						NextHousePosition2d = new Vector2 (closestHouseLocationFound.x, closestHouseLocationFound.y);
 						angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
-						Debug.Log ("Current position " + _startPosition + " and next position " + NextHousePosition2d);
+						//Debug.Log ("Current position " + _startPosition + " and next position " + NextHousePosition2d);
 					
    
 					}
