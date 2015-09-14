@@ -268,7 +268,7 @@ public class Player : MonoBehaviour {
 		public float absoluteDistancePlusX(Vector2 point1,Vector2  point2){
 			float forwardBonus = -Mathf.Abs(point2.y - Global.top);
 			float abDistnce = Mathf.Sqrt (Mathf.Pow (point2.x - point1.x, 2) + Mathf.Pow (point2.y - point1.y, 2));
-			float totaldistance = abDistnce + forwardBonus * 1f;
+			float totaldistance = abDistnce + forwardBonus * 0.9f;
 			return totaldistance;
 		}
 		
@@ -348,7 +348,7 @@ public class Player : MonoBehaviour {
 			List<House> ownHouses = new List<House> ();
 			
 				//Determine direction base tower should face
-			for (int counter = 1; counter <= 500; counter++) {
+			for (int counter = 1; counter <= 100; counter++) {
 				Vector2 randomPos = new Vector2 (Random.Range (Global.left * 8, Global.right * 8), -14f);
 				Vector2 offset = new Vector2 (Random.Range(-0.4f, 0.4f), Random.Range(-0.4f, 0.4f));
 				Vector2 tryPosition = _startPosition + offset;
@@ -394,33 +394,33 @@ public class Player : MonoBehaviour {
 				//Debug.Log("AI found houses owned by AI: " + ownHouses.Count);
 				bool foundHome = false;
 				if (ownHouses.Count > 0) {
-					Debug.Log ("Looking for house with vectors");
-
-					foreach (House house in ownHouses) {
-						if (checkHousePath(house)){
-								//Debug.Log ("Found house owned by AI with vectors");
-								foundHome = true;
-
-
-								if (!_foundFurthestHouseLocation) {
-									furthestHouseLocationFound = house.transform.position;
-									furthestHouseDistance = 0f;
-									furthestHouse = house;
-									_foundClosestHouseLocation = true;
-								}
-
-								housedistance = _startPosition.y - house.transform.position.y;
-
-								if (housedistance > furthestHouseDistance) {
-									furthestHouseLocationFound = house.transform.position;
-									furthestHouseDistance = housedistance;
-									furthestHouse = house;
-									NextHousePosition2d = new Vector2 (house.transform.position.x, house.transform.position.y);
-									angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
-									
-								}
-							}
-						}
+//					Debug.Log ("Looking for house with vectors");
+//
+//					foreach (House house in ownHouses) {
+//						if (checkHousePath(house)){
+//								//Debug.Log ("Found house owned by AI with vectors");
+//								foundHome = true;
+//
+//
+//								if (!_foundFurthestHouseLocation) {
+//									furthestHouseLocationFound = house.transform.position;
+//									furthestHouseDistance = 0f;
+//									furthestHouse = house;
+//									_foundClosestHouseLocation = true;
+//								}
+//
+//								housedistance = _startPosition.y - house.transform.position.y;
+//
+//								if (housedistance > furthestHouseDistance) {
+//									furthestHouseLocationFound = house.transform.position;
+//									furthestHouseDistance = housedistance;
+//									furthestHouse = house;
+//									NextHousePosition2d = new Vector2 (house.transform.position.x, house.transform.position.y);
+//									angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
+//									
+//								}
+//							}
+//						}
 
 
 //
@@ -679,7 +679,10 @@ public class Player : MonoBehaviour {
 		private bool reset = false;
 		private float newTowerRate = 3f;
 		private float nextTower = 0.0f;
-		private float callTowerRate = 0.2f;
+
+		private float callTowerRate = (5 - Global.difficulty) * 0.7f + 0.2f;
+
+
 		private float nextTowerCall = 0.0f;
 		private float timeAttackingSpawner = 20f;
 		private float stopAttackingSpawner = 0f;
@@ -687,9 +690,12 @@ public class Player : MonoBehaviour {
 
 		public override void pulse ()
 		{
+			if (Global.difficulty == 4){
+				callTowerRate = 0.7f;
+			}
 
 			if (towers.Count == 0) {
-				towers.Add(new HouseTower(_player, new Vector2 (0, _player.baseposY ), new Vector2 (0, _player.baseposY ), 8f, towers));
+				towers.Add(new HouseTower(_player, new Vector2 (0, _player.baseposY ), new Vector2 (0, _player.baseposY ), 10f, towers));
 			}
 			//Debug.Log ("Towers count"  + towers.Count);
 			HouseTower lastTower = towers [towers.Count - 1];
@@ -697,7 +703,7 @@ public class Player : MonoBehaviour {
 			if (lastTower.Locked && !lastTower.finalLocked && towers.Count <= 8) {
 				if (Time.time > nextTower) {
 					nextTower = Time.time + newTowerRate;
-					towers.Add (new HouseTower (_player, towers [towers.Count - 1].getLockedPosition (), towers [towers.Count - 1].getLockedPosition (), 5f, towers));
+					towers.Add (new HouseTower (_player, towers [towers.Count - 1].getLockedPosition (), towers [towers.Count - 1].getLockedPosition (), 8f, towers));
 				}
 				lastTower = towers [towers.Count - 1];
 				if (towers.Count > 8 | lastTower.finalLocked) {
