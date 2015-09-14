@@ -161,31 +161,31 @@ public class Player : MonoBehaviour {
 		private Vector2 source;
 		private Vector2 target;
 		public Line line90;
-
+		
 		public Line(Vector2 point1, Vector2 point2){
 			beta = (point1.y-point2.y)/(point1.x - point2.x);
 			alpha = point1.y - beta * point1.x;
 			source = point1;
 			target = point2;
-
+			
 		}
-
-
+		
+		
 		public Vector2 pointOnLine(float x){
 			float y = alpha + beta * x;
 			return new Vector2 (x, y);
 		}
-
-		public Vector2 randomPoint(float drawrange){
-			float distance = source.x + Random.Range (-drawrange, drawrange);
-			float drawx = source.x + Mathf.Sqrt (Mathf.Pow (distance, 2) / (1 + Mathf.Pow (beta, 2)));
+		
+		public Vector2 randomPoint(float lowend, float highend){
+			float distance = source.x + Random.Range (lowend, highend);
+			float drawx = source.x - Mathf.Sqrt (Mathf.Pow (distance, 2) / (1 + Mathf.Pow (beta, 2)));
 			return pointOnLine(drawx);
 		}
-
+		
 		public void calc90Line(){
 			Vector2 zeropoint = new Vector2 (source.x + (source.x - alpha), 0);
 			line90 = new Line(source, zeropoint);
-
+			
 		}
 	}
 
@@ -386,7 +386,7 @@ public class Player : MonoBehaviour {
 						Vector2 testNextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
 						Line attackLine = new Line(_startPosition, testNextHousePosition2d);
 						attackLine.calc90Line();
-						Vector2 tryPosition = attackLine.line90.randomPoint(0.5f);
+						Vector2 tryPosition = attackLine.randomPoint(0.5f, 0.5f);
 						GameObject go = AIStrategy.findClosestGameObject (tryPosition, testNextHousePosition2d);
 						if (go.tag == "House") {
 							Debug.Log ("Found a house with vectors");
