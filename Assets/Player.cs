@@ -177,8 +177,15 @@ public class Player : MonoBehaviour {
 		}
 		
 		public Vector2 randomPoint(float lowend, float highend){
+
 			float distance = source.x + Random.Range (lowend, highend);
-			float drawx = source.x - Mathf.Sqrt (Mathf.Pow (distance, 2) / (1 + Mathf.Pow (beta, 2)));
+			float term2 = Mathf.Sqrt (Mathf.Pow (distance, 2) / (1 + Mathf.Pow (beta, 2)));
+			float drawx;
+			if (beta >= 0){
+				drawx = source.x - term2;
+			}else{
+				drawx = source.x + term2;
+			}
 			return pointOnLine(drawx);
 		}
 		
@@ -277,6 +284,36 @@ public class Player : MonoBehaviour {
 			baseTower = null;			
 			baseTower = _player.tokenManager.createNewTokenAI (new Vector3 (_startPosition.x, _startPosition.y, 0), angle);
 
+		}
+
+
+
+		public bool checkHouseLocation(House house, Vector2 tryPosition, Vector2 target){
+			GameObject go = AIStrategy.findClosestGameObject (tryPosition, target);
+			Debug.Log ("Trying from " + tryPosition + " to hit " + target);
+			if (go.tag == "House") {
+				Debug.Log ("Found a house with vectors in checkHouseLocation");
+				House checkhouse = go.GetComponent<House> ();
+				if (checkhouse.transform.position == house.transform.position && Global.boardHeight / 2 > absoluteDistance (_startPosition, house.transform.position)) {
+					Debug.Log ("Found house owned by AI in checkHouseLocation");
+					return true;
+				}
+				
+				
+			}
+			return false;
+
+			}
+
+		public bool checkHousePath(House house){
+			Vector3 housePosition = house.transform.position;
+			Vector2 testNextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
+			Line attackLine = new Line (_startPosition, testNextHousePosition2d);
+			attackLine.calc90Line ();
+			Vector2 tryPosition = attackLine.randomPoint (0.5f, 0.5f);
+			return checkHouseLocation(house, tryPosition, testNextHousePosition2d);
+
+		
 		}
 
 
@@ -379,19 +416,10 @@ public class Player : MonoBehaviour {
 				Debug.Log("AI found houses owned by AI: " + ownHouses.Count);
 				bool foundHome = false;
 				if (ownHouses.Count > 0) {
-//					Debug.Log ("Looking for house with vectors");
-//
+					Debug.Log ("Looking for house with vectors");
+
 //					foreach (House house in ownHouses) {
-//						Vector3 housePosition = house.transform.position;
-//						Vector2 testNextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
-//						Line attackLine = new Line(_startPosition, testNextHousePosition2d);
-//						attackLine.calc90Line();
-//						Vector2 tryPosition = attackLine.randomPoint(0.3f, 0.3f);
-//						GameObject go = AIStrategy.findClosestGameObject (tryPosition, testNextHousePosition2d);
-//						if (go.tag == "House") {
-//							Debug.Log ("Found a house with vectors");
-//							House checkhouse = go.GetComponent<House> ();
-//							if (checkhouse.transform.position == house.transform.position && Global.boardHeight / 2 > absoluteDistance (_startPosition, house.transform.position)) {
+//						if (checkHousePath(house)){
 //								Debug.Log ("Found house owned by AI");
 //								foundHome = true;
 //
@@ -409,13 +437,13 @@ public class Player : MonoBehaviour {
 //									furthestHouseLocationFound = house.transform.position;
 //									furthestHouseDistance = housedistance;
 //									furthestHouse = house;
-//									NextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
+//									NextHousePosition2d = new Vector2 (house.transform.position.x, house.transform.position.y);
 //									angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
 //									
 //								}
 //							}
 //						}
-//					}
+
 
 //
 //					}
@@ -704,7 +732,7 @@ public class Player : MonoBehaviour {
 			if (lastTower.Locked && !lastTower.finalLocked && towers.Count <= 7) {
 				if (Time.time > nextTower) {
 					nextTower = Time.time + newTowerRate;
-					towers.Add (new HouseTower(_player, towers[towers.Count - 1].getLockedPosition(), towers[towers.Count - 1].getLockedPosition(), 3f, towers));
+					towers.Add (new HouseTower(_player, towers[towers.Count - 1].getLockedPosition(), towers[towers.Count - 1].getLockedPosition(), 5f, towers));
 				} 
 
 			}
