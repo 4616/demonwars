@@ -109,7 +109,7 @@ public class Player : MonoBehaviour {
 
 		public void deleteAllTokens(){
 			foreach (Token tk in tokenList) {
-				//Instantiate (tk.explosion, tk.transform.position, tk.transform.rotation);
+				Instantiate (tk.explosion, tk.transform.position, tk.transform.rotation);
 				tk.Destroy();
 			}
 			tokenList = new List<Token> ();
@@ -258,22 +258,40 @@ public class Player : MonoBehaviour {
 			
 		private Vector2 _enemySpawnerLocation;
 		private bool _foundEnemySpawnerLocation = false;
-			
+
 
 		public float absoluteDistance(Vector2 point1,Vector2  point2){
+
+			return Mathf.Sqrt (Mathf.Pow (point2.x - point1.x, 2) + Mathf.Pow (point2.y - point1.y, 2));
+		}
+
+		public float absoluteDistancePlusX(Vector2 point1,Vector2  point2){
+			float forwardBonus = -Mathf.Abs(point2.y - Global.top);
+			float abDistnce = Mathf.Sqrt (Mathf.Pow (point2.x - point1.x, 2) + Mathf.Pow (point2.y - point1.y, 2));
+			float totaldistance = abDistnce + forwardBonus * 1f;
+			return totaldistance;
+		}
+		
+		public float absoluteDistanceOld(Vector2 point1,Vector2  point2){
 			float xdistance = Mathf.Abs (point1.x - point2.x);
 			float ydistance  = Mathf.Abs(point1.y - point2.y);
 			float totaldistance = xdistance + ydistance;
 			return totaldistance;
 			}
 
-		public float yxsquaredDistance(Vector2 point1,Vector2  point2){
+		public float yxsquaredDistanceOld(Vector2 point1,Vector2  point2){
 			float xdistance = Mathf.Abs (point1.x - point2.x);
 			float ydistance  = Mathf.Abs(point1.y - point2.y);
 			float forwardBonus = Mathf.Min (40, Mathf.Abs (point2.y - Global.top));
-			float totaldistance = xdistance * 2 + ydistance ;
-			return ydistance;
+			float totaldistance = xdistance * 3 + ydistance ;
+			return totaldistance;
 		}
+
+		public float absoluteDistanceY(Vector2 point1,Vector2  point2){
+			float ydistance  = Mathf.Abs(point1.y - point2.y);
+			return ydistance;
+			
+			}
 
 
 		
@@ -282,13 +300,12 @@ public class Player : MonoBehaviour {
 			NextHousePosition2d = new Vector2 (0f, -14f);
 			angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
 			Locked = true;
+			finalLocked = true;
 			_player.tokenManager.Destroy(baseTower);
 			baseTower = null;			
 			baseTower = _player.tokenManager.createNewTokenAI (new Vector3 (_startPosition.x, _startPosition.y, 0), angle);
 
 		}
-
-
 
 		public bool checkHouseLocation(House house, Vector2 tryPosition, Vector2 target){
 			GameObject go = AIStrategy.findClosestGameObject (tryPosition, target);
@@ -297,7 +314,7 @@ public class Player : MonoBehaviour {
 				//Debug.Log ("Found a house with vectors in checkHouseLocation");
 				House checkhouse = go.GetComponent<House> ();
 				if (checkhouse.transform.position == house.transform.position && Global.boardHeight / 2 > absoluteDistance (_startPosition, house.transform.position)) {
-					Debug.Log ("Found house owned by AI in checkHouseLocation");
+					//Debug.Log ("Found house owned by AI in checkHouseLocation");
 					return true;
 				}
 				
@@ -312,7 +329,7 @@ public class Player : MonoBehaviour {
 			Vector2 testNextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
 			Line attackLine = new Line (_startPosition, testNextHousePosition2d);
 			attackLine.calc90Line ();
-			Vector2 tryPosition = attackLine.randomPoint (0.3f, 0.3f);
+			Vector2 tryPosition = attackLine.randomPoint (0.2f, 0.2f);
 			return checkHouseLocation (house, tryPosition, testNextHousePosition2d);
 		}
 
@@ -346,47 +363,8 @@ public class Player : MonoBehaviour {
 						ownHouses.Add(house);
 						}
 					}
-//				if (go.tag == "Spawner"){
-//					Debug.Log ("Found a spawner");
-//					Spawner aspawner = go.GetComponent<Spawner> ();
-//					if(aspawner.owner != _player){
-//						while(true){
-//							Debug.Log ("Found the enemy spawner");
-//							}
-//						}	
-//					}
 				}
 
-
-
-//				foreach (House house in unclaimedHouses) {
-//			
-//
-//
-//					if (!_foundClosestHouseLocation) {
-//						closestHouseLocationFound = house.transform.position;
-//						closestHouseDistance = 100f;
-//						// closestHouseDistance = absoluteDistance(_startPosition, go.gameObject.transform.position);
-//						closestHouse = house;
-//						_foundClosestHouseLocation = true;
-//						}
-//					if(house.transform.position.x !=  _startPosition.x | house.transform.position.y != _startPosition.y){
-//							housedistance = absoluteDistance (_startPosition, house.transform.position);
-//							//Debug.Log (house.transform.position + " " + closestHouseLocationFound + " " + housedistance + " " + closestHouseDistance);
-//				
-//						if (housedistance < closestHouseDistance) {
-//							closestHouseLocationFound = house.transform.position;
-//							closestHouseDistance = housedistance;
-//							closestHouse = house;
-//					
-//						}
-//					}
-//				}
-
-			
-			
-			//Debug.Log ("Unclaimed houses " + unclaimedHouses.Count);
-				//Debug.Log (unclaimedHouses.Count);
 			if (unclaimedHouses.Count > 0) {
 				House randomHouse = unclaimedHouses [Random.Range (0, unclaimedHouses.Count)];
 				//Vector3 housePosition = closestHouseLocationFound;
@@ -413,14 +391,14 @@ public class Player : MonoBehaviour {
 				Locked = true;
 				}
 			if (Locked) {
-				Debug.Log("AI found houses owned by AI: " + ownHouses.Count);
+				//Debug.Log("AI found houses owned by AI: " + ownHouses.Count);
 				bool foundHome = false;
 				if (ownHouses.Count > 0) {
-					//Debug.Log ("Looking for house with vectors");
-
+//					Debug.Log ("Looking for house with vectors");
+//
 //					foreach (House house in ownHouses) {
 //						if (checkHousePath(house)){
-//								Debug.Log ("Found house owned by AI with vectors");
+//								//Debug.Log ("Found house owned by AI with vectors");
 //								foundHome = true;
 //
 //
@@ -450,7 +428,8 @@ public class Player : MonoBehaviour {
 				
 
 					if (foundHome == false) {
-						Debug.Log ("Checking for really close house by distance");
+						//Debug.Log ("Checking for really close house by distance");
+						Debug.Log("Failed to locate target using vectors");
 //					//Locked = false;
 						
 						foreach (House house in ownHouses) {
@@ -464,8 +443,8 @@ public class Player : MonoBehaviour {
 							}
 							Vector2 candidatePosition2D = new Vector2(house.transform.position.x, house.transform.position.y);
 							if(!existingTowerPosition (candidatePosition2D)){
-								Debug.Log ("new tower check passed");
-								housedistance = yxsquaredDistance (_startPosition, house.transform.position);
+								//Debug.Log ("new tower check passed");
+								housedistance = absoluteDistancePlusX (_startPosition, house.transform.position);
 								//Debug.Log (house.transform.position + " " + closestHouseLocationFound + " " + housedistance + " " + closestHouseDistance);
 							
 								if (housedistance < closestHouseDistance) {
@@ -485,28 +464,16 @@ public class Player : MonoBehaviour {
 						//Debug.Log ("Current position " + _startPosition + " and next position " + NextHousePosition2d);
 					
    
+					}else{
+						Debug.Log("Located target using vectors");
 					}
 
 				}
-////					else {
-////						Debug.Log ("No houses in AI list");
-////						//Locked = false;
-////						//					timeoutLock = Time.time + timeoutLockRate;
-////						//					if(unclaimedHouses.Count > 0){
-////						//						House randomHouse = unclaimedHouses [Random.Range (0, unclaimedHouses.Count)];
-////						//						Vector3 housePosition = randomHouse.transform.position;
-////						//						Vector2 NextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
-////						//						angle = Vector2.Angle (Vector2.right, _startPosition - NextHousePosition2d) + 180;
-////						//						Locked = true;
-////						//					}else{
-////						//					Debug.Log ("Cannot find anything, lost in the desert");
-////						//					}
-////						//
-////					}
-//
-//				}
-//
-//
+				if(absoluteDistanceY(_startPosition, new Vector2(0f,-14f)) < 4){
+					Locked = true;
+					finalLocked = true;
+					angle = Vector2.Angle (Vector2.right, _startPosition - new Vector2(0f,-14f)) + 180;
+				}
 			}
 		_player.tokenManager.Destroy(baseTower);
 		baseTower = null;			
@@ -714,7 +681,7 @@ public class Player : MonoBehaviour {
 		private float nextTower = 0.0f;
 		private float callTowerRate = 0.2f;
 		private float nextTowerCall = 0.0f;
-		private float timeAttackingSpawner = 15f;
+		private float timeAttackingSpawner = 10f;
 		private float stopAttackingSpawner = 0f;
 
 
@@ -727,11 +694,16 @@ public class Player : MonoBehaviour {
 			//Debug.Log ("Towers count"  + towers.Count);
 			HouseTower lastTower = towers [towers.Count - 1];
 			// && lastTower.getLockedDirection().y < -11
-			if (lastTower.Locked && !lastTower.finalLocked && towers.Count <= 7) {
+			if (lastTower.Locked && !lastTower.finalLocked && towers.Count <= 8) {
 				if (Time.time > nextTower) {
 					nextTower = Time.time + newTowerRate;
-					towers.Add (new HouseTower(_player, towers[towers.Count - 1].getLockedPosition(), towers[towers.Count - 1].getLockedPosition(), 6f, towers));
-				} 
+					towers.Add (new HouseTower (_player, towers [towers.Count - 1].getLockedPosition (), towers [towers.Count - 1].getLockedPosition (), 3f, towers));
+				}
+				lastTower = towers [towers.Count - 1];
+				if (towers.Count > 8 | lastTower.finalLocked) {
+					Debug.Log ("attacking spawner in player AI");
+					lastTower.attackSpawner ();
+				}
 
 			}
 
@@ -744,13 +716,8 @@ public class Player : MonoBehaviour {
 			}
 
 			
-			if(towers.Count > 7){
-
-				lastTower = towers [towers.Count - 1];	
-				lastTower.attackSpawner();
-
-
-				if(stopAttackingSpawner > Time.time){
+			if(towers.Count > 8 | lastTower.finalLocked){
+				if(Time.time > stopAttackingSpawner){
 					Debug.Log ("removing all towers");
 					this.resetTokenList();
 					Debug.Log (towers.Count);
@@ -759,7 +726,7 @@ public class Player : MonoBehaviour {
 				
 			}
 
-			if (towers.Count <= 7) {
+			if (towers.Count <= 8 | !lastTower.finalLocked) {
 				stopAttackingSpawner = Time.time + timeAttackingSpawner;
 
 				}
