@@ -204,13 +204,15 @@ public class Player : MonoBehaviour {
 		private Vector2 _playerPosition;
 		private Vector2 _startPosition;
 		private List<HouseTower> _towers;
+
 			
-		public HouseTower(Player player, Vector2 playerPosition, Vector2 startPosition, float timoutLockRate, List<HouseTower> towers) {
+		public HouseTower(Player player, Vector2 playerPosition, Vector2 startPosition, float timoutLockRateInput, List<HouseTower> towers) {
 
 			_player = player;
 			_playerPosition = playerPosition;
 			_startPosition = startPosition;
 			_towers = towers;
+			this.timeoutLockRate = timoutLockRateInput;
 			this.houseTower();
 			}
 
@@ -234,8 +236,8 @@ public class Player : MonoBehaviour {
 		private Vector2 NextHousePosition2d;
 		private float housedistance;
 		private float angle;
-		private float timeoutLockRate = 4f;
 		private float timeoutLock = 0f;
+		private float timeoutLockRate = 10f;
 		List<House> ownHouses = new List<House> ();
 
 		private bool existingTowerPosition (Vector2 candidatePosition2D){
@@ -269,8 +271,8 @@ public class Player : MonoBehaviour {
 			float xdistance = Mathf.Abs (point1.x - point2.x);
 			float ydistance  = Mathf.Abs(point1.y - point2.y);
 			float forwardBonus = Mathf.Min (40, Mathf.Abs (point2.y - Global.top));
-			float totaldistance = xdistance + xdistance + ydistance ;
-			return totaldistance;
+			float totaldistance = xdistance * 2 + ydistance ;
+			return ydistance;
 		}
 
 
@@ -290,9 +292,9 @@ public class Player : MonoBehaviour {
 
 		public bool checkHouseLocation(House house, Vector2 tryPosition, Vector2 target){
 			GameObject go = AIStrategy.findClosestGameObject (tryPosition, target);
-			Debug.Log ("Trying from " + tryPosition + " to hit " + target);
+			//Debug.Log ("Trying from " + tryPosition + " to hit " + target);
 			if (go.tag == "House") {
-				Debug.Log ("Found a house with vectors in checkHouseLocation");
+				//Debug.Log ("Found a house with vectors in checkHouseLocation");
 				House checkhouse = go.GetComponent<House> ();
 				if (checkhouse.transform.position == house.transform.position && Global.boardHeight / 2 > absoluteDistance (_startPosition, house.transform.position)) {
 					Debug.Log ("Found house owned by AI in checkHouseLocation");
@@ -310,10 +312,8 @@ public class Player : MonoBehaviour {
 			Vector2 testNextHousePosition2d = new Vector2 (housePosition.x, housePosition.y);
 			Line attackLine = new Line (_startPosition, testNextHousePosition2d);
 			attackLine.calc90Line ();
-			Vector2 tryPosition = attackLine.randomPoint (0.5f, 0.5f);
-			return checkHouseLocation(house, tryPosition, testNextHousePosition2d);
-
-		
+			Vector2 tryPosition = attackLine.randomPoint (0.3f, 0.3f);
+			return checkHouseLocation (house, tryPosition, testNextHousePosition2d);
 		}
 
 
@@ -416,11 +416,11 @@ public class Player : MonoBehaviour {
 				Debug.Log("AI found houses owned by AI: " + ownHouses.Count);
 				bool foundHome = false;
 				if (ownHouses.Count > 0) {
-					Debug.Log ("Looking for house with vectors");
+					//Debug.Log ("Looking for house with vectors");
 
 //					foreach (House house in ownHouses) {
 //						if (checkHousePath(house)){
-//								Debug.Log ("Found house owned by AI");
+//								Debug.Log ("Found house owned by AI with vectors");
 //								foundHome = true;
 //
 //
@@ -452,7 +452,7 @@ public class Player : MonoBehaviour {
 					if (foundHome == false) {
 						Debug.Log ("Checking for really close house by distance");
 //					//Locked = false;
-//				
+						
 						foreach (House house in ownHouses) {
 
 							if (!_foundClosestHouseLocation) {
@@ -463,10 +463,8 @@ public class Player : MonoBehaviour {
 								_foundClosestHouseLocation = true;
 							}
 							Vector2 candidatePosition2D = new Vector2(house.transform.position.x, house.transform.position.y);
-							if(candidatePosition2D != _startPosition && existingTowerPosition (candidatePosition2D)){
+							if(!existingTowerPosition (candidatePosition2D)){
 								Debug.Log ("new tower check passed");
-							//if (house.transform.position.x != _startPosition.x | house.transform.position.y != _startPosition.y) {
-								//housedistance = absoluteDistance (_startPosition, house.transform.position);
 								housedistance = yxsquaredDistance (_startPosition, house.transform.position);
 								//Debug.Log (house.transform.position + " " + closestHouseLocationFound + " " + housedistance + " " + closestHouseDistance);
 							
@@ -732,7 +730,7 @@ public class Player : MonoBehaviour {
 			if (lastTower.Locked && !lastTower.finalLocked && towers.Count <= 7) {
 				if (Time.time > nextTower) {
 					nextTower = Time.time + newTowerRate;
-					towers.Add (new HouseTower(_player, towers[towers.Count - 1].getLockedPosition(), towers[towers.Count - 1].getLockedPosition(), 5f, towers));
+					towers.Add (new HouseTower(_player, towers[towers.Count - 1].getLockedPosition(), towers[towers.Count - 1].getLockedPosition(), 6f, towers));
 				} 
 
 			}
